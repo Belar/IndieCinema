@@ -1,7 +1,7 @@
 <template>
   <div class="modal-mask" v-show="show" @click="show = false" transition="modal">
     <div class="modal-wrapper">
-      <div class="modal-container ">
+      <div class="modal-container" @click.stop>
         <div class="flex-video">
           <!-- TODO: Change to custom player or clean embed -->
           {{{ movie.embed.html }}}
