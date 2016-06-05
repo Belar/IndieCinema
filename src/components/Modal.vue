@@ -7,6 +7,13 @@
           {{{ movie.embed.html }}}
         </div>
         <button class="modal-button button" @click="show = false"> Close </button>
+        <div class="movie-info">
+          <h2 class="title">{{ movie.name }}</h2>
+          <div class="by">by <span class="author">{{ movie.user.name }}</span></div>
+          <div>
+            {{ movie.description }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
