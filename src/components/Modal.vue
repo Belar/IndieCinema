@@ -80,7 +80,7 @@
       document.addEventListener('keydown', (event) => {
         // Check if modal is open and key is esc
         if (this.show && event.keyCode === 27) {
-          this.show = false
+          this.closeMovie()
         }
       })
     }
