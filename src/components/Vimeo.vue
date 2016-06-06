@@ -1,6 +1,6 @@
 <template>
 
-  <div id="movies" class="viemo">
+  <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
     <button class="button" v-on:click="getList">Get latest Indie movies</button>
     <modal :show.sync="showModal" :video.sync="videoModal"></modal>
@@ -58,6 +58,9 @@
         // Show modal and pass movie's URI for data query
         this.videoModal = videoUri
         this.showModal = true
+
+        // Add class to body limiting its scrolling with overflow
+        document.body.className += ' modal-open'
       }
     }
   }

@@ -1,12 +1,14 @@
 <template>
-  <div class="modal-mask" v-show="show" @click="show = false" transition="modal">
+  <div class="modal-mask" v-show="show" @click="closeMovie()" transition="modal">
     <div class="modal-wrapper">
       <div class="modal-container" @click.stop>
-        <div class="flex-video">
+        <div class="modal-header clearfix">
+          <button class="close modal-button button" @click="closeMovie()"> Close </button>
+        </div>
+        <div class="flex-video widescreen">
           <!-- TODO: Change to custom player or clean embed -->
           {{{ movie.embed.html }}}
         </div>
-        <button class="modal-button button" @click="show = false"> Close </button>
         <div class="movie-info">
           <h2 class="title">{{ movie.name }}</h2>
           <div class="by">by <span class="author">{{ movie.user.name }}</span></div>
@@ -39,6 +41,15 @@
     data: function() {
       return {
         movie: []
+      }
+    },
+
+    methods: {
+      closeMovie() {
+        // Remove class from body to return scrolling availability
+        // TODO: Remove the class without cleaning others
+        document.body.className = ''
+        this.show = false
       }
     },
 
@@ -76,34 +87,53 @@
   }
 </script>
 
-<style>
+<style scoped lang="scss">
+  // TODO:
+  // Add auto-prefixing
+  $primary-dark: #14171e;
+  $secondary-dark: #282a36;
   .modal-mask {
     position: fixed;
-    z-index: 9998;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .5);
-    display: table;
+    background-color: rgba($secondary-dark, .8);
     transition: opacity .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
   }
 
   .modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+    position: absolute;
+    ;
+    z-index: 1010;
+    margin: auto;
+    left: 0;
+    right: 0;
   }
 
   .modal-container {
-    width: 600px;
+    width: 100%;
     margin: 0px auto;
-    background-color: #fff;
+    background-color: rgba($primary-dark, .8);
     transition: all .3s ease;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+    border-radius: 5px;
+    text-align: left;
+    @media (min-width: 40em) {
+      width: 600px;
+    }
   }
 
-  .modal-button {
-    display: block;
+  .modal-button.close {
+    float: right;
+  }
+
+  .movie-info {
+    padding: 1rem;
   }
   /*
  * the following styles are auto-applied to elements with

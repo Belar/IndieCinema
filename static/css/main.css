@@ -2,3 +2,8 @@ body {
     background: #14171e;
     background-image: url('../images/background.jpg');
 }
+
+body.modal-open{
+    height:100%;
+    overflow: hidden;
+}
