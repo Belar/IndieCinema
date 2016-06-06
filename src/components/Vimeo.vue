@@ -68,12 +68,16 @@
     color: #FF004D;
   }
 
+  .single-movie{
+      max-width: 200px;
+      margin: .5rem;
+  }
+
   .thumbnail:hover {
     cursor: pointer;
   }
 
   img {
-    max-width: 200px;
     height: auto;
   }
 
@@ -81,10 +85,11 @@
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: flex-start;
     list-style-type: none;
     li {
-      flex: 1;
+      flex: 200px 1;
     }
   }
 </style>
