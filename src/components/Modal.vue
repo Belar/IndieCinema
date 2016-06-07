@@ -49,6 +49,9 @@
         // Remove class from body to return scrolling availability
         // TODO: Remove the class without cleaning others
         document.body.className = ''
+        // Clear movie info
+        this.movie = []
+        // Hide modal
         this.show = false
       }
     },
