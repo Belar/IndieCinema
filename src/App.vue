@@ -1,17 +1,17 @@
 <template>
   <div id="app" class="main-wrapper">
     <div class="row column">
-      <vimeo></vimeo>
+      <video-grid></video-grid>
     </div>
   </div>
 </template>
 
 <script>
-  import Vimeo from './components/Vimeo'
+  import VideoGrid from './components/VideoGrid'
 
   export default {
     components: {
-      Vimeo
+      VideoGrid
     }
   }
 </script>
