@@ -1,7 +1,7 @@
 <template>
   <div class="modal-mask" v-show="show" @click="closeMovie()" transition="modal">
     <div class="modal-wrapper">
-      <div class="modal-container" @click.stop>
+      <div class="modal-container" v-if="movie.length > 0" @click.stop>
         <div class="modal-header clearfix">
           <button class="close modal-button button" @click="closeMovie()"> Close </button>
         </div>
