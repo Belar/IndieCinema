@@ -108,7 +108,6 @@
 
   .modal-wrapper {
     position: absolute;
-    ;
     z-index: 1010;
     margin: auto;
     left: 0;
