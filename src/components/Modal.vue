@@ -1,17 +1,17 @@
 <template>
   <div class="modal-mask" v-show="show" @click="closeMovie()" transition="modal">
     <div class="modal-wrapper">
-      <div class="modal-container" @click.stop>
+      <div class="modal-container" v-if="movie" @click.stop>
         <div class="modal-header clearfix">
           <button class="close modal-button button" @click="closeMovie()"> Close </button>
         </div>
-        <div class="flex-video widescreen">
+        <div class="flex-video widescreen" v-if="movie.embed">
           <!-- TODO: Change to custom player or clean embed -->
           {{{ movie.embed.html }}}
         </div>
         <div class="movie-info">
           <h2 class="title">{{ movie.name }}</h2>
-          <div class="by">by <span class="author">{{ movie.user.name }}</span></div>
+          <div class="by" v-if="movie.user">by <span class="author">{{ movie.user.name }}</span></div>
           <div>
             {{ movie.description }}
           </div>
@@ -40,7 +40,7 @@
 
     data: function() {
       return {
-        movie: []
+        movie: {}
       }
     },
 
@@ -49,9 +49,9 @@
         // Remove class from body to return scrolling availability
         // TODO: Remove the class without cleaning others
         document.body.className = ''
-        // Clear movie info
-        this.movie = []
-        // Hide modal
+          // Clear movie info
+        this.movie = {}
+          // Hide modal
         this.show = false
       }
     },
