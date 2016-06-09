@@ -1,6 +1,7 @@
 body {
     background: #14171e;
     background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
 }
 
 body.modal-open{
