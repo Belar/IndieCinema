@@ -5,8 +5,8 @@
     <button class="button" v-on:click="getList">Get latest Indie movies</button>
     <modal :show.sync="showModal" :video.sync="videoModal"></modal>
     <ul>
-      <li class="single-movie" v-for="movie in movieList | orderBy 'created_time'">
-        <div class="thumbnail" @click="showMovie(movie.uri)">
+      <li class="single-movie" v-for="movie in movieList | orderBy 'created_time' -1">
+        <div @click="showMovie(movie.uri)">
           <img v-bind:src="movie.pictures.sizes[1].link_with_play_button" alt="">
         </div>
         {{ movie.name }}
