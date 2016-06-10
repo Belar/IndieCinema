@@ -7,10 +7,17 @@
     <ul>
       <li class="single-movie" v-for="movie in movieList | orderBy 'created_time' -1">
         <div @click="showMovie(movie.uri)">
-          <img v-bind:src="movie.pictures.sizes[1].link_with_play_button" alt="">
+          <img v-bind:src="movie.pictures.sizes[3].link" alt="">
         </div>
         {{ movie.name }}
       </li>
+      <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
+      <li class="single-movie"></li>
+      <li class="single-movie"></li>
+      <li class="single-movie"></li>
+      <li class="single-movie"></li>
+      <li class="single-movie"></li>
+      <li class="single-movie"></li>
     </ul>
   </div>
 
@@ -99,7 +106,7 @@
   }
 
   .single-movie {
-    max-width: 200px;
+    max-width: 100%;
     margin: .5rem;
   }
 
@@ -112,14 +119,15 @@
   }
 
   ul {
+    margin: auto;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     list-style-type: none;
     li {
-      flex: 200px 1;
+      flex: 300px 1;
     }
   }
 </style>
