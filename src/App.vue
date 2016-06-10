@@ -7,13 +7,13 @@
 </template>
 
 <script>
-  import VideoGrid from './components/VideoGrid'
+  import VideoGrid from './components/VideoGrid';
 
   export default {
     components: {
       VideoGrid
     }
-  }
+  };
 </script>
 
 <style>

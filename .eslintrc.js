@@ -13,6 +13,8 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // Turned off spaces before pern because of broken Beatify formating for JS inside script tag
-    'space-before-function-paren': 'off'
+    'space-before-function-paren': 'off',
+    // Require semicolons
+    'semi': ['error', 'always']
   }
 }

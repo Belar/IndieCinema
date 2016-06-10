@@ -22,8 +22,8 @@
 </template>
 
 <script>
-  var Vue = require('vue')
-  Vue.use(require('vue-resource')) // Web requests Vue plugin
+  var Vue = require('vue');
+  Vue.use(require('vue-resource')); // Web requests Vue plugin
 
   export default {
     props: {
@@ -41,18 +41,18 @@
     data: function() {
       return {
         movie: {}
-      }
+      };
     },
 
     methods: {
       closeMovie() {
         // Remove class from body to return scrolling availability
         // TODO: Remove the class without cleaning others
-        document.body.className = ''
-          // Clear movie info
-        this.movie = {}
-          // Hide modal
-        this.show = false
+        document.body.className = '';
+        // Clear movie info
+        this.movie = {};
+        // Hide modal
+        this.show = false;
       }
     },
 
@@ -70,10 +70,10 @@
             }
           }).then(function(response) {
             // Update information about the movie
-            this.$set('movie', response.data)
+            this.$set('movie', response.data);
           }, function(response) {
-            return false
-          })
+            return false;
+          });
         }
       }
     },
@@ -83,11 +83,11 @@
       document.addEventListener('keydown', (event) => {
         // Check if modal is open and key is esc
         if (this.show && event.keyCode === 27) {
-          this.closeMovie()
+          this.closeMovie();
         }
-      })
+      });
     }
-  }
+  };
 </script>
 
 <style scoped lang="scss">

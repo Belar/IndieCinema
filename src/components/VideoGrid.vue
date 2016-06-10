@@ -17,29 +17,29 @@
 </template>
 
 <script>
-  var Vue = require('vue')
-  Vue.use(require('vue-resource')) // Web requests, Vue plugin
+  var Vue = require('vue');
+  Vue.use(require('vue-resource')); // Web requests, Vue plugin
 
-  import Modal from './Modal' // Modal component
+  import Modal from './Modal'; // Modal component
 
-  const config = require('../../config/secret.js') // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
-  const vimeoData = require('../vimeoData.js') // Get JSON with dummy data (real Vimeo data, just stored for convenience)
+  const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
+  const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
 
   // Accepts array of objects and removes duplicates
   function removeDuplicates(array, prop) {
-    var uniqueArray = []
-    var uniqueObject = {}
-    var arrayLength = array.length
+    var uniqueArray = [];
+    var uniqueObject = {};
+    var arrayLength = array.length;
 
     // Generate objects identified by prop as key
     for (var i = 0; i < arrayLength; i++) {
-      uniqueObject[array[i][prop]] = array[i]
+      uniqueObject[array[i][prop]] = array[i];
     }
     // Insert objects into array
     for (i = 0 in uniqueObject) {
-      uniqueArray.push(uniqueObject[i])
+      uniqueArray.push(uniqueObject[i]);
     }
-    return uniqueArray
+    return uniqueArray;
   }
 
   export default {
@@ -52,7 +52,7 @@
         queryGroups: ['indie', 'indiefilmmakers'], // Assign dummy data TODO: Empty array populated with the latest videos
         showModal: false, // Modal's initial state
         videoModal: '' // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
-      }
+      };
     },
     methods: {
       getList() {
@@ -60,8 +60,8 @@
         // This is a simple query based on manually generated token to bypass the CORS, normally it should be use unauthenticated token from the provider
         // TODO: Move to back-end and cache
         // TODO: Make clear duplicates and update movieList executed outside for loop (sync)
-        var movies = []
-        var queryGroupsLength = this.queryGroups.length
+        var movies = [];
+        var queryGroupsLength = this.queryGroups.length;
         for (var i = 0; i < queryGroupsLength; i++) {
           this.$http({
             url: 'https://api.vimeo.com/groups/' + this.queryGroups[i] + '/videos?per_page=5',
@@ -72,25 +72,25 @@
             }
           }).then(function(response) {
             // Add videos to array
-            movies = movies.concat(response.data.data)
-              // Clear duplicates
-            var uniqueMovies = removeDuplicates(movies, 'uri')
-              // Update list of videos
-            this.$set('movieList', uniqueMovies)
+            movies = movies.concat(response.data.data);
+            // Clear duplicates
+            var uniqueMovies = removeDuplicates(movies, 'uri');
+            // Update list of videos
+            this.$set('movieList', uniqueMovies);
           }, function(response) {
-            return false
-          })
+            return false;
+          });
         }
       },
       showMovie(videoUri) {
         // Show modal and pass movie's URI for data query
-        this.videoModal = videoUri
-        this.showModal = true
-          // Add class to body limiting its scrolling with overflow
-        document.body.className += ' modal-open'
+        this.videoModal = videoUri;
+        this.showModal = true;
+        // Add class to body limiting its scrolling with overflow
+        document.body.className += ' modal-open';
       }
     }
-  }
+  };
 </script>
 
 <style scoped lang="scss">
@@ -98,9 +98,9 @@
     color: #FF004D;
   }
 
-  .single-movie{
-      max-width: 200px;
-      margin: .5rem;
+  .single-movie {
+    max-width: 200px;
+    margin: .5rem;
   }
 
   .thumbnail:hover {
