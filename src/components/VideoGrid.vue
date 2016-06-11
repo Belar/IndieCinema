@@ -7,7 +7,8 @@
     <ul>
       <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
         <div @click="showMovie(movie.uri)">
-          <img v-bind:src="movie.pictures.sizes[3].link" alt="">
+          <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
+          <img v-bind:src="movie.pictures.sizes[2].link" alt="">
         </div>
         {{ movie.name }}
       </li>
