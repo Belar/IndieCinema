@@ -5,7 +5,7 @@
     <button class="button" v-on:click="getList">Get latest Indie movies</button>
     <modal :show.sync="showModal" :video.sync="videoModal"></modal>
     <ul>
-      <li class="single-movie" v-for="movie in movieList | orderBy 'created_time' -1">
+      <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
         <div @click="showMovie(movie.uri)">
           <img v-bind:src="movie.pictures.sizes[3].link" alt="">
         </div>
@@ -56,7 +56,7 @@
     data: function() {
       return {
         movieList: vimeoData, // Assign dummy data TODO: Empty array populated with the latest videos
-        queryGroups: ['indie', 'indiefilmmakers'], // Assign dummy data TODO: Empty array populated with the latest videos
+        queryChannels: ['staffpicks', 'welikeitindietv', 'indiefilms'], // Assign dummy data TODO: Empty array populated with the latest videos
         showModal: false, // Modal's initial state
         videoModal: '' // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
       };
@@ -68,10 +68,10 @@
         // TODO: Move to back-end and cache
         // TODO: Make clear duplicates and update movieList executed outside for loop (sync)
         var movies = [];
-        var queryGroupsLength = this.queryGroups.length;
-        for (var i = 0; i < queryGroupsLength; i++) {
+        var queryLength = this.queryChannels.length;
+        for (var i = 0; i < queryLength; i++) {
           this.$http({
-            url: 'https://api.vimeo.com/groups/' + this.queryGroups[i] + '/videos?per_page=5',
+            url: 'https://api.vimeo.com/channels/' + this.queryChannels[i] + '/videos?per_page=10&sort=added&direction=desc',
             method: 'GET',
             headers: {
               'Accept': 'application/vnd.vimeo.*+json;version=3.2',
