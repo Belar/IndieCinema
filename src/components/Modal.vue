@@ -11,7 +11,7 @@
         </div>
         <div class="movie-info">
           <h2 class="title">{{ movie.name }}</h2>
-          <div class="by" v-if="movie.user">by <span class="author">{{ movie.user.name }}</span></div>
+          <div class="by" v-if="movie.user">by <span class="author"><a v-bind:href="movie.user.link">{{ movie.user.name }}</a></span></div>
           <div>
             {{ movie.description }}
           </div>
