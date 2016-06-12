@@ -67,13 +67,21 @@
     methods: {
       // TODO addChannel and getList is the same query, restructure and reuse
       addChannel: function() {
+        // Check if there is a valid(ish) value
         var value = this.newChannel && this.newChannel.trim();
+        if (!value) {
+          return;
+        }
+
+        // Remove whitespace on ends
+        var addChannel = this.newChannel.trim();
+
         // Add channel to the array with channels
-        this.queryChannels.push(this.newChannel);
+        this.queryChannels.push(addChannel);
 
         var movies = this.movieList; // Get list of already showed movies
         this.$http({
-          url: 'https://api.vimeo.com/channels/' + this.newChannel + '/videos?per_page=10&sort=added&direction=desc',
+          url: 'https://api.vimeo.com/channels/' + addChannel + '/videos?per_page=10&sort=added&direction=desc',
           method: 'GET',
           headers: {
             'Accept': 'application/vnd.vimeo.*+json;version=3.2',
