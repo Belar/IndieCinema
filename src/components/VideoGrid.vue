@@ -77,6 +77,12 @@
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
+        // Check if channel already exists in the array of channels
+        if (this.queryChannels.indexOf(addChannel)) {
+          // TODO Error, return information for user
+          return;
+        }
+
         // Add channel to the array with channels
         this.queryChannels.push(addChannel);
 
