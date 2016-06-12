@@ -2,7 +2,7 @@
 
   <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
-    <button class="button" v-on:click="getList">Get latest Indie movies</button>
+    <button class="button" v-on:click="getList()">Get latest Indie movies</button>
     <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
     <button class="button" v-on:click="addChannel()">+</button>
     <modal :show.sync="showModal" :video.sync="videoModal"></modal>
