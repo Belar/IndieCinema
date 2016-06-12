@@ -3,6 +3,7 @@
   <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
     <button class="button" v-on:click="getList">Get latest Indie movies</button>
+    <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
     <modal :show.sync="showModal" :video.sync="videoModal"></modal>
     <ul>
       <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
@@ -59,10 +60,38 @@
         movieList: vimeoData, // Assign dummy data TODO: Empty array populated with the latest videos
         queryChannels: ['staffpicks', 'welikeitindietv', 'indiefilms'], // Assign dummy data TODO: Empty array populated with the latest videos
         showModal: false, // Modal's initial state
-        videoModal: '' // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
+        videoModal: '', // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
+        newChannel: '' // Placeholder for new channel
       };
     },
     methods: {
+      // TODO addChannel and getList is the same query, restructure and reuse
+      addChannel: function() {
+        var value = this.newChannel && this.newChannel.trim();
+        // Add channel to the array with channels
+        this.queryChannels.push(this.newChannel);
+
+        var movies = this.movieList; // Get list of already showed movies
+        this.$http({
+          url: 'https://api.vimeo.com/channels/' + this.newChannel + '/videos?per_page=10&sort=added&direction=desc',
+          method: 'GET',
+          headers: {
+            'Accept': 'application/vnd.vimeo.*+json;version=3.2',
+            'Authorization': 'Bearer ' + config.vimeoAccessToken
+          }
+        }).then(function(response) {
+          // Add videos to array
+          movies = movies.concat(response.data.data);
+          // Clear duplicates
+          var uniqueMovies = removeDuplicates(movies, 'uri');
+          // Update list of videos
+          this.$set('movieList', uniqueMovies);
+        }, function(response) {
+          return false;
+        });
+        // Clear input
+        this.newChannel = '';
+      },
       getList() {
         // GET request
         // This is a simple query based on manually generated token to bypass the CORS, normally it should be use unauthenticated token from the provider
@@ -104,6 +133,10 @@
 <style scoped lang="scss">
   h1 {
     color: #FF004D;
+  }
+
+  input {
+    color: black;
   }
 
   .single-movie {
