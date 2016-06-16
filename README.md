@@ -1,14 +1,21 @@
-# Indie Cinema
+# IndieCinema
 
-Indie Cinema is a web application that builds index of Vimeo videos from groups (potentially also from other sources like channels and categories) dedicated to independent film.
+IndieCinema is a web application that builds grid of Vimeo videos from given channels.
+
+Features:
+
+- predefined grid with videos from popular channels dedicated to independent film
+- pop-up with embed and information about video
+- custom channels
 
 ## Current development state
 
-What you can see now is a front-end prototype using [Indie](https://vimeo.com/groups/indie) group for video data. If you would like to run the application, all you need to do is execute:
+Front-end: [VueJS](https://vuejs.org) and its [Webpack template](https://vuejs-templates.github.io/webpack/)  
+API [Soon]: [HapiJS](https://hapijs.com/)
+
+If you would like to run the application, all you need to do is download and execute:
 
 ```
 npm install
 npm run dev
 ```
-
-It's using VueJS and its [Webpack template](http://vuejs-templates.github.io/webpack/). Back-end is planned to use [HapiJS](http://hapijs.com/).
