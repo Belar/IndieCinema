@@ -30,7 +30,7 @@
   var Vue = require('vue');
   Vue.use(require('vue-resource')); // Web requests, Vue plugin
 
-  import Modal from './Modal'; // Modal component
+  import Modal from './Modal.vue'; // Modal component
 
   const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
   const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
@@ -145,7 +145,7 @@
   };
 </script>
 
-<style scoped lang="scss">
+<style>
   h1 {
     color: #FF004D;
   }
@@ -175,8 +175,8 @@
     flex-direction: row;
     justify-content: space-between;
     list-style-type: none;
-    li {
-      flex: 300px 1;
-    }
+  }
+  li {
+    flex: 300px 1;
   }
 </style>

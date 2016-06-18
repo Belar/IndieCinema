@@ -11,7 +11,7 @@
         </div>
         <div class="movie-info">
           <h2 class="title">{{ movie.name }}</h2>
-          <div class="by" v-if="movie.user">by <span class="author"><a v-bind:href="movie.user.link">{{ movie.user.name }}</a></span></div>
+          <div class="by" v-if="movie.user">by <span class="author"><a v-bind:href="movie.user.link" target="_blank" rel="noreferrer">{{ movie.user.name }}</a></span></div>
           <div>
             {{ movie.description }}
           </div>
@@ -90,18 +90,14 @@
   };
 </script>
 
-<style scoped lang="scss">
-  // TODO:
-  // Add auto-prefixing
-  $primary-dark: #14171e;
-  $secondary-dark: #282a36;
+<style scoped>
   .modal-mask {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($secondary-dark, .8);
+    background-color: rgba(0,0,0,.8);
     transition: opacity .3s ease;
     display: flex;
     align-items: center;
@@ -120,13 +116,15 @@
   .modal-container {
     width: 100%;
     margin: 0px auto;
-    background-color: rgba($primary-dark, .8);
+    background-color: rgba(255,255,255, 1);
     transition: all .3s ease;
     font-family: Source Sans Pro, Helvetica, sans-serif;
-    border-radius: 5px;
     text-align: left;
-    @media (min-width: 40em) {
-      width: 600px;
+  }
+
+  @media (min-width: 40em) {
+    .modal-container {
+          width: 600px;
     }
   }
 
