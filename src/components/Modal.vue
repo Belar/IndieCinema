@@ -66,7 +66,7 @@
             method: 'GET',
             headers: {
               'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-              'Authorization': 'Bearer a3e6b53ec8b0d76e8d44e9854f914814'
+              'Authorization': 'Bearer ' + config.vimeoAccessToken
             }
           }).then(function(response) {
             // Update information about the movie
