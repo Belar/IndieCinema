@@ -78,7 +78,7 @@
         var addChannel = this.newChannel.trim();
 
         // Check if channel already exists in the array of channels
-        if (this.queryChannels.indexOf(addChannel)) {
+        if (this.queryChannels.indexOf(addChannel) !== -1) {
           // TODO Error, return information for user
           return;
         }
