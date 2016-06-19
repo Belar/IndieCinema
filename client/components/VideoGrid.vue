@@ -1,5 +1,4 @@
 <template>
-
   <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
     <button class="button" v-on:click="getList()">Get latest Indie movies</button>
@@ -23,14 +22,14 @@
     </ul>
   </div>
 
-<modal :show.sync="showModal" :video.sync="videoModal"></modal>
+  <modal :show.sync="showModal" :video.sync="videoModal"></modal>
 </template>
 
 <script>
   var Vue = require('vue');
   Vue.use(require('vue-resource')); // Web requests, Vue plugin
 
-  import Modal from './Modal.vue'; // Modal component
+  import Modal from './Modal'; // Modal component
 
   const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
   const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
@@ -67,18 +66,17 @@
     },
     methods: {
       // TODO addChannel and getList is the same query, restructure and reuse
-      addChannel: function() {
-        // Check if there is a valid(ish) value
-        var value = this.newChannel && this.newChannel.trim();
-        if (!value) {
-          return;
-        }
-
+      addChannel() {
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
+        // Check if there is a valid(ish) value
+        if (!addChannel) {
+          return;
+        }
+
         // Check if channel already exists in the array of channels
-        if (this.queryChannels.indexOf(addChannel)) {
+        if (this.queryChannels.indexOf(addChannel) !== -1) {
           // TODO Error, return information for user
           return;
         }
@@ -176,6 +174,7 @@
     justify-content: space-between;
     list-style-type: none;
   }
+
   li {
     flex: 300px 1;
   }

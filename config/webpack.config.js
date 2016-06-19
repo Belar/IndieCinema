@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const projectRoot = path.resolve(__dirname, '../')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -10,10 +11,24 @@ module.exports = {
         publicPath: '/',
         filename: 'build.js'
     },
+    resolve: {
+        extensions: ['', '.js', '.vue']
+    },
     resolveLoader: {
         root: path.join(__dirname, 'node_modules'),
     },
     module: {
+        preLoaders: [{
+            test: /\.vue$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        }, {
+            test: /\.js$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        }],
         loaders: [{
             test: /\.vue$/,
             loader: 'vue'
@@ -35,6 +50,9 @@ module.exports = {
                 name: '[name].[ext]?[hash]'
             }
         }]
+    },
+    eslint: {
+        formatter: require('eslint-friendly-formatter')
     },
     plugins: [
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage

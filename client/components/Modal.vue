@@ -25,6 +25,8 @@
   var Vue = require('vue');
   Vue.use(require('vue-resource')); // Web requests Vue plugin
 
+  const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
+
   export default {
     props: {
       show: {
@@ -66,7 +68,7 @@
             method: 'GET',
             headers: {
               'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-              'Authorization': 'Bearer a3e6b53ec8b0d76e8d44e9854f914814'
+              'Authorization': 'Bearer ' + config.vimeoAccessToken
             }
           }).then(function(response) {
             // Update information about the movie
@@ -116,7 +118,7 @@
   .modal-container {
     width: 100%;
     margin: 0px auto;
-    background-color: rgba(255,255,255, 1);
+    background-color: rgba(255,255,255,1);
     transition: all .3s ease;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: left;
@@ -124,7 +126,7 @@
 
   @media (min-width: 40em) {
     .modal-container {
-          width: 600px;
+      width: 600px;
     }
   }
 

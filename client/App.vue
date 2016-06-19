@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import VideoGrid from './components/VideoGrid.vue';
+  import VideoGrid from './components/VideoGrid';
 
   export default {
     components: {
