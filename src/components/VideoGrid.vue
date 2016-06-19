@@ -67,7 +67,7 @@
     },
     methods: {
       // TODO addChannel and getList is the same query, restructure and reuse
-      addChannel: function() {
+      addChannel() {
         // Check if there is a valid(ish) value
         var value = this.newChannel && this.newChannel.trim();
         if (!value) {
