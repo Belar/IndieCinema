@@ -67,12 +67,9 @@
     methods: {
       // TODO addChannel and getList is the same query, restructure and reuse
       addChannel() {
-<<<<<<< HEAD:src/components/VideoGrid.vue
-=======
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
->>>>>>> dev:client/components/VideoGrid.vue
         // Check if there is a valid(ish) value
         if (!addChannel) {
           return;
