@@ -1,5 +1,4 @@
 <template>
-
   <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
     <button class="button" v-on:click="getList()">Get latest Indie movies</button>
@@ -23,7 +22,7 @@
     </ul>
   </div>
 
-<modal :show.sync="showModal" :video.sync="videoModal"></modal>
+  <modal :show.sync="showModal" :video.sync="videoModal"></modal>
 </template>
 
 <script>
@@ -68,14 +67,16 @@
     methods: {
       // TODO addChannel and getList is the same query, restructure and reuse
       addChannel() {
-        // Check if there is a valid(ish) value
-        var value = this.newChannel && this.newChannel.trim();
-        if (!value) {
-          return;
-        }
-
+<<<<<<< HEAD:src/components/VideoGrid.vue
+=======
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
+
+>>>>>>> dev:client/components/VideoGrid.vue
+        // Check if there is a valid(ish) value
+        if (!addChannel) {
+          return;
+        }
 
         // Check if channel already exists in the array of channels
         if (this.queryChannels.indexOf(addChannel) !== -1) {
@@ -145,7 +146,7 @@
   };
 </script>
 
-<style scoped lang="scss">
+<style>
   h1 {
     color: #FF004D;
   }
@@ -175,8 +176,9 @@
     flex-direction: row;
     justify-content: space-between;
     list-style-type: none;
-    li {
-      flex: 300px 1;
-    }
+  }
+
+  li {
+    flex: 300px 1;
   }
 </style>

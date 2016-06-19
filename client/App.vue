@@ -18,7 +18,7 @@
 
 <style>
   .main-wrapper {
-    color: white;
+    color: rgba(0,0,0,.8);
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: center;
   }
