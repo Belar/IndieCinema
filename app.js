@@ -50,6 +50,9 @@ server.register([Inert], function (err) {
             reply.file('./public/index.html');
         }
     });
+  // Load API routes
+  server.route(require('./server/routes'));
+  
 });
 
 

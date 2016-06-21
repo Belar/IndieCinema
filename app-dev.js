@@ -60,6 +60,8 @@ server.register([Inert, {
             }
         }
     });
+  // Load API routes
+  server.route(require('./server/routes'));
 
     server.route({
         method: 'GET',
