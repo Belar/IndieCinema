@@ -9,3 +9,5 @@ test/e2e/reports
 client/vimeoData.js
 public/images
 config/secret.js
+.debug_log
+.error_log
