@@ -13,7 +13,7 @@ gulp.task('nodemon', function (cb) {
             script: 'app-dev.js',
 
             // Watch core server file(s) that require restart on change
-            watch: ['app.js', 'app-dev.js', 'server/**/*.*']
+            watch: ['app.js', 'app-dev.js', 'server/**/*.*', 'plugins/**/*.js']
         })
         .on('start', function onStart() {
 
