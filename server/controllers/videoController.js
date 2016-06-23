@@ -13,6 +13,7 @@ exports.getVideos = {
 
     // Send movies back after all channels are gathered (async lib)
     async.forEachOf(queryChannels, function (value, key, callback) {
+
       // Call server method provided by the plugin
       request.server.methods.getChannel(value, function (error, result) {
         if (error) {
@@ -32,6 +33,27 @@ exports.getVideos = {
       // Send movies back
       return reply(movies);
     })
+
+  }
+};
+
+exports.getVideosSingle = {
+  handler: function (request, reply) {
+    // Repack list of channels from URI in to array
+    var queryChannel = request.url.query.channel;
+    var movies = [];
+
+    request.server.methods.getChannel(queryChannel, function (error, result) {
+      if (error) {
+        return reply({
+          error: error
+        }).code(500);
+      }
+      // Put movies into general array
+      movies = movies.concat(result);
+      // Send movies back
+      return reply(movies);
+    });
 
   }
 };

@@ -31,7 +31,6 @@
 
   import Modal from './Modal'; // Modal component
 
-  const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
   const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
 
   // Accepts array of objects and removes duplicates
@@ -65,40 +64,35 @@
       };
     },
     methods: {
-      // TODO addChannel and getList is the same query, restructure and reuse
       addChannel() {
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
         // Check if there is a valid(ish) value
         if (!addChannel) {
-          return;
+          return console.log('No channel to add');
         }
 
         // Check if channel already exists in the array of channels
         if (this.queryChannels.indexOf(addChannel) !== -1) {
           // TODO Error, return information for user
-          return;
+          return console.log('Channel already present');
         }
 
-        // Add channel to the array with channels
-        this.queryChannels.push(addChannel);
-
         var movies = this.movieList; // Get list of already showed movies
+
         this.$http({
-          url: 'https://api.vimeo.com/channels/' + addChannel + '/videos?per_page=10&sort=added&direction=desc',
-          method: 'GET',
-          headers: {
-            'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-            'Authorization': 'Bearer ' + config.vimeoAccessToken
-          }
+          url: '/api/get-videos-single?channel=' + addChannel,
+          method: 'GET'
         }).then(function(response) {
           // Add videos to array
-          movies = movies.concat(response.data.data);
+          movies = movies.concat(response.data);
           // Clear duplicates
           var uniqueMovies = removeDuplicates(movies, 'uri');
           // Update list of videos
           this.$set('movieList', uniqueMovies);
+          // Add channel to the array with channels
+          this.queryChannels.push(addChannel);
         }, function(response) {
           return false;
         });
@@ -108,7 +102,7 @@
       getList() {
         var movies = [];
         this.$http({
-          url: '/api/getvideos?channels=' + this.queryChannels,
+          url: '/api/get-videos?channels=' + this.queryChannels,
           method: 'GET'
         }).then(function(response) {
           movies = movies.concat(response.data);
