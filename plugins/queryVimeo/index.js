@@ -10,7 +10,7 @@ exports.register = function (server, options, next) {
   var getChannel = function (value, next) {
 
     var method = 'GET';
-    var uri = 'https://api.vimeo.com/channels/' + value + '/videos?per_page=10&sort=added&filter_content_rating=[drugs,nudity]&fields=uri,name,pictures,release_time,embed.html,description,user.link,user.name';
+    var uri = '/channels/' + value + '/videos?per_page=10&sort=added&filter_content_rating=[drugs,nudity]&fields=uri,name,pictures,release_time,embed.html,description,user.link,user.name';
 
     // Wreck callback, executed after data is received
     var optionalCallback = function (error, result) {
@@ -32,10 +32,14 @@ exports.register = function (server, options, next) {
 
     // Wreck options
     var options = {
+      baseUrl: 'https://api.vimeo.com/',
       headers: {
         'Accept': 'application/vnd.vimeo.*+json;version=3.2',
         'Authorization': 'Bearer ' + config.vimeoAccessToken
-      }
+      },
+      timeout: 5000, // default: unlimited
+      maxBytes: 1048576, // 1 MB, default: unlimited
+      rejectUnauthorized: true
     };
 
     // Execute the call
