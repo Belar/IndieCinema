@@ -106,31 +106,19 @@
         this.newChannel = '';
       },
       getList() {
-        // GET request
-        // This is a simple query based on manually generated token to bypass the CORS, normally it should be use unauthenticated token from the provider
-        // TODO: Move to back-end and cache
-        // TODO: Make clear duplicates and update movieList executed outside for loop (sync)
         var movies = [];
-        var queryLength = this.queryChannels.length;
-        for (var i = 0; i < queryLength; i++) {
-          this.$http({
-            url: 'https://api.vimeo.com/channels/' + this.queryChannels[i] + '/videos?per_page=10&sort=added&direction=desc',
-            method: 'GET',
-            headers: {
-              'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-              'Authorization': 'Bearer ' + config.vimeoAccessToken
-            }
-          }).then(function(response) {
-            // Add videos to array
-            movies = movies.concat(response.data.data);
-            // Clear duplicates
-            var uniqueMovies = removeDuplicates(movies, 'uri');
-            // Update list of videos
-            this.$set('movieList', uniqueMovies);
-          }, function(response) {
-            return false;
-          });
-        }
+        this.$http({
+          url: '/api/getvideos?channels=' + this.queryChannels,
+          method: 'GET'
+        }).then(function(response) {
+          movies = movies.concat(response.data);
+          // Clear duplicates
+          var uniqueMovies = removeDuplicates(movies, 'uri');
+          // Update list of videos
+          this.$set('movieList', uniqueMovies);
+        }, function(response) {
+          return false;
+        });
       },
       showMovie(videoUri) {
         // Show modal and pass movie's URI for data query

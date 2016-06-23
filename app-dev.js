@@ -7,6 +7,7 @@ const WebpackConfig = require('./config/webpack.config.js'); // Webpack config
 const HapiWebpackDevMiddleware = require('hapi-webpack-dev-middleware');
 const HapiWebpackHotMiddleware = require('hapi-webpack-hot-middleware');
 
+const queryVimeo = require('./plugins/queryVimeo'); // Logging
 
 const server = new Hapi.Server();
 server.connection({
@@ -41,7 +42,7 @@ var logConfig = {
   }
 };
 
-server.register([Inert, {
+server.register([Inert, queryVimeo, {
   register: Good,
   options: logConfig
 }, {
@@ -106,5 +107,5 @@ server.start((err) => {
     server.log(['error'], err);
   }
   server.log('info', 'Server running at: ' + server.info.uri);
-  
+
 });

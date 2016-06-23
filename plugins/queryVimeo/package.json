@@ -1,0 +1,11 @@
+{
+  "name": "queryViemo",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=4.0.0",
+    "wreck": "8.x.x"
+  },
+  "peerDependencies": {
+    "hapi": "11.x.x"
+  }
+}
