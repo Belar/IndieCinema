@@ -6,7 +6,7 @@
     <button class="button" v-on:click="addChannel()">+</button>
     <ul>
       <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
-        <div @click="showMovie(movie.uri)">
+        <div @click="showMovie(movie)">
           <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
           <img v-bind:src="movie.pictures.sizes[2].link" alt="">
         </div>
@@ -59,7 +59,7 @@
         movieList: vimeoData, // Assign dummy data TODO: Empty array populated with the latest videos
         queryChannels: ['staffpicks', 'welikeitindietv', 'indiefilms'], // Assign dummy data TODO: Empty array populated with the latest videos
         showModal: false, // Modal's initial state
-        videoModal: '', // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
+        videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
         newChannel: '' // Placeholder for new channel
       };
     },
@@ -114,9 +114,9 @@
           return false;
         });
       },
-      showMovie(videoUri) {
+      showMovie(video) {
         // Show modal and pass movie's URI for data query
-        this.videoModal = videoUri;
+        this.videoModal = video;
         this.showModal = true;
         // Add class to body limiting its scrolling with overflow
         document.body.className += ' modal-open';

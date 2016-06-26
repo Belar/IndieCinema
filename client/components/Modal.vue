@@ -25,7 +25,7 @@
   var Vue = require('vue');
   Vue.use(require('vue-resource')); // Web requests Vue plugin
 
-  const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
+  // const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
 
   export default {
     props: {
@@ -35,7 +35,7 @@
         twoWay: true
       },
       video: {
-        type: String,
+        type: Object,
         required: true
       }
     },
@@ -61,21 +61,7 @@
     watch: {
       'show': function() {
         if (this.show === true) {
-          // Get data about the video
-          // TODO Remove request and use data from movieList in parent component
-          this.$http({
-            url: 'https://api.vimeo.com/' + this.video,
-            method: 'GET',
-            headers: {
-              'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-              'Authorization': 'Bearer ' + config.vimeoAccessToken
-            }
-          }).then(function(response) {
-            // Update information about the movie
-            this.$set('movie', response.data);
-          }, function(response) {
-            return false;
-          });
+          this.$set('movie', this.video);
         }
       }
     },
@@ -99,7 +85,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0, 0, 0, .8);
     transition: opacity .3s ease;
     display: flex;
     align-items: center;
@@ -118,7 +104,7 @@
   .modal-container {
     width: 100%;
     margin: 0px auto;
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 1);
     transition: all .3s ease;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: left;
