@@ -4,7 +4,7 @@
     <button class="button" v-on:click="getList()">Refresh list</button>
     <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
     <button class="button" v-on:click="addChannel()">+</button>
-    <ul>
+    <ul class="video-grid">
       <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
         <div @click="showMovie(movie)">
           <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
