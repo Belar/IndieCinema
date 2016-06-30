@@ -38,7 +38,7 @@ exports.register = function (server, options, next) {
       baseUrl: 'https://api.vimeo.com/',
       headers: {
         'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-        'Authorization': 'Bearer ' + config.vimeoAccessToken
+        'Authorization': 'Bearer ' + config.vimeo.vimeoAccessToken
       },
       timeout: 5000, // default: unlimited
       maxBytes: 1048576, // 1 MB, default: unlimited
@@ -56,12 +56,7 @@ exports.register = function (server, options, next) {
       return value;
     },
     // Cache data from server method
-    cache: {
-      expiresIn: 10 * 60 * 1000,
-      staleIn: 5 * 60 * 1000,
-      staleTimeout: 100,
-      generateTimeout: 5000
-    }
+    cache: config.vimeo.cache
   });
 
   next();
