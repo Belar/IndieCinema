@@ -4,6 +4,8 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const Good = require('good'); // Logging
 
+const queryVimeo = require('./server/plugins/queryVimeo'); // plugin for Viemo proxy
+
 const server = new Hapi.Server();
 server.connection({
   port: 3000
@@ -28,7 +30,7 @@ var logConfig = {
 };
 
 
-server.register([Inert, {
+server.register([Inert, queryVimeo, {
   register: Good,
   options: logConfig
 }], function (err) {
@@ -76,7 +78,7 @@ server.register([Inert, {
 
   // Load API routes
   server.route(require('./server/routes'));
-  
+
 });
 
 
