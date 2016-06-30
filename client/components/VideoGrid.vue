@@ -56,7 +56,7 @@
     },
     data: function() {
       return {
-        movieList: vimeoData, // Assign dummy data TODO: Empty array populated with the latest videos
+        movieList: [], // Assign dummy data TODO: Empty array populated with the latest videos
         queryChannels: ['staffpicks', 'welikeitindietv', 'indiefilms'], // Assign dummy data TODO: Empty array populated with the latest videos
         showModal: false, // Modal's initial state
         videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
