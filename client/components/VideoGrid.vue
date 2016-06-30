@@ -4,6 +4,12 @@
     <button class="button" v-on:click="getList()">Refresh list</button>
     <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
     <button class="button" v-on:click="addChannel()">+ Add to the list</button>
+    <h5>Current channels:</h5>
+    <ul class="query-channels">
+      <li v-for="channel in queryChannels">
+        {{ channel }}
+      </li>
+    </ul>
     <ul class="video-grid">
       <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
         <div @click="showMovie(movie)">
@@ -135,6 +141,15 @@
 
   input {
     color: black;
+  }
+
+  .query-channels {
+    list-style-type: none;
+  }
+
+  .query-channels li {
+    display: inline-block;
+    margin: auto .25rem;
   }
 
   ul.video-grid {
