@@ -19,7 +19,9 @@ exports.register = function (server, options, next) {
         return next(error);
       }
       // TODO: Monitor rate limit headers
-      // console.log(result.headers);
+      // console.log('X-Ratelimit-Limit: ' + result.headers['x-ratelimit-limit']);
+      // console.log('X-Ratelimit-Remaining: ' + result.headers['x-ratelimit-remaining']);
+      // console.log('X-Ratelimit-Reset: ' + result.headers['x-ratelimit-reset']);
 
       // Response buffer, parsed to json
       Wreck.read(result, {
