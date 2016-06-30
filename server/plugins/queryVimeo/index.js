@@ -1,7 +1,8 @@
 'use strict';
+const path = require('path');
 
 const Wreck = require('wreck'); // HTTP requests
-const config = require('../../config/secret'); // Config
+const config = require('../../../config/secret'); // Config
 
 // Register Hapi plugin
 exports.register = function (server, options, next) {
