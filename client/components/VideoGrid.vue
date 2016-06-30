@@ -134,20 +134,7 @@
     color: black;
   }
 
-  .single-movie {
-    max-width: 100%;
-    margin: .5rem;
-  }
-
-  .thumbnail:hover {
-    cursor: pointer;
-  }
-
-  img {
-    height: auto;
-  }
-
-  ul {
+  ul.video-grid {
     margin: auto;
     display: flex;
     align-items: flex-start;
@@ -157,7 +144,17 @@
     list-style-type: none;
   }
 
-  li {
+  li.single-movie {
+    max-width: 100%;
+    margin: .5rem;
     flex: 300px 1;
+  }
+
+  .thumbnail:hover {
+    cursor: pointer;
+  }
+
+  img {
+    height: auto;
   }
 </style>
