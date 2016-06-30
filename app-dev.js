@@ -7,7 +7,7 @@ const WebpackConfig = require('./config/webpack.config.js'); // Webpack config
 const HapiWebpackDevMiddleware = require('hapi-webpack-dev-middleware');
 const HapiWebpackHotMiddleware = require('hapi-webpack-hot-middleware');
 
-const queryVimeo = require('./plugins/queryVimeo'); // Logging
+const queryVimeo = require('./server/plugins/queryVimeo'); // plugin for Viemo proxy
 
 const server = new Hapi.Server();
 server.connection({
