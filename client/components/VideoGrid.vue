@@ -6,8 +6,8 @@
     <button class="button" v-on:click="addChannel()">+ Add to the list</button>
     <h5>Current channels:</h5>
     <ul class="query-channels">
-      <li v-for="channel in queryChannels">
-        {{ channel }}
+      <li class="channel label " v-for="channel in queryChannels">
+        <i class="fi-x" @click="removeChannel(channel)" @click.stop></i> {{ channel }}
       </li>
     </ul>
     <ul class="video-grid">
@@ -106,6 +106,10 @@
         this.newChannel = '';
       },
       getList() {
+        if (!this.queryChannels.length > 0) {
+          // TODO: Proper error
+          return console.log('No channels to query');
+        }
         var movies = [];
         this.$http({
           url: '/api/get-videos?channels=' + this.queryChannels,
@@ -126,6 +130,15 @@
         this.showModal = true;
         // Add class to body limiting its scrolling with overflow
         document.body.className += ' modal-open';
+      },
+      removeChannel(channel) {
+        var channelPosition = this.queryChannels.indexOf(channel);
+        this.queryChannels.splice(channelPosition, 1);
+
+        if (!this.queryChannels.length > 0) {
+          return this.$set('movieList', []);
+        }
+        this.getList();
       }
     },
     ready: function() {
