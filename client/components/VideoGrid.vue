@@ -37,6 +37,8 @@
 
   import Modal from './Modal'; // Modal component
 
+  const localStorage = window.localStorage;
+
   // const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
 
   // Accepts array of objects and removes duplicates
@@ -99,6 +101,7 @@
           this.$set('movieList', uniqueMovies);
           // Add channel to the array with channels
           this.queryChannels.push(addChannel);
+          localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         }, function(response) {
           return false;
         });
@@ -138,7 +141,14 @@
         if (!this.queryChannels.length > 0) {
           return this.$set('movieList', []);
         }
+        localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         this.getList();
+      }
+    },
+    created: function() {
+      var customChannels = localStorage.getItem('myChannels');
+      if (customChannels) {
+        this.$set('queryChannels', JSON.parse(customChannels));
       }
     },
     ready: function() {
