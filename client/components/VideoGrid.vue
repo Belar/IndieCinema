@@ -1,6 +1,7 @@
 <template>
   <div id="movies" class="video-index">
     <h1>Indie Cinema</h1>
+    <button class="button" v-on:click="resetChannels()">Reset Channels</button>
     <button class="button" v-on:click="getList()">Refresh list</button>
     <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
     <button class="button" v-on:click="addChannel()">+ Add to the list</button>
@@ -38,6 +39,7 @@
   import Modal from './Modal'; // Modal component
 
   const localStorage = window.localStorage;
+  var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
 
   // const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
 
@@ -65,7 +67,7 @@
     data: function() {
       return {
         movieList: [], // Assign dummy data TODO: Empty array populated with the latest videos
-        queryChannels: ['staffpicks', 'welikeitindietv', 'indiefilms'], // Assign dummy data TODO: Empty array populated with the latest videos
+        queryChannels: defaultChannels, // Assign default channels
         showModal: false, // Modal's initial state
         videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
         newChannel: '' // Placeholder for new channel
@@ -142,6 +144,10 @@
           return this.$set('movieList', []);
         }
         localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
+        this.getList();
+      },
+      resetChannels() {
+        this.$set('queryChannels', defaultChannels);
         this.getList();
       }
     },
