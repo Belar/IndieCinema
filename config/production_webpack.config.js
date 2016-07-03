@@ -5,7 +5,7 @@ const projectRoot = path.resolve(__dirname, '../')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: ['webpack-hot-middleware/client', './client/main.js'],
+    entry: ['./client/main.js'],
     output: {
         path: path.resolve(__dirname, '../public/'),
         publicPath: '/',
@@ -57,7 +57,6 @@ module.exports = {
     plugins: [
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
@@ -67,4 +66,22 @@ module.exports = {
         })
     ],
     devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production') {
+    module.exports.devtool = '#source-map'
+        // http://vuejs.github.io/vue-loader/workflow/production.html
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
+    ])
 }
