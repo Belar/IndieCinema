@@ -5,6 +5,15 @@ const Boom = require('boom'); //HTTP errors
 const async = require('async'); // HTTP requests
 
 exports.getVideos = {
+  validate: {
+    query: {
+      channels: Joi.string().trim().required(),
+    },
+    failAction: function (request, reply, source, error) {
+      error.output.payload = error.data.details;
+      return reply(error.output.payload).code(error.output.statusCode);
+    }
+  },
   handler: function (request, reply) {
 
     // Repack list of channels from URI in to array
@@ -38,6 +47,15 @@ exports.getVideos = {
 };
 
 exports.getVideosSingle = {
+  validate: {
+    query: {
+      channel: Joi.string().trim().required(),
+    },
+    failAction: function (request, reply, source, error) {
+      error.output.payload = error.data.details;
+      return reply(error.output.payload).code(error.output.statusCode);
+    }
+  },
   handler: function (request, reply) {
     // Repack list of channels from URI in to array
     var queryChannel = request.url.query.channel;
