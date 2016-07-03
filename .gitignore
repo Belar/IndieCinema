@@ -4,6 +4,7 @@ npm-debug.log
 
 client/vimeoData.js
 public/images
+public/js/analytics.js
 config/secret.js
 .debug_log
 .error_log
