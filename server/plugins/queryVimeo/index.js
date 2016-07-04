@@ -38,7 +38,8 @@ exports.register = function (server, options, next) {
       baseUrl: 'https://api.vimeo.com/',
       headers: {
         'Accept': 'application/vnd.vimeo.*+json;version=3.2',
-        'Authorization': 'Bearer ' + config.vimeo.vimeoAccessToken
+        'Authorization': 'Bearer ' + config.vimeo.vimeoAccessToken,
+        'User-Agent': config.vimeo.user_agent
       },
       timeout: 5000, // default: unlimited
       maxBytes: 1048576, // 1 MB, default: unlimited
