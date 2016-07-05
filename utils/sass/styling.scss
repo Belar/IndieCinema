@@ -1,0 +1,26 @@
+@mixin bp($point) {
+   @if $point == xlg{
+    @media (min-width: 90em) {
+       @content;
+    }
+  }
+  @else if $point == lg {
+     @media (min-width: 64em){
+      @content;
+    }
+  }
+  @else if $point == md {
+     @media (min-width: 40em){
+      @content;
+    }
+  }
+}
+$light: #FAFAFA;
+$dark: #212121;
+$primary: #1E88E5;
+
+.clearfix:after {
+  content: " ";
+  display: table;
+  clear: both;
+}
