@@ -7,6 +7,8 @@
 </template>
 
 <script>
+  'use strict';
+
   import VideoGrid from './components/VideoGrid';
 
   export default {

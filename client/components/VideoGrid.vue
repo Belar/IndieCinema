@@ -33,6 +33,8 @@
 </template>
 
 <script>
+  'use strict';
+
   var Vue = require('vue');
   Vue.use(require('vue-resource')); // Web requests, Vue plugin
 
