@@ -1,8 +1,6 @@
 <template>
   <div id="app" class="main-wrapper">
-    <div class="row expanded column">
-      <video-grid></video-grid>
-    </div>
+    <video-grid></video-grid>
   </div>
 </template>
 
