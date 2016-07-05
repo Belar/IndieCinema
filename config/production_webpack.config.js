@@ -51,6 +51,11 @@ module.exports = {
       }
     }]
   },
+  vue: {
+    loaders: {
+      'scss': 'vue-style!css!sass'
+    }
+  },
   eslint: {
     formatter: require('eslint-friendly-formatter')
   },
