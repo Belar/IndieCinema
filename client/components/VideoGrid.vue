@@ -135,8 +135,6 @@
         // Show modal and pass movie's URI for data query
         this.videoModal = video;
         this.showModal = true;
-        // Add class to body limiting its scrolling with overflow
-        document.body.className += ' modal-open';
       },
       removeChannel(channel) {
         var channelPosition = this.queryChannels.indexOf(channel);

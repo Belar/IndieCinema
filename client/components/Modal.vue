@@ -49,9 +49,6 @@
 
     methods: {
       closeMovie() {
-        // Remove class from body to return scrolling availability
-        // TODO: Remove the class without cleaning others
-        document.body.className = '';
         // Clear movie info
         this.movie = {};
         // Hide modal
@@ -63,6 +60,11 @@
       'show': function() {
         if (this.show === true) {
           this.$set('movie', this.video);
+          // Add class to body limiting its scrolling with overflow
+          document.body.classList.add('modal-open');
+        } else {
+          // Remove class from body to return scrolling availability
+          document.body.classList.remove('modal-open');
         }
       }
     },
