@@ -18,6 +18,7 @@
 
 <style>
   .main-wrapper {
+    background: $light;
     font-family: Source Sans Pro, Helvetica, sans-serif;
   }
 

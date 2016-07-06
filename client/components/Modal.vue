@@ -120,6 +120,7 @@
     text-align: right;
     padding: .25rem .25rem;
   }
+
   .modal-close {
     font-size: 1.3rem;
     margin: 1px 5px 0 0;
@@ -165,13 +166,13 @@
       font-weight: 600;
       padding: 0 2px;
       transition: background .2s ease-in, color .2s ease-in;
-      &:hover{
-          background: $primary;
-          color: $light;
+      &:hover {
+        background: $primary;
+        color: $light;
       }
     }
-    .description{
-        margin: 1rem auto;
+    .description {
+      margin: 1rem auto;
     }
   }
   /*
