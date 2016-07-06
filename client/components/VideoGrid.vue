@@ -195,45 +195,208 @@
   };
 </script>
 
-<style>
+<style lang="scss">
+  @import "./utils/sass/styling";
   h1 {
-    color: #FF004D;
+    font-family: 'Old Standard TT', serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2rem;
+    @include bp(md) {
+      margin: 2rem 0 0 0;
+      font-size: 2.5rem;
+    }
+    @include bp(lg) {
+      margin: 4rem 0 0 0;
+      font-size: 3rem;
+    }
   }
 
-  input {
-    color: black;
+  .add-new-channel-wrapper {
+    text-align: center;
+    @include bp(md) {
+      margin: 2rem 0 0 0;
+      font-size: 2.5rem;
+    }
+    @include bp(lg) {
+      margin: 4rem 0 0 0;
+      font-size: 3rem;
+    }
+  }
+
+  .add-new-channel {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    label {
+      display: block;
+      text-align: left;
+      margin: auto auto .5rem 1.5rem;
+      font-size: 1rem;
+      color: $dark;
+    }
+    input {
+      height: 48px;
+      border-radius: 1000px;
+      border: 2px solid rgba($dark, .25);
+      padding: 0 1.5rem;
+      vertical-align: top;
+      font-size: 1rem;
+      font-style: italic;
+      width: 200px;
+      transition: border-color .2s ease-in;
+      &:focus {
+        outline: 0;
+        border-color: $primary;
+      }
+      @include bp(md) {
+        width: 500px;
+      }
+    }
+    button {
+      background: none;
+      border: none;
+    }
+    i {
+      color: rgba($dark, .25);
+      transition: opacity .2s ease-in;
+      &:hover,
+      &:active {
+        color: $primary;
+      }
+    }
   }
 
   .query-channels {
-    list-style-type: none;
+    padding: 0 1rem;
+    margin: 2rem 0 0 0;
+    width: 70%;
+    float: left;
+    @include bp(md) {
+      width: 60%;
+      padding: 0 1rem;
+      margin: 2rem 0 0 0;
+    }
+    @include bp(xlg) {
+      width: 80%;
+      padding: 0 2.5rem;
+      margin: 4rem 0 0 0;
+    }
+    h5 {
+      font-size: 1rem;
+      margin: 0 0 .5rem 0;
+      opacity: .75;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    li {
+      display: inline-block;
+      margin: .5rem 1rem .5rem 0;
+      font-weight: 600;
+      @include bp(xlg) {
+        margin: auto 1.5rem auto 0;
+      }
+    }
+    .close {
+      margin: 1px 5px 0 0;
+      float: left;
+      cursor: pointer;
+      color: rgba($dark, .25);
+      transition: color .2s ease-in;
+      &:hover,
+      &:active {
+        color: $primary;
+        opacity: 1;
+      }
+    }
+    .channel-name {
+      float: right;
+      font-size: .95rem;
+    }
   }
 
-  .query-channels li {
-    display: inline-block;
-    margin: auto .25rem;
+  .options {
+    padding: 0 1rem;
+    text-align: right;
+    width: 10%;
+    float: right;
+    @include bp(md) {
+      padding: 0 1rem;
+      margin: 2rem 0 0 0;
+    }
+    @include bp(xlg) {
+      padding: 0 2.5rem;
+      margin: 4rem 0 0 0;
+    }
+    .refresh-videos {
+      cursor: pointer;
+      margin-top: 2rem;
+      font-size: 24px;
+      color: rgba($dark, .25);
+      transition: color .2s ease-in;
+      &:hover,
+      &:active {
+        color: $primary;
+        opacity: 1;
+      }
+      @include bp(md) {
+        margin-top: 1rem;
+      }
+    }
+    // VideoGrid specific styling for Loading component
+    .loading-bar {
+      right: 0;
+      padding: 0 2.5rem;
+    }
   }
 
-  ul.video-grid {
-    margin: auto;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    list-style-type: none;
-  }
-
-  li.single-movie {
-    max-width: 100%;
-    margin: .5rem;
-    flex: 300px 1;
-  }
-
-  .thumbnail:hover {
-    cursor: pointer;
-  }
-
-  img {
-    height: auto;
+  .video-grid {
+    clear: both;
+    ul {
+      padding: 0;
+      margin: auto;
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      list-style-type: none;
+      @include bp(md) {
+        margin: 2rem 0 0 0;
+      }
+      @include bp(lg) {
+        margin: 3rem 0 0 0;
+      }
+    }
+    .single-movie {
+      max-width: 100%;
+      flex: 295px 1;
+      margin: 1rem .5rem;
+      @include bp(md) {
+        margin: 2rem .5rem;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .preview-wrapper {
+      cursor: pointer;
+    }
+    h4 {
+      margin: .25rem auto;
+      font-size: .95rem;
+      font-weight: 700;
+    }
+    .description {
+      width: 295px;
+      height: 25px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 </style>
