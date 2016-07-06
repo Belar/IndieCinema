@@ -1,6 +1,6 @@
 <template>
   <div class="loading-bar" v-show="loading" transition="expand">
-    <img class="loading-indicator" src="/images/dashinfinity.gif" alt=""> <span class="loading-txt">Loading...</span>
+    <span class="loading-txt">Loading...</span> <img class="loading-indicator" src="/images/dashinfinity.gif" alt="">
   </div>
 </template>
 
@@ -28,14 +28,13 @@
 
   .loading-indicator {
     height: 36px;
-    max-height: 100%;
     display: inline-block;
   }
 
   .loading-txt {
     display: inline-block;
     vertical-align: top;
-    margin: .5rem 0 0 .5rem;
+    margin: .5rem .5rem 0;
   }
 
   .expand-transition {
