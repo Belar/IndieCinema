@@ -321,12 +321,12 @@
 
   .options {
     padding: 0 1rem;
+    margin: 2rem 0 0 0;
     text-align: right;
     width: 10%;
     float: right;
     @include bp(md) {
       padding: 0 1rem;
-      margin: 2rem 0 0 0;
     }
     @include bp(xlg) {
       padding: 0 2.5rem;
