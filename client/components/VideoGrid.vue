@@ -258,6 +258,7 @@
       border: none;
     }
     i {
+      font-size: 48px;
       color: rgba($dark, .25);
       transition: opacity .2s ease-in;
       &:hover,
