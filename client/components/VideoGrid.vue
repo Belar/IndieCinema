@@ -39,6 +39,7 @@
   Vue.use(require('vue-resource')); // Web requests, Vue plugin
 
   import Modal from './Modal'; // Modal component
+  import Loading from './Loading'; // Loading indicator component
 
   const localStorage = window.localStorage;
   var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
@@ -64,19 +65,23 @@
 
   export default {
     components: {
-      Modal
+      Modal,
+      Loading
     },
     data: function() {
       return {
         movieList: [], // Assign dummy data TODO: Empty array populated with the latest videos
         queryChannels: defaultChannels, // Assign default channels
         showModal: false, // Modal's initial state
+        loadingIndicator: false, // Loading indicator's state
         videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
         newChannel: '' // Placeholder for new channel
       };
     },
     methods: {
       addChannel() {
+        // Show loading indicator
+        this.loadingIndicator = true;
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
@@ -103,16 +108,22 @@
           var uniqueMovies = removeDuplicates(movies, 'uri');
           // Update list of videos
           this.$set('movieList', uniqueMovies);
+          // Turn off loading
+          this.loadingIndicator = false;
           // Add channel to the array with channels
           this.queryChannels.push(addChannel);
           localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         }, function(response) {
+          // Turn off loading
+          this.loadingIndicator = false;
           return false;
         });
         // Clear input
         this.newChannel = '';
       },
       getList() {
+        // Show loading indicator
+        this.loadingIndicator = true;
         if (!this.queryChannels.length > 0) {
           // TODO: Proper error
           return console.log('No channels to query');
@@ -125,9 +136,13 @@
           movies = movies.concat(response.data);
           // Clear duplicates
           var uniqueMovies = removeDuplicates(movies, 'uri');
+          // Turn off loading
+          this.loadingIndicator = false;
           // Update list of videos
           this.$set('movieList', uniqueMovies);
         }, function(response) {
+          // Turn off loading indicator
+          this.loadingIndicator = false;
           return false;
         });
       },
