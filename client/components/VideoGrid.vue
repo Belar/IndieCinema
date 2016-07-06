@@ -5,7 +5,7 @@
       <div class="add-new-channel">
         <label>Add channel</label>
         <input autofocus autocomplete="off" placeholder="e.g. staffpicks" v-model="newChannel" @keyup.enter="addChannel()">
-        <i class="close icon ion-plus-circled" @click="addChannel()"></i>
+        <i class="icon ion-plus-circled" @click="addChannel()"></i>
       </div>
     </div>
     <!-- <button class="button" v-on:click="resetChannels()">Reset Channels</button>-->
@@ -260,9 +260,8 @@
     i {
       font-size: 48px;
       color: rgba($dark, .25);
-      transition: opacity .2s ease-in;
-      &:hover,
-      &:active {
+      transition: color .2s ease-in;
+      &:hover {
         color: $primary;
       }
     }
