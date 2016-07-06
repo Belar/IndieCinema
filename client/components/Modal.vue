@@ -77,15 +77,16 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss">
+  @import "./utils/sass/styling";
   .modal-mask {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .8);
-    transition: opacity .3s ease;
+    background-color: rgba($dark, .9);
+    transition: opacity .2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,7 +94,6 @@
   }
 
   .modal-wrapper {
-    position: absolute;
     z-index: 1010;
     margin: auto;
     left: 0;
@@ -103,24 +103,75 @@
   .modal-container {
     width: 100%;
     margin: 0px auto;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: $light;
     transition: all .3s ease;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: left;
-  }
-
-  @media (min-width: 40em) {
-    .modal-container {
+    @include bp(md) {
       width: 600px;
+    }
+    @include bp(xl) {
+      width: 960px;
     }
   }
 
-  .modal-button.close {
-    float: right;
+  .modal-header {
+    text-align: right;
+    padding: .25rem .25rem;
+  }
+  .modal-close {
+    font-size: 1.3rem;
+    margin: 1px 5px 0 0;
+    cursor: pointer;
+    color: rgba($dark, .25);
+    transition: color .2s ease-in;
+    &:hover,
+    &:active {
+      color: $primary;
+      opacity: 1;
+    }
+  }
+
+  .flex-video {
+    height: 0;
+    padding-top: 25px;
+    padding-bottom: 67.5%;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    &.widescreen {
+      padding-bottom: 56.34%;
+    }
+    iframe {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
   }
 
   .movie-info {
-    padding: 1rem;
+    position: relative;
+    padding: 0 1rem 1rem;
+    .title {
+      margin: .5rem auto 0;
+    }
+    .by a {
+      text-decoration: none;
+      color: $primary;
+      font-weight: 600;
+      padding: 0 2px;
+      transition: background .2s ease-in, color .2s ease-in;
+      &:hover{
+          background: $primary;
+          color: $light;
+      }
+    }
+    .description{
+        margin: 1rem auto;
+    }
   }
   /*
  * the following styles are auto-applied to elements with
