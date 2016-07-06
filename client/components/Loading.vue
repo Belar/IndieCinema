@@ -32,6 +32,7 @@
   }
 
   .loading-txt {
+    color: rgba($dark, .25);
     display: inline-block;
     vertical-align: top;
     margin: .5rem .5rem 0;

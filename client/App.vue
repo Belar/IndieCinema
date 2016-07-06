@@ -16,12 +16,13 @@
   };
 </script>
 
-<style>
-  .main-wrapper {
+<style lang="scss">
+  @import "./utils/sass/styling";
+  body {
     background: $light;
     font-family: Source Sans Pro, Helvetica, sans-serif;
   }
-
+  
   .modal-open {
     position: absolute;
     overflow-y: hidden;

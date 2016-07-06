@@ -259,10 +259,10 @@
     }
     i {
       font-size: 48px;
-      color: rgba($dark, .25);
+      color: rgba($primary, .25);
       transition: color .2s ease-in;
       &:hover {
-        color: $primary;
+        color: rgba($primary, 1);
       }
     }
   }
