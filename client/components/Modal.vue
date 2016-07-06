@@ -2,8 +2,8 @@
   <div class="modal-mask" v-show="show" @click="closeMovie()" transition="modal">
     <div class="modal-wrapper">
       <div class="modal-container" v-if="movie" @click.stop>
-        <div class="modal-header clearfix">
-          <button class="close modal-button button" @click="closeMovie()"> Close </button>
+        <div class="modal-header">
+          <i class="modal-close icon ion-close" @click="closeMovie()" @click.stop></i>
         </div>
         <div class="flex-video widescreen" v-if="movie.embed">
           <!-- TODO: Change to custom player or clean embed -->
