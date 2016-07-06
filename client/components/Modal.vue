@@ -22,10 +22,6 @@
 </template>
 
 <script>
-  var Vue = require('vue');
-  Vue.use(require('vue-resource')); // Web requests Vue plugin
-
-  // const config = require('../../config/secret.js'); // Config with settings that shouldn't make it to the repo (e.g. accessToken for Viemo API)
   'use strict';
 
   export default {
