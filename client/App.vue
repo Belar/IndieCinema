@@ -20,4 +20,9 @@
   .main-wrapper {
     font-family: Source Sans Pro, Helvetica, sans-serif;
   }
+
+  .modal-open {
+    position: absolute;
+    overflow-y: hidden;
+  }
 </style>
