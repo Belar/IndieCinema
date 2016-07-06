@@ -54,13 +54,14 @@
 
     watch: {
       'show': function() {
+        var appWrapper = document.getElementById('body-content-wrapper');
         if (this.show === true) {
           this.$set('movie', this.video);
           // Add class to body limiting its scrolling with overflow
-          document.body.classList.add('modal-open');
+          appWrapper.classList.add('modal-open');
         } else {
           // Remove class from body to return scrolling availability
-          document.body.classList.remove('modal-open');
+          appWrapper.classList.remove('modal-open');
         }
       }
     },
