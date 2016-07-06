@@ -1,34 +1,51 @@
 <template>
   <div id="movies" class="video-index">
-    <h1>Indie Cinema</h1>
-    <button class="button" v-on:click="resetChannels()">Reset Channels</button>
-    <button class="button" v-on:click="getList()">Refresh list</button>
-    <input class="new-channel" autofocus autocomplete="off" placeholder="Channel name..." v-model="newChannel" @keyup.enter="addChannel()">
-    <button class="button" v-on:click="addChannel()">+ Add to the list</button>
-    <h5>Current channels:</h5>
-    <ul class="query-channels">
-      <li class="channel label " v-for="channel in queryChannels">
-        <i class="fi-x" @click="removeChannel(channel)" @click.stop></i> {{ channel }}
-      </li>
-    </ul>
-    <ul class="video-grid">
-      <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
-        <div @click="showMovie(movie)">
-          <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
-          <img v-bind:src="movie.pictures.sizes[2].link" alt="">
-        </div>
-        {{ movie.name }}
-      </li>
-      <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
-      <li class="single-movie"></li>
-      <li class="single-movie"></li>
-      <li class="single-movie"></li>
-      <li class="single-movie"></li>
-      <li class="single-movie"></li>
-      <li class="single-movie"></li>
-    </ul>
-  </div>
+    <h1>indie cinema</h1>
+    <div class="add-new-channel-wrapper">
+      <div class="add-new-channel">
+        <label>Add channel</label>
+        <input autofocus autocomplete="off" placeholder="e.g. staffpicks" v-model="newChannel" @keyup.enter="addChannel()">
+        <i class="close icon ion-plus-circled" @click="addChannel()"></i>
+      </div>
+    </div>
+    <!-- <button class="button" v-on:click="resetChannels()">Reset Channels</button>-->
+    <div class="action-bar clearfix">
+      <div class="query-channels">
+        <h5>Current channels:</h5>
+        <ul>
+          <li class="channel label " v-for="channel in queryChannels">
+            <i class="close icon ion-close" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="options">
+        <i class="refresh-videos close icon ion-refresh" @on:click="getList()"></i>
+        <loading :loading.sync="loadingIndicator"></loading>
+      </div>
+    </div>
 
+    <div class="video-grid">
+      <ul>
+        <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
+          <div class="preview-wrapper" @click="showMovie(movie)">
+            <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
+            <img v-bind:src="movie.pictures.sizes[2].link" alt="">
+          </div>
+          <h4>{{ movie.name }}</h4>
+          <div class="description">
+            {{ movie.description }}
+          </div>
+        </li>
+        <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
+        <li class="single-movie"></li>
+        <li class="single-movie"></li>
+        <li class="single-movie"></li>
+        <li class="single-movie"></li>
+        <li class="single-movie"></li>
+        <li class="single-movie"></li>
+      </ul>
+    </div>
+  </div>
   <modal :show.sync="showModal" :video.sync="videoModal"></modal>
 </template>
 
