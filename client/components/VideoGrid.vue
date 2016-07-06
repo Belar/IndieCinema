@@ -19,7 +19,7 @@
         </ul>
       </div>
       <div class="options">
-        <i class="refresh-videos close icon ion-refresh" @on:click="getList()"></i>
+        <i class="refresh-videos icon ion-refresh" v-show="!loadingIndicator" @click="getList()"></i>
         <loading :loading.sync="loadingIndicator"></loading>
       </div>
     </div>
