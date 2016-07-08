@@ -25,8 +25,17 @@
     </div>
 
     <div class="video-grid">
+      <div class="grid-options">
+        <div class="sorting">
+          <h5>Order by:</h5>
+          <ul class="modes">
+            <li :class="{active : orderCondition == 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
+            <li :class="{active : orderCondition == 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
+          </ul>
+        </div>
+      </div>
       <ul>
-        <li class="single-movie" v-for="movie in movieList | orderBy 'release_time' -1">
+        <li class="single-movie" v-for="movie in movieList | orderBy orderCondition order">
           <div class="preview-wrapper" @click="showMovie(movie)">
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
             <img v-bind:src="movie.pictures.sizes[2].link" alt="">
@@ -92,7 +101,9 @@
         showModal: false, // Modal's initial state
         loadingIndicator: false, // Loading indicator's state
         videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
-        newChannel: '' // Placeholder for new channel
+        newChannel: '', // Placeholder for new channel
+        orderCondition: 'indieCinema.order', // Defines how movies are ordered
+        order: 1 // Asc or desc
       };
     },
     methods: {
@@ -181,6 +192,13 @@
       resetChannels() {
         this.$set('queryChannels', defaultChannels);
         this.getList();
+      },
+      changeOrder(condition) {
+        this.$set('orderCondition', condition);
+        if (condition === 'indieCinema.order') {
+          return this.$set('order', 1);
+        }
+        this.$set('order', -1);
       }
     },
     created: function() {
@@ -397,6 +415,45 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+  }
+
+  .grid-options {
+    padding: 0 1rem;
+    margin: 2rem 0 0 0;
+    @include bp(md) {
+      width: 60%;
+      padding: 0 1rem;
+      margin: 2rem 0 0 0;
+    }
+    @include bp(xlg) {
+      width: 80%;
+      padding: 0 2.5rem;
+      margin: 1rem 0 0 0;
+    }
+    h5 {
+      font-size: 1rem;
+      margin: 0 0 .5rem 0;
+      opacity: .75;
+    }
+    .modes {
+      display: inline;
+      li {
+        display: inline;
+        font-weight: 600;
+        margin: auto 1rem auto 0;
+        transition: color .2s ease-in;
+        opacity: .5;
+        cursor: pointer;
+      }
+      li:hover,
+      li.active {
+        color: $primary;
+        opacity: 1;
+      }
+      i {
+        margin: 1px 5px 0 0;
+      }
     }
   }
 </style>
