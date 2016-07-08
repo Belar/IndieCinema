@@ -173,6 +173,7 @@
     }
     .description {
       margin: 1rem auto;
+      white-space: pre-line;
     }
   }
   /*
