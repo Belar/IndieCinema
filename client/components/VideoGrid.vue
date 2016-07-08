@@ -4,7 +4,7 @@
     <div class="add-new-channel-wrapper">
       <div class="add-new-channel">
         <label>Add channel</label>
-        <input autofocus autocomplete="off" placeholder="e.g. staffpicks" v-model="newChannel" @keyup.enter="addChannel()">
+        <input autofocus autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
         <i class="icon ion-plus-circled" @click="addChannel()"></i>
       </div>
     </div>
