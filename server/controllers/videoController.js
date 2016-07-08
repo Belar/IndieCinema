@@ -28,9 +28,28 @@ exports.getVideos = {
         if (error) {
           return callback(error);
         }
-        // Put movies into general array
-        movies = movies.concat(result);
-        return callback(null);
+        // Assign current channel
+        var currentChannel = value;
+
+        // Vimeo doesn't return added_time via API, but allows to request data to be sorted by added time
+        // Go through results, asign an order number and later sort by this property
+        async.forEachOf(result, function (value, key, callback) {
+          // Create place for indieCinema data
+          value.indieCinema = {};
+          // Add order number, for sorting by added_time
+          value.indieCinema.order = key;
+          // Add channel video was taken from, for filtering
+          value.indieCinema.channel = currentChannel;
+          callback(null);
+        }, function (err) {
+          if (error) {
+            return callback(error);
+          }
+          // Put movies into general array
+          movies = movies.concat(result);
+          return callback(null);
+        });
+
       });
 
     }, function (error) {
@@ -67,10 +86,26 @@ exports.getVideosSingle = {
           error: error
         }).code(500);
       }
-      // Put movies into general array
-      movies = movies.concat(result);
-      // Send movies back
-      return reply(movies);
+
+      // Vimeo doesn't return added_time via API, but allows to request data to be sorted by added time
+      // Go through results, asign an order number and later sort by this property
+      async.forEachOf(result, function (value, key, callback) {
+        // Create place for indieCinema data
+        value.indieCinema = {};
+        // Add order number
+        value.indieCinema.order = key;
+        value.indieCinema.channel = queryChannel;
+        callback(null);
+      }, function (err) {
+        if (error) {
+          return callback(error);
+        }
+        // Put movies into general array
+        movies = movies.concat(result);
+        // Send movies back
+        return reply(movies);
+      });
+
     });
 
   }
