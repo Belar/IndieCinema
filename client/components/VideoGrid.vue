@@ -250,7 +250,8 @@
       display: block;
       text-align: left;
       margin: auto auto .5rem 1.5rem;
-      font-size: 1rem;
+      font-size: .95rem;
+      font-weight: 600;
       color: $dark;
     }
     input {
@@ -259,7 +260,7 @@
       border: 2px solid rgba($dark, .25);
       padding: 0 1.5rem;
       vertical-align: top;
-      font-size: 1rem;
+      font-size: .95rem;
       font-style: italic;
       width: 200px;
       transition: border-color .2s ease-in;
@@ -270,10 +271,6 @@
       @include bp(md) {
         width: 500px;
       }
-    }
-    button {
-      background: none;
-      border: none;
     }
     i {
       font-size: 48px;
@@ -291,19 +288,18 @@
     width: 70%;
     float: left;
     @include bp(md) {
-      width: 60%;
+      width: 80%;
       padding: 0 1rem;
       margin: 2rem 0 0 0;
     }
     @include bp(xlg) {
-      width: 80%;
       padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
     h5 {
-      font-size: 1rem;
+      font-size: .95rem;
       margin: 0 0 .5rem 0;
-      opacity: .75;
+      color: rgba($dark, .5);
     }
     ul {
       margin: 0;
@@ -314,6 +310,7 @@
       display: inline-block;
       margin: .5rem 1rem .5rem 0;
       font-weight: 600;
+      font-size: .95rem;
       @include bp(xlg) {
         margin: auto 1.5rem auto 0;
       }
@@ -327,7 +324,6 @@
       &:hover,
       &:active {
         color: $primary;
-        opacity: 1;
       }
     }
     .channel-name {
@@ -415,6 +411,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      font-size: .9rem;
     }
   }
 
@@ -429,12 +426,12 @@
     @include bp(xlg) {
       width: 80%;
       padding: 0 2.5rem;
-      margin: 1rem 0 0 0;
+      margin: 2rem 0 0 0;
     }
     h5 {
-      font-size: 1rem;
+      font-size: .95rem;
+      color: rgba($dark, .5);
       margin: 0 0 .5rem 0;
-      opacity: .75;
     }
     .modes {
       display: inline;
@@ -443,13 +440,12 @@
         font-weight: 600;
         margin: auto 1rem auto 0;
         transition: color .2s ease-in;
-        opacity: .5;
         cursor: pointer;
+        color: rgba($dark, .5);
       }
       li:hover,
       li.active {
         color: $primary;
-        opacity: 1;
       }
       i {
         margin: 1px 5px 0 0;

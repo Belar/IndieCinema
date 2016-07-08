@@ -106,7 +106,6 @@
     margin: 0px auto;
     background-color: $light;
     transition: all .3s ease;
-    font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: left;
     @include bp(md) {
       width: 600px;
