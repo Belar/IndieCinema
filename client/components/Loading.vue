@@ -10,11 +10,6 @@
       loading: {
         type: Boolean
       }
-    },
-    watch: {
-      'loading': function() {
-        console.log('Loading');
-      }
     }
   };
 </script>
