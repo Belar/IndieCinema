@@ -259,7 +259,9 @@
         margin: auto 1.5rem auto 0;
       }
     }
-    .close {
+    .icon {
+      height: 15px;
+      width: 15px;
       margin: 1px 5px 0 0;
       float: left;
       cursor: pointer;
