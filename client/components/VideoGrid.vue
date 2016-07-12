@@ -65,8 +65,6 @@
   const localStorage = window.localStorage;
   var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
 
-  // const vimeoData = require('../vimeoData.js'); // Get JSON with dummy data (real Vimeo data, just stored for convenience)
-
   // Accepts array of objects and removes duplicates
   function removeDuplicates(array, prop) {
     var uniqueArray = [];
