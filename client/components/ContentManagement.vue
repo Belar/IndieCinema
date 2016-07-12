@@ -12,6 +12,7 @@
       <h5>Current channels:</h5>
       <ul>
         <li class="channel label " v-for="channel in queryChannels">
+          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.invisibleChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
           <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
         </li>
       </ul>
@@ -58,6 +59,11 @@
     },
     props: {
       movieList: {
+        type: Array,
+        required: true,
+        twoWay: true
+      },
+      invisibleChannels: {
         type: Array,
         required: true,
         twoWay: true
@@ -154,6 +160,13 @@
         }
         localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         this.getList();
+      },
+      hideChannel(channel) {
+        var channelPosition = this.invisibleChannels.indexOf(channel);
+        if (channelPosition !== -1) {
+          return this.invisibleChannels.splice(channelPosition, 1);
+        }
+        return this.invisibleChannels.push(channel);
       },
       resetChannels() {
         this.$set('queryChannels', defaultChannels);
@@ -270,6 +283,12 @@
       &:hover,
       &:active {
         color: $primary;
+      }
+    }
+    .channel-visibility {
+      color: $primary;
+      &.inactive {
+        color: rgba($dark, .25);
       }
     }
     .channel-name {

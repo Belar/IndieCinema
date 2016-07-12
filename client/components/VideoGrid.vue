@@ -2,14 +2,14 @@
   <div id="movies" class="video-index">
     <h1>indie cinema</h1>
 
-    <content-management :movie-List.sync="movieList"></content-management>
+    <content-management :movie-List.sync="movieList" :invisible-channels.sync="invisibleChannels"></content-management>
 
     <div class="video-grid">
       <div class="grid-options">
         <sorting :sort-Condition.sync="sortCondition" :order.sync="order"></sorting>
       </div>
       <ul>
-        <li class="single-movie" v-for="movie in movieList | orderBy sortCondition order">
+        <li class="single-movie" v-for="movie in movieListVisible | orderBy sortCondition order">
           <div class="preview-wrapper" @click="showMovie(movie)">
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
             <img v-bind:src="movie.pictures.sizes[2].link" alt="">
@@ -48,11 +48,25 @@
     data: function() {
       return {
         movieList: [], // Assign dummy data
+        invisibleChannels: [], // Channels videos to hide
         showModal: false, // Modal's initial state
         videoModal: {}, // Pass video info to modal
         sortCondition: 'indieCinema.order', // Defines how movies are ordered
         order: 1 // Asc or desc
       };
+    },
+    computed: {
+      movieListVisible: function() {
+        var movies = this.movieList;
+        var filteredMovies = [];
+        var invisibleChannels = this.invisibleChannels;
+        for (var i = 0; i < movies.length; i++) {
+          if (invisibleChannels.indexOf(movies[i].indieCinema.channel) === -1) {
+            filteredMovies.push(movies[i]);
+          }
+        }
+        return filteredMovies;
+      }
     },
     methods: {
       showMovie(video) {
