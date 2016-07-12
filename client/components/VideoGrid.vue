@@ -26,16 +26,10 @@
 
     <div class="video-grid">
       <div class="grid-options">
-        <div class="sorting">
-          <h5>Order by:</h5>
-          <ul class="modes">
-            <li :class="{active : orderCondition == 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
-            <li :class="{active : orderCondition == 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
-          </ul>
-        </div>
+        <sorting :sort-Condition.sync="sortCondition" :order.sync="order"></sorting>
       </div>
       <ul>
-        <li class="single-movie" v-for="movie in movieList | orderBy orderCondition order">
+        <li class="single-movie" v-for="movie in movieList | orderBy sortCondition order">
           <div class="preview-wrapper" @click="showMovie(movie)">
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
             <img v-bind:src="movie.pictures.sizes[2].link" alt="">
@@ -66,6 +60,7 @@
 
   import Modal from './Modal'; // Modal component
   import Loading from './Loading'; // Loading indicator component
+  import Sorting from './Sorting'; // Loading indicator component
 
   const localStorage = window.localStorage;
   var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
@@ -92,7 +87,8 @@
   export default {
     components: {
       Modal,
-      Loading
+      Loading,
+      Sorting
     },
     data: function() {
       return {
@@ -102,7 +98,7 @@
         loadingIndicator: false, // Loading indicator's state
         videoModal: {}, // Pass video info to modal TODO: Pass all data from movieList, remove query from the modal
         newChannel: '', // Placeholder for new channel
-        orderCondition: 'indieCinema.order', // Defines how movies are ordered
+        sortCondition: 'indieCinema.order', // Defines how movies are ordered
         order: 1 // Asc or desc
       };
     },
@@ -174,11 +170,6 @@
           return false;
         });
       },
-      showMovie(video) {
-        // Show modal and pass movie's URI for data query
-        this.videoModal = video;
-        this.showModal = true;
-      },
       removeChannel(channel) {
         var channelPosition = this.queryChannels.indexOf(channel);
         this.queryChannels.splice(channelPosition, 1);
@@ -189,16 +180,14 @@
         localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         this.getList();
       },
+      showMovie(video) {
+        // Show modal and pass movie's URI for data query
+        this.videoModal = video;
+        this.showModal = true;
+      },
       resetChannels() {
         this.$set('queryChannels', defaultChannels);
         this.getList();
-      },
-      changeOrder(condition) {
-        this.$set('orderCondition', condition);
-        if (condition === 'indieCinema.order') {
-          return this.$set('order', 1);
-        }
-        this.$set('order', -1);
       }
     },
     created: function() {
@@ -427,29 +416,6 @@
       width: 80%;
       padding: 0 2.5rem;
       margin: 2rem 0 0 0;
-    }
-    h5 {
-      font-size: .95rem;
-      color: rgba($dark, .5);
-      margin: 0 0 .5rem 0;
-    }
-    .modes {
-      display: inline;
-      li {
-        display: inline;
-        font-weight: 600;
-        margin: auto 1rem auto 0;
-        transition: color .2s ease-in;
-        cursor: pointer;
-        color: rgba($dark, .5);
-      }
-      li:hover,
-      li.active {
-        color: $primary;
-      }
-      i {
-        margin: 1px 5px 0 0;
-      }
     }
   }
 </style>
