@@ -12,11 +12,12 @@
       <h5>Current channels:</h5>
       <ul>
         <li class="channel label " v-for="channel in queryChannels">
-          <i class="close icon ion-close" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
+          <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
         </li>
       </ul>
     </div>
     <div class="options">
+      <i class="delete-channels icon ion-trash-b" @click="allowRemoval()"></i>
       <i class="refresh-videos icon ion-refresh" v-show="!loadingIndicator" @click="getList()"></i>
       <loading :loading.sync="loadingIndicator"></loading>
     </div>
@@ -66,7 +67,8 @@
       return {
         queryChannels: defaultChannels, // Assign default channels
         loadingIndicator: false, // Loading indicator's state
-        newChannel: '' // Placeholder for new channel
+        newChannel: '', // Placeholder for new channel
+        deleteChannels: false // Option to delete channel
       };
     },
     methods: {
@@ -136,6 +138,12 @@
           this.loadingIndicator = false;
           return false;
         });
+      },
+      allowRemoval() {
+        if (this.deleteChannels === false) {
+          return this.$set('deleteChannels', true);
+        }
+        this.$set('deleteChannels', false);
       },
       removeChannel(channel) {
         var channelPosition = this.queryChannels.indexOf(channel);
@@ -219,16 +227,16 @@
   }
 
   .query-channels {
-    padding: 0 1rem;
+    padding: 0 .5rem;
     margin: 2rem 0 0 0;
     width: 70%;
     float: left;
     @include bp(md) {
-      width: 80%;
       padding: 0 1rem;
       margin: 2rem 0 0 0;
     }
     @include bp(xlg) {
+      width: 75%;
       padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
@@ -272,7 +280,7 @@
     padding: 0 1rem;
     margin: 2rem 0 0 0;
     text-align: right;
-    width: 10%;
+    width: 15%;
     float: right;
     @include bp(md) {
       padding: 0 1rem;
@@ -281,9 +289,10 @@
       padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
-    .refresh-videos {
+    .icon {
       cursor: pointer;
-      margin-top: 2rem;
+      margin: 0rem .25rem;
+      display: inline-block;
       font-size: 24px;
       color: rgba($dark, .25);
       transition: color .2s ease-in;
