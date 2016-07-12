@@ -2,8 +2,8 @@
   <div class="sorting">
     <h5>Order by:</h5>
     <ul class="modes">
-      <li :class="{active : sortCondition === 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
-      <li :class="{active : sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
+      <li :class="{'active' : sortCondition === 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
+      <li :class="{'active' : sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
     </ul>
   </div>
 </template>
