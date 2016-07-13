@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="main-wrapper">
+    <on-screen-message></on-screen-message>
     <video-grid></video-grid>
   </div>
 </template>
@@ -8,10 +9,12 @@
   'use strict';
 
   import VideoGrid from './components/VideoGrid';
+  import OnScreenMessage from './components/OnScreenMessage';
 
   export default {
     components: {
-      VideoGrid
+      VideoGrid,
+      OnScreenMessage
     }
   };
 </script>
