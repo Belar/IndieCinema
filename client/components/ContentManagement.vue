@@ -79,8 +79,6 @@
     },
     methods: {
       addChannel() {
-        // Show loading indicator
-        this.loadingIndicator = true;
         // Remove whitespace on ends
         var addChannel = this.newChannel.trim();
 
@@ -96,6 +94,7 @@
         }
 
         var movies = this.movieList; // Get list of already showed movies
+        this.loadingIndicator = true;
 
         this.$http({
           url: '/api/get-videos-single?channel=' + addChannel,
