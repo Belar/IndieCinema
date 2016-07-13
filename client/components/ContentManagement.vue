@@ -28,10 +28,8 @@
 <script>
   'use strict';
 
-  var Vue = require('vue');
-  Vue.use(require('vue-resource')); // Web requests, Vue plugin
-
   import Loading from './Loading'; // Loading component
+  import store from '../store';
 
   const localStorage = window.localStorage;
   var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
@@ -74,7 +72,8 @@
         queryChannels: defaultChannels, // Assign default channels
         loadingIndicator: false, // Loading indicator's state
         newChannel: '', // Placeholder for new channel
-        deleteChannels: false // Option to delete channel
+        deleteChannels: false, // Option to delete channel
+        sharedState: store.state // Global store
       };
     },
     methods: {
@@ -84,13 +83,13 @@
 
         // Check if there is a valid(ish) value
         if (!addChannel) {
-          return console.log('No channel to add');
+          // this.sharedState.screenMessage = 'No channel to add';
+          return store.setMessage('Field is empty, no channel to add');
         }
 
         // Check if channel already exists in the array of channels
         if (this.queryChannels.indexOf(addChannel) !== -1) {
-          // TODO Error, return information for user
-          return console.log('Channel already present');
+          return store.setMessage('This channel is already present');
         }
 
         var movies = this.movieList; // Get list of already showed movies
@@ -123,8 +122,7 @@
         // Show loading indicator
         this.loadingIndicator = true;
         if (!this.queryChannels.length > 0) {
-          // TODO: Proper error
-          return console.log('No channels to query');
+          return store.setMessage('There are no channels to show videos from');
         }
         var movies = [];
         this.$http({
