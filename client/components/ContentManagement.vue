@@ -111,7 +111,7 @@
           // Add channel to the array with channels
           this.queryChannels.push(addChannel);
           localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
-        }, function(error) {
+        }, function(response) {
           // Turn off loading
           this.loadingIndicator = false;
           return false;

@@ -41,7 +41,7 @@ exports.getVideos = {
           // Add channel video was taken from, for filtering
           value.indieCinema.channel = currentChannel;
           callback(null);
-        }, function (error) {
+        }, function (err) {
           if (error) {
             return callback(error);
           }
@@ -54,7 +54,9 @@ exports.getVideos = {
 
     }, function (error) {
       if (error) {
-        return reply(error);
+        return reply({
+          error: error
+        }).code(500);
       }
       // Send movies back
       return reply(movies);
