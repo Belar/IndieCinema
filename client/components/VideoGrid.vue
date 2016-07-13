@@ -4,10 +4,11 @@
 
     <content-management :movie-List.sync="movieList" :invisible-channels.sync="invisibleChannels"></content-management>
 
+    <div class="grid-options">
+      <sorting :sort-Condition.sync="sortCondition" :order.sync="order"></sorting>
+    </div>
+
     <div class="video-grid">
-      <div class="grid-options">
-        <sorting :sort-Condition.sync="sortCondition" :order.sync="order"></sorting>
-      </div>
       <ul>
         <li class="single-movie" v-for="movie in movieListVisible | orderBy sortCondition order">
           <div class="preview-wrapper" @click="showMovie(movie)">

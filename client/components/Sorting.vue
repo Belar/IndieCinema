@@ -44,6 +44,7 @@
 
   .sorting .modes {
     display: inline;
+    padding: 0;
     li {
       display: inline;
       font-weight: 600;
