@@ -19,6 +19,11 @@ exports.register = function (server, options, next) {
         // Pass error back
         return next(error);
       }
+
+      if (result.statusCode === 404) {
+        return callback(error)
+      }
+
       // TODO: Monitor rate limit headers
       // console.log('X-Ratelimit-Limit: ' + result.headers['x-ratelimit-limit']);
       // console.log('X-Ratelimit-Remaining: ' + result.headers['x-ratelimit-remaining']);
