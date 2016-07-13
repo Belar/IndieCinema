@@ -12,7 +12,7 @@
       <h5>Current channels:</h5>
       <ul>
         <li class="channel label " v-for="channel in queryChannels">
-          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.invisibleChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
+          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.invisibleChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
           <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
         </li>
       </ul>
@@ -55,18 +55,6 @@
     components: {
       Loading
     },
-    props: {
-      movieList: {
-        type: Array,
-        required: true,
-        twoWay: true
-      },
-      invisibleChannels: {
-        type: Array,
-        required: true,
-        twoWay: true
-      }
-    },
     data: function() {
       return {
         queryChannels: defaultChannels, // Assign default channels
@@ -92,7 +80,7 @@
           return store.setMessage('This channel is already present');
         }
 
-        var movies = this.movieList; // Get list of already showed movies
+        var movies = this.sharedState.movieList; // Get list of already showed movies
         this.loadingIndicator = true;
 
         this.$http({
@@ -104,7 +92,7 @@
           // Clear duplicates
           var uniqueMovies = removeDuplicates(movies, 'uri');
           // Update list of videos
-          this.$set('movieList', uniqueMovies);
+          store.setMovies(uniqueMovies);
           // Turn off loading
           this.loadingIndicator = false;
           // Add channel to the array with channels
@@ -135,7 +123,7 @@
           // Turn off loading
           this.loadingIndicator = false;
           // Update list of videos
-          this.$set('movieList', uniqueMovies);
+          store.setMovies(uniqueMovies);
         }, function(response) {
           // Turn off loading indicator
           this.loadingIndicator = false;
@@ -159,11 +147,7 @@
         this.getList();
       },
       hideChannel(channel) {
-        var channelPosition = this.invisibleChannels.indexOf(channel);
-        if (channelPosition !== -1) {
-          return this.invisibleChannels.splice(channelPosition, 1);
-        }
-        return this.invisibleChannels.push(channel);
+        store.hideChannel(channel);
       },
       resetChannels() {
         this.$set('queryChannels', defaultChannels);
