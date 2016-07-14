@@ -227,10 +227,9 @@
     float: left;
     @include bp(md) {
       padding: 0 1rem;
-      margin: 2rem 0 0 0;
     }
     @include bp(xlg) {
-      width: 75%;
+      width: 70%;
       padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
@@ -302,9 +301,6 @@
       &:active {
         color: $primary;
         opacity: 1;
-      }
-      @include bp(md) {
-        margin-top: 1rem;
       }
     }
     // VideoGrid specific styling for Loading component

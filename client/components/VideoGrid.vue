@@ -1,13 +1,5 @@
 <template>
-  <div id="movies" class="video-index">
-    <h1>indie cinema</h1>
-
-    <content-management></content-management>
-
-    <div class="grid-options">
-      <sorting></sorting>
-    </div>
-
+  <div class="video-index">
     <div class="video-grid">
       <ul>
         <li class="single-movie" v-for="movie in movieListEdited">
@@ -37,15 +29,11 @@
   'use strict';
 
   import Modal from './Modal'; // Modal component
-  import ContentManagement from './ContentManagement'; // Loading indicator component
-  import Sorting from './Sorting'; // Loading indicator component
   import store from '../store';
 
   export default {
     components: {
-      Modal,
-      Sorting,
-      ContentManagement
+      Modal
     },
     data: function() {
       return {
@@ -162,21 +150,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: .9rem;
-    }
-  }
-
-  .grid-options {
-    padding: 0 1rem;
-    margin: 2rem 0 0 0;
-    @include bp(md) {
-      width: 60%;
-      padding: 0 1rem;
-      margin: 2rem 0 0 0;
-    }
-    @include bp(xlg) {
-      width: 80%;
-      padding: 0 2.5rem;
-      margin: 2rem 0 0 0;
     }
   }
 </style>
