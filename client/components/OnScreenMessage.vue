@@ -18,7 +18,6 @@
     watch: {
       'sharedState.screenMessage': function() {
         if (this.sharedState.screenMessage) {
-          console.log('Set');
           setTimeout(function() {
             store.setMessage('');
           }, 3000);

@@ -21,7 +21,7 @@ exports.register = function (server, options, next) {
       }
 
       if (result.statusCode === 404) {
-        return callback(error)
+        return next('Channel does not exist')
       }
 
       // TODO: Monitor rate limit headers

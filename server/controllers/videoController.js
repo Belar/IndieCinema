@@ -7,11 +7,11 @@ const async = require('async'); // HTTP requests
 exports.getVideos = {
   validate: {
     query: {
-      channels: Joi.string().trim().required(),
+      channels: Joi.string().trim().replace(/^[A-Za-z\u00C0-\u017F]+$/, '').required(),
     },
     failAction: function (request, reply, source, error) {
-      error.output.payload = error.data.details;
-      return reply(error.output.payload).code(error.output.statusCode);
+      // Return error on failed validation
+      return reply(Boom.badRequest(error.data.details[0].message));
     }
   },
   handler: function (request, reply) {
@@ -41,7 +41,7 @@ exports.getVideos = {
           // Add channel video was taken from, for filtering
           value.indieCinema.channel = currentChannel;
           callback(null);
-        }, function (err) {
+        }, function (error) {
           if (error) {
             return callback(error);
           }
@@ -54,9 +54,7 @@ exports.getVideos = {
 
     }, function (error) {
       if (error) {
-        return reply({
-          error: error
-        }).code(500);
+        return reply(Boom.badRequest(error));
       }
       // Send movies back
       return reply(movies);
@@ -71,8 +69,8 @@ exports.getVideosSingle = {
       channel: Joi.string().trim().required(),
     },
     failAction: function (request, reply, source, error) {
-      error.output.payload = error.data.details;
-      return reply(error.output.payload).code(error.output.statusCode);
+      // Return error on failed validation
+      return reply(Boom.badRequest(error.data.details[0].message));
     }
   },
   handler: function (request, reply) {
@@ -82,9 +80,7 @@ exports.getVideosSingle = {
 
     request.server.methods.getChannel(queryChannel, function (error, result) {
       if (error) {
-        return reply({
-          error: error
-        }).code(500);
+        return reply(Boom.notFound(error));
       }
 
       // Vimeo doesn't return added_time via API, but allows to request data to be sorted by added time
@@ -96,9 +92,9 @@ exports.getVideosSingle = {
         value.indieCinema.order = key;
         value.indieCinema.channel = queryChannel;
         callback(null);
-      }, function (err) {
+      }, function (error) {
         if (error) {
-          return callback(error);
+          return reply(Boom.badRequest(error));
         }
         // Put movies into general array
         movies = movies.concat(result);

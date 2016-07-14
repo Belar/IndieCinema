@@ -71,8 +71,11 @@
 
         // Check if there is a valid(ish) value
         if (!addChannel) {
-          // this.sharedState.screenMessage = 'No channel to add';
-          return store.setMessage('Field is empty, no channel to add');
+          return store.setMessage('Channel name can not empty, no channel to add');
+        }
+
+        if (/^[A-Za-z\u00C0-\u017F]+$/.test(addChannel)) {
+          return store.setMessage('Channel name can not contain accented characters');
         }
 
         // Check if channel already exists in the array of channels
@@ -98,20 +101,22 @@
           // Add channel to the array with channels
           this.queryChannels.push(addChannel);
           localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
-        }, function(response) {
+        }, function(error) {
           // Turn off loading
           this.loadingIndicator = false;
-          return false;
+          return store.setMessage(error.data.message);
         });
         // Clear input
         this.newChannel = '';
       },
       getList() {
-        // Show loading indicator
-        this.loadingIndicator = true;
+        // Check if there are channel to get videos
         if (!this.queryChannels.length > 0) {
           return store.setMessage('There are no channels to show videos from');
         }
+
+        // Show loading indicator
+        this.loadingIndicator = true;
         var movies = [];
         this.$http({
           url: '/api/get-videos?channels=' + this.queryChannels,
@@ -124,10 +129,10 @@
           this.loadingIndicator = false;
           // Update list of videos
           store.setMovies(uniqueMovies);
-        }, function(response) {
-          // Turn off loading indicator
+        }, function(error) {
+          // Turn off loading
           this.loadingIndicator = false;
-          return false;
+          return store.setMessage(error.data.message);
         });
       },
       allowRemoval() {
