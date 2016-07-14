@@ -2,33 +2,28 @@
   <div class="sorting">
     <h5>Order by:</h5>
     <ul class="modes">
-      <li :class="{'active' : sortCondition === 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
-      <li :class="{'active' : sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
+      <li :class="{'active' : this.sharedState.sortCondition === 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
+      <li :class="{'active' : this.sharedState.sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
     </ul>
   </div>
 </template>
 
 <script>
+  import store from '../store';
+
   export default {
-    props: {
-      sortCondition: {
-        type: String,
-        required: true,
-        twoWay: true
-      },
-      order: {
-        type: Number,
-        required: true,
-        twoWay: true
-      }
+    data: function() {
+      return {
+        sharedState: store.state // Global store
+      };
     },
     methods: {
       changeOrder(condition) {
-        this.$set('sortCondition', condition);
+        store.setSortCondition(condition);
         if (condition === 'indieCinema.order') {
-          return this.$set('order', 1);
+          return store.setSortOrder('asc');
         }
-        this.$set('order', -1);
+        return store.setSortOrder('desc');
       }
     }
   };

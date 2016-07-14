@@ -5,12 +5,12 @@
     <content-management></content-management>
 
     <div class="grid-options">
-      <sorting :sort-Condition.sync="sortCondition" :order.sync="order"></sorting>
+      <sorting></sorting>
     </div>
 
     <div class="video-grid">
       <ul>
-        <li class="single-movie" v-for="movie in movieListVisible | orderBy sortCondition order">
+        <li class="single-movie" v-for="movie in movieListEdited">
           <div class="preview-wrapper" @click="showMovie(movie)">
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
             <img v-bind:src="movie.pictures.sizes[2].link" alt="">
@@ -51,22 +51,43 @@
       return {
         showModal: false, // Modal's initial state
         videoModal: {}, // Pass video info to modal
-        sortCondition: 'indieCinema.order', // Defines how movies are ordered
-        order: 1, // Asc or desc
         sharedState: store.state // Global store
       };
     },
     computed: {
-      movieListVisible: function() {
+      movieListEdited: function() {
         var movies = this.sharedState.movieList;
-        var filteredMovies = [];
         var invisibleChannels = this.sharedState.invisibleChannels;
+        var sortCondition = this.sharedState.sortCondition;
+        var sortOrder = this.sharedState.sortOrder;
+        var filteredMovies = [];
+
+        function sortBy(condition, order) {
+          var prop = condition.split('.');
+          var propCount = prop.length;
+
+          return function(a, b) {
+            for (var i = 0; i < propCount; i++) {
+              a = a[prop[i]];
+              b = b[prop[i]];
+            }
+            if (a < b) {
+              return -1 * order;
+            } else if (a > b) {
+              return 1 * order;
+            } else {
+              return 0;
+            }
+          };
+        };
+
         for (var i = 0; i < movies.length; i++) {
           if (invisibleChannels.indexOf(movies[i].indieCinema.channel) === -1) {
             filteredMovies.push(movies[i]);
           }
         }
-        return filteredMovies;
+
+        return filteredMovies.sort(sortBy(sortCondition, sortOrder));
       }
     },
     methods: {
