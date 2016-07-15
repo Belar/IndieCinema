@@ -2,7 +2,7 @@ var store = {
   state: {
     screenMessage: '',
     movieList: [],
-    invisibleChannels: [], // Channels videos to hide
+    hiddenChannels: [], // Channels videos to hide
     sortCondition: 'indieCinema.order', // Defines how movies are ordered
     sortOrder: 1 // Asc or desc
   },
@@ -12,12 +12,13 @@ var store = {
   setMovies: function (movies) {
     this.state.movieList = movies;
   },
-  hideChannel: function (channel) {
-    var channelPosition = this.state.invisibleChannels.indexOf(channel);
+  toggleHideChannel: function (channel) {
+    // Toggle channel from invisible channels
+    var channelPosition = this.state.hiddenChannels.indexOf(channel);
     if (channelPosition !== -1) {
-      return this.state.invisibleChannels.splice(channelPosition, 1);
+      return this.state.hiddenChannels.splice(channelPosition, 1);
     }
-    return this.state.invisibleChannels.push(channel);
+    return this.state.hiddenChannels.push(channel);
   },
   setSortCondition: function (condition) {
     this.state.sortCondition = condition;

@@ -12,7 +12,7 @@
       <h5>Current channels:</h5>
       <ul>
         <li class="channel label " v-for="channel in queryChannels">
-          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.invisibleChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
+          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
           <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
         </li>
       </ul>
@@ -152,7 +152,8 @@
         this.getList();
       },
       hideChannel(channel) {
-        store.hideChannel(channel);
+        store.toggleHideChannel(channel);
+        localStorage.setItem('hiddenChannels', JSON.stringify(this.sharedState.hiddenChannels));
       },
       resetChannels() {
         this.$set('queryChannels', defaultChannels);
@@ -160,9 +161,18 @@
       }
     },
     created: function() {
+      // Get list of channels
       var customChannels = localStorage.getItem('myChannels');
       if (customChannels) {
         this.$set('queryChannels', JSON.parse(customChannels));
+      }
+      // Get list of hidden channels
+      var hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));
+      if (hiddenChannels) {
+        var hiddenChannelsLength = hiddenChannels.length;
+        for (var i = 0; i < hiddenChannelsLength; i++) {
+          store.toggleHideChannel(hiddenChannels[i]);
+        }
       }
     },
     ready: function() {

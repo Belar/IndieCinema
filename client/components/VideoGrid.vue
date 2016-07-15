@@ -45,7 +45,7 @@
     computed: {
       movieListEdited: function() {
         var movies = this.sharedState.movieList;
-        var invisibleChannels = this.sharedState.invisibleChannels;
+        var hiddenChannels = this.sharedState.hiddenChannels;
         var sortCondition = this.sharedState.sortCondition;
         var sortOrder = this.sharedState.sortOrder;
         var filteredMovies = [];
@@ -70,7 +70,7 @@
         };
 
         for (var i = 0; i < movies.length; i++) {
-          if (invisibleChannels.indexOf(movies[i].indieCinema.channel) === -1) {
+          if (hiddenChannels.indexOf(movies[i].indieCinema.channel) === -1) {
             filteredMovies.push(movies[i]);
           }
         }
