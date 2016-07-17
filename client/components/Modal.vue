@@ -173,6 +173,9 @@
     .description {
       margin: 1rem auto;
       white-space: pre-line;
+      line-height: 1.5;
+      font-size: .95rem;
+      line-height: 1.5;
     }
   }
   /*
