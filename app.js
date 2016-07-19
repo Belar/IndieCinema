@@ -1,7 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Inert = require('inert');
+const Inert = require('inert'); // Hapi plugin for file reply
 const Good = require('good'); // Logging
 
 const queryVimeo = require('./server/plugins/queryVimeo'); // plugin for Viemo proxy
@@ -29,6 +29,34 @@ var logConfig = {
   }
 };
 
+// Register webpack HMR only for non-production environments
+if (process.env.NODE_ENV !== 'production') {
+
+  const WebpackConfig = require('./config/webpack.config.js'); // Webpack config
+  const HapiWebpackDevMiddleware = require('hapi-webpack-dev-middleware');
+  const HapiWebpackHotMiddleware = require('hapi-webpack-hot-middleware');
+
+  server.register([{
+    register: HapiWebpackDevMiddleware,
+    options: {
+      config: WebpackConfig,
+      options: {
+        noInfo: true,
+        publicPath: WebpackConfig.output.publicPath,
+        stats: {
+          colors: true
+        }
+      }
+    }
+  }, {
+    register: HapiWebpackHotMiddleware
+  }], function (err) {
+    if (err) {
+      throw err;
+    }
+  });
+
+}
 
 server.register([Inert, queryVimeo, {
   register: Good,
@@ -55,16 +83,6 @@ server.register([Inert, queryVimeo, {
         listing: false,
         index: false
       }
-    }
-  });
-
-  server.route({
-    method: 'GET',
-    path: '/api/call',
-    handler: function (request, reply) {
-      reply({
-        message: 'Hello!'
-      })
     }
   });
 
