@@ -5,7 +5,7 @@
         <li class="single-movie" v-for="movie in movieListEdited">
           <div class="preview-wrapper" @click="showMovie(movie)">
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
-            <img v-bind:src="movie.pictures.sizes[2].link" alt="">
+            <img class="lazyload" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" alt="">
           </div>
           <h4>{{ movie.name }}</h4>
           <div class="description">
@@ -30,6 +30,7 @@
 
   import Modal from './Modal'; // Modal component
   import store from '../store';
+  import 'lazysizes';
 
   export default {
     components: {
