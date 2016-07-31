@@ -19,7 +19,6 @@
     </div>
     <div class="options">
       <i class="delete-channels icon ion-trash-b" @click="allowRemoval()"></i>
-      <i class="refresh-videos icon ion-refresh" v-show="!loadingIndicator" @click="getList()"></i>
       <loading :loading.sync="loadingIndicator"></loading>
     </div>
   </div>
