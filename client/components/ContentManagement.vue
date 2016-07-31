@@ -74,7 +74,7 @@
           return store.setMessage('Channel name can not be empty');
         }
 
-        if (/^[A-Za-z\u00C0-\u017F]+$/.test(addChannel)) {
+        if (/^[a-zA-Z\u00C0-\u017F]+,\s[a-zA-Z\u00C0-\u017F]+$/.test(addChannel)) {
           return store.setMessage('Channel name can not contain accented characters');
         }
 

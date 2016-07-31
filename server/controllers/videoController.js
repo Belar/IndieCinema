@@ -7,7 +7,7 @@ const async = require('async'); // HTTP requests
 exports.getVideos = {
   validate: {
     query: {
-      channels: Joi.string().trim().replace(/^[A-Za-z\u00C0-\u017F]+$/, '').required(),
+      channels: Joi.string().trim().replace(/^[a-zA-Z\u00C0-\u017F]+,\s[a-zA-Z\u00C0-\u017F]+$/, '').required(),
     },
     failAction: function (request, reply, source, error) {
       // Return error on failed validation
