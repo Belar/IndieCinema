@@ -39,7 +39,7 @@ exports.getVideos = {
           // Create place for indieCinema data
           value.indieCinema = {};
           // Add order number, for sorting by added_time
-          value.indieCinema.order = key;
+          value.indieCinema.order = page + key;
           // Add channel video was taken from, for filtering
           value.indieCinema.channel = currentChannel;
           callback(null);
@@ -92,7 +92,7 @@ exports.getVideosSingle = {
         // Create place for indieCinema data
         value.indieCinema = {};
         // Add order number
-        value.indieCinema.order = key;
+        value.indieCinema.order = page + key;
         value.indieCinema.channel = queryChannel;
         callback(null);
       }, function (error) {
