@@ -117,8 +117,9 @@
         // Show loading indicator
         this.loadingIndicator = true;
         var movies = [];
+        var fetchPage = this.sharedState.currentPage;
         this.$http({
-          url: '/api/get-videos?channels=' + this.queryChannels,
+          url: '/api/get-videos?channels=' + this.queryChannels + '&page=' + fetchPage,
           method: 'GET'
         }).then(function(response) {
           movies = movies.concat(response.data);

@@ -8,6 +8,7 @@ exports.getVideos = {
   validate: {
     query: {
       channels: Joi.string().trim().replace(/^[a-zA-Z\u00C0-\u017F]+,\s[a-zA-Z\u00C0-\u017F]+$/, '').required(),
+      page: Joi.number().integer().min(1).required()
     },
     failAction: function (request, reply, source, error) {
       // Return error on failed validation
@@ -18,13 +19,14 @@ exports.getVideos = {
 
     // Repack list of channels from URI in to array
     var queryChannels = request.url.query.channels.split(',');
+    var page = request.url.query.page;
     var movies = [];
 
     // Send movies back after all channels are gathered (async lib)
     async.forEachOf(queryChannels, function (value, key, callback) {
 
       // Call server method provided by the plugin
-      request.server.methods.getChannel(value, function (error, result) {
+      request.server.methods.getChannel(value, page, function (error, result) {
         if (error) {
           return callback(error);
         }
@@ -77,8 +79,9 @@ exports.getVideosSingle = {
     // Repack list of channels from URI in to array
     var queryChannel = request.url.query.channel;
     var movies = [];
+    var page = 1;
 
-    request.server.methods.getChannel(queryChannel, function (error, result) {
+    request.server.methods.getChannel(queryChannel, page, function (error, result) {
       if (error) {
         return reply(Boom.notFound(error));
       }

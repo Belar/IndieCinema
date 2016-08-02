@@ -8,10 +8,11 @@ const config = require('../../../config/secret'); // Config
 exports.register = function (server, options, next) {
 
   // Define function for method
-  var getChannel = function (value, next) {
+  var getChannel = function (value, page, next) {
 
     var method = 'GET';
-    var uri = '/channels/' + value + '/videos?per_page=10&sort=added&filter_content_rating=[drugs,nudity]&fields=uri,name,pictures,release_time,embed.html,description,user.link,user.name';
+    console.log(page);
+    var uri = '/channels/' + value + '/videos?page=' + page + '&per_page=10&sort=added&filter_content_rating=[drugs,nudity]&fields=uri,name,pictures,release_time,embed.html,description,user.link,user.name';
 
     // Wreck callback, executed after data is received
     var optionalCallback = function (error, result) {
