@@ -116,7 +116,7 @@
 
         // Show loading indicator
         this.loadingIndicator = true;
-        var movies = [];
+        var movies = this.sharedState.movieList;
         var fetchPage = this.sharedState.currentPage;
         this.$http({
           url: '/api/get-videos?channels=' + this.queryChannels + '&page=' + fetchPage,
@@ -177,6 +177,19 @@
     },
     ready: function() {
       this.getList();
+
+      window.addEventListener('scroll', () => {
+        var scrollHeight = document.body.scrollHeight;
+        var scrollTop = document.body.scrollTop;
+        var windowHeight = window.innerHeight;
+        var offset = 250;
+        if (scrollTop >= scrollHeight - windowHeight - offset && this.loadingIndicator === false) {
+          var nextPage = this.sharedState.currentPage + 1;
+          store.setCurrentPage(nextPage);
+          console.log('Load videos');
+          return this.getList();
+        }
+      });
     }
   };
 </script>
