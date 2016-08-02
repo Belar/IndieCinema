@@ -4,7 +4,8 @@ var store = {
     movieList: [],
     hiddenChannels: [], // Channels videos to hide
     sortCondition: 'indieCinema.order', // Defines how movies are ordered
-    sortOrder: 1 // Asc or desc
+    sortOrder: 1, // Asc or desc
+    currentPage: 1 // Current browsing page
   },
   setMessage: function (message) {
     this.state.screenMessage = message;
@@ -29,6 +30,9 @@ var store = {
     } else {
       this.state.sortOrder = -1;
     }
+  },
+  setCurrentPage: function (pageNo) {
+    this.state.currentPage = pageNo;
   }
 };
 
