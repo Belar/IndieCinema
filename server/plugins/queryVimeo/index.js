@@ -59,8 +59,8 @@ exports.register = function (server, options, next) {
   // Define server method
   server.method('getChannel', getChannel, {
     // Generate a key to identify data in cache
-    generateKey: function (value) {
-      return value;
+    generateKey: function (value, page) {
+      return value + page;
     },
     // Cache data from server method
     cache: config.vimeo.cache
