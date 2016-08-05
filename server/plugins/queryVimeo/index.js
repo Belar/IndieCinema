@@ -11,7 +11,6 @@ exports.register = function (server, options, next) {
   var getChannel = function (value, page, next) {
 
     var method = 'GET';
-    console.log(page);
     var uri = '/channels/' + value + '/videos?page=' + page + '&per_page=10&sort=added&filter_content_rating=[drugs,nudity]&fields=uri,name,pictures,release_time,embed.html,description,user.link,user.name';
 
     // Wreck callback, executed after data is received
