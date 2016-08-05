@@ -1,11 +1,15 @@
 var store = {
   state: {
+    loadingIndicator: false,
     screenMessage: '',
     movieList: [],
     hiddenChannels: [], // Channels videos to hide
     sortCondition: 'indieCinema.order', // Defines how movies are ordered
     sortOrder: 1, // Asc or desc
     currentPage: 1 // Current browsing page
+  },
+  setLoading: function (state) {
+    this.state.loadingIndicator = state;
   },
   setMessage: function (message) {
     this.state.screenMessage = message;

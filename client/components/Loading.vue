@@ -1,15 +1,16 @@
 <template>
-  <div class="loading-bar" v-show="loading" transition="expand">
+  <div class="loading-bar" v-show="sharedState.loadingIndicator" transition="expand">
     <span class="loading-txt">Loading...</span> <img class="loading-indicator" src="/images/dashinfinity.gif" alt="">
   </div>
 </template>
 
 <script>
+  import store from '../store';
   export default {
-    props: {
-      loading: {
-        type: Boolean
-      }
+    data: function() {
+      return {
+        sharedState: store.state
+      };
     }
   };
 </script>
@@ -17,8 +18,13 @@
 <style lang="scss">
   @import "./utils/sass/styling";
   .loading-bar {
-    position: absolute;
+    position: fixed;
+    width: 100%;
     background: $light;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .loading-indicator {
@@ -30,7 +36,7 @@
     color: rgba($dark, .25);
     display: inline-block;
     vertical-align: top;
-    margin: .5rem .5rem 0;
+    margin: 0 .5rem 0 0;
   }
 
   .expand-transition {

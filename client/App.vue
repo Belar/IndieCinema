@@ -10,6 +10,7 @@
     </div>
 
     <video-grid></video-grid>
+    <loading></loading>
   </div>
 </template>
 
@@ -20,13 +21,15 @@
   import OnScreenMessage from './components/OnScreenMessage';
   import ContentManagement from './components/ContentManagement'; // Loading indicator component
   import Sorting from './components/Sorting'; // Loading indicator component
+  import Loading from './components/Loading'; // Loading indicator component
 
   export default {
     components: {
       VideoGrid,
       OnScreenMessage,
       Sorting,
-      ContentManagement
+      ContentManagement,
+      Loading
     }
   };
 </script>

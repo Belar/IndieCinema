@@ -19,15 +19,12 @@
     </div>
     <div class="options">
       <i class="delete-channels icon ion-trash-b" @click="allowRemoval()"></i>
-      <loading :loading.sync="loadingIndicator"></loading>
     </div>
   </div>
 </template>
 
 <script>
   'use strict';
-
-  import Loading from './Loading'; // Loading component
   import store from '../store';
 
   const localStorage = window.localStorage;
@@ -51,13 +48,9 @@
   }
 
   export default {
-    components: {
-      Loading
-    },
     data: function() {
       return {
         queryChannels: defaultChannels, // Assign default channels
-        loadingIndicator: false, // Loading indicator's state
         newChannel: '', // Placeholder for new channel
         deleteChannels: false, // Option to delete channel
         sharedState: store.state // Global store
@@ -83,7 +76,7 @@
         }
 
         var movies = this.sharedState.movieList; // Get list of already showed movies
-        this.loadingIndicator = true;
+        store.setLoading(true);
 
         this.$http({
           url: '/api/get-videos-single?channel=' + addChannel,
@@ -96,13 +89,13 @@
           // Update list of videos
           store.setMovies(uniqueMovies);
           // Turn off loading
-          this.loadingIndicator = false;
+          store.setLoading(false);
           // Add channel to the array with channels
           this.queryChannels.push(addChannel);
           localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
         }, function(error) {
           // Turn off loading
-          this.loadingIndicator = false;
+          store.setLoading(false);
           return store.setMessage(error.data.message);
         });
         // Clear input
@@ -115,7 +108,7 @@
         }
 
         // Show loading indicator
-        this.loadingIndicator = true;
+        store.setLoading(true);
         var movies = this.sharedState.movieList;
         var fetchPage = this.sharedState.currentPage;
         this.$http({
@@ -126,12 +119,12 @@
           // Clear duplicates
           var uniqueMovies = removeDuplicates(movies, 'uri');
           // Turn off loading
-          this.loadingIndicator = false;
+          store.setLoading(false);
           // Update list of videos
           store.setMovies(uniqueMovies);
         }, function(error) {
           // Turn off loading
-          this.loadingIndicator = false;
+          store.setLoading(false);
           return store.setMessage(error.data.message);
         });
       },
@@ -183,10 +176,9 @@
         var scrollTop = document.body.scrollTop;
         var windowHeight = window.innerHeight;
         var offset = 250;
-        if (scrollTop >= scrollHeight - windowHeight - offset && this.loadingIndicator === false) {
+        if (scrollTop >= scrollHeight - windowHeight - offset && this.sharedState.loadingIndicator === false) {
           var nextPage = this.sharedState.currentPage + 1;
           store.setCurrentPage(nextPage);
-          console.log('Load videos');
           return this.getList();
         }
       });
@@ -330,11 +322,6 @@
         color: $primary;
         opacity: 1;
       }
-    }
-    // VideoGrid specific styling for Loading component
-    .loading-bar {
-      right: 0;
-      padding: 0 2.5rem;
     }
   }
 </style>
