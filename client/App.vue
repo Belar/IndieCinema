@@ -11,6 +11,7 @@
 
     <video-grid></video-grid>
     <loading></loading>
+    <scroll-to-top></scroll-to-top>
   </div>
 </template>
 
@@ -22,6 +23,7 @@
   import ContentManagement from './components/ContentManagement'; // Loading indicator component
   import Sorting from './components/Sorting'; // Loading indicator component
   import Loading from './components/Loading'; // Loading indicator component
+  import ScrollToTop from './components/ScrollToTop'; // Loading indicator component
 
   export default {
     components: {
@@ -29,7 +31,8 @@
       OnScreenMessage,
       Sorting,
       ContentManagement,
-      Loading
+      Loading,
+      ScrollToTop
     }
   };
 </script>
