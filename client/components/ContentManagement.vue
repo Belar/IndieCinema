@@ -13,7 +13,7 @@
       <ul>
         <li class="channel label " v-for="channel in queryChannels">
           <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
-          <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> {{ channel }}</span>
+          <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i> <span class="channel-name">{{ channel }}</span>
         </li>
       </ul>
     </div>
@@ -294,6 +294,7 @@
     .channel-name {
       float: right;
       font-size: .95rem;
+      text-transform: lowercase;
     }
   }
 
