@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="main-wrapper">
     <on-screen-message></on-screen-message>
-    <h1>indie cinema</h1>
+    <h1>IndieCinema</h1>
 
     <content-management></content-management>
 
