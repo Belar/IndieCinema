@@ -18,7 +18,7 @@
       </ul>
     </div>
     <div class="options">
-      <i class="delete-channels icon ion-trash-b" @click="allowRemoval()"></i>
+      <i class="delete-channels icon ion-trash-b" :class="{'active' : deleteChannels}" @click="allowRemoval()"></i>
     </div>
   </div>
 </template>
@@ -322,6 +322,9 @@
         color: $primary;
         opacity: 1;
       }
+    }
+    .delete-channels.active{
+      color: $warning;
     }
   }
 </style>
