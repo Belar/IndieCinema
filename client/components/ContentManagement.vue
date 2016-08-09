@@ -6,7 +6,6 @@
       <i class="icon ion-plus-circled" @click="addChannel()"></i>
     </div>
   </div>
-  <!-- <button class="button" v-on:click="resetChannels()">Reset Channels</button>-->
   <div class="action-bar clearfix">
     <div class="query-channels">
       <h5>Current channels:</h5>
@@ -147,10 +146,6 @@
       hideChannel(channel) {
         store.toggleHideChannel(channel);
         localStorage.setItem('hiddenChannels', JSON.stringify(this.sharedState.hiddenChannels));
-      },
-      resetChannels() {
-        this.$set('queryChannels', defaultChannels);
-        this.getList();
       }
     },
     created: function() {
