@@ -5,9 +5,7 @@
 
     <content-management></content-management>
 
-    <div class="grid-options">
-      <sorting></sorting>
-    </div>
+    <sorting></sorting>
 
     <video-grid></video-grid>
     <loading></loading>
@@ -47,18 +45,5 @@
   .modal-open {
     position: absolute;
     overflow-y: hidden;
-  }
-
-  .grid-options {
-    padding: 0 1rem;
-    margin: 2rem 0 0 0;
-    @include bp(md) {
-      padding: 0 1rem;
-      margin: 2rem 0 0 0;
-    }
-    @include bp(xlg) {
-      padding: 0 2.5rem;
-      margin: 2rem 0 0 0;
-    }
   }
 </style>

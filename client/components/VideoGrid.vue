@@ -7,9 +7,11 @@
             <!-- TODO: Utilize bigger preview image, but keep grid elements the same size -->
             <img class="lazyload" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" alt="">
           </div>
-          <h4>{{ movie.name }}</h4>
-          <div class="description">
-            {{ movie.description }}
+          <div class="excerpt">
+            <h4>{{ movie.name }}</h4>
+            <div class="description">
+              {{ movie.description }}
+            </div>
           </div>
         </li>
         <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
@@ -108,6 +110,13 @@
 
   .video-grid {
     clear: both;
+    padding: 0 1rem;
+    @include bp(md) {
+      padding: 0 2rem;
+    }
+    @include bp(xlg) {
+      padding: 0 4rem;
+    }
     ul {
       padding: 0;
       margin: auto;
@@ -117,35 +126,32 @@
       flex-direction: row;
       justify-content: space-around;
       list-style-type: none;
-      @include bp(md) {
-        margin: 2rem 0 0 0;
-      }
-      @include bp(lg) {
-        margin: 3rem 0 0 0;
-      }
     }
     .single-movie {
       max-width: 100%;
       flex: 295px 1;
-      margin: 1rem .5rem;
-      @include bp(md) {
-        margin: 2rem .5rem;
-      }
+      margin: 0 auto 2rem;
       img {
         width: 100%;
         height: auto;
       }
     }
-    .preview-wrapper {
-      cursor: pointer;
-    }
+  }
+
+  .preview-wrapper {
+    cursor: pointer;
+  }
+
+  .excerpt {
+    padding: 0 .5rem;
     h4 {
       margin: .25rem auto;
       font-size: .95rem;
       font-weight: 700;
     }
     .description {
-      width: 295px;
+      max-width: 100%;
+      width: 250px;
       height: 25px;
       overflow: hidden;
       text-overflow: ellipsis;

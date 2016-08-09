@@ -235,17 +235,24 @@
     }
   }
 
-  .query-channels {
-    padding: 0 .5rem;
-    margin: 2rem 0 0 0;
-    width: 70%;
-    float: left;
+  .action-bar {
+    padding: 0 1rem;
+    margin: 2rem auto;
     @include bp(md) {
-      padding: 0 1rem;
+      padding: 0 2rem;
+      margin: 4rem auto 2rem;
     }
     @include bp(xlg) {
+      padding: 0 4rem;
+      margin: 2rem auto 2rem;
+    }
+  }
+
+  .query-channels {
+    width: 70%;
+    float: left;
+    @include bp(xlg) {
       width: 70%;
-      padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
     h5 {
@@ -295,20 +302,17 @@
 
   .options {
     padding: 0 1rem;
-    margin: 2rem 0 0 0;
     text-align: right;
     width: 15%;
     float: right;
     @include bp(md) {
-      padding: 0 1rem;
     }
     @include bp(xlg) {
-      padding: 0 2.5rem;
       margin: 4rem 0 0 0;
     }
     .icon {
       cursor: pointer;
-      margin: 0rem .25rem;
+      // margin: 0rem .25rem;
       display: inline-block;
       font-size: 24px;
       color: rgba($dark, .25);
@@ -319,7 +323,7 @@
         opacity: 1;
       }
     }
-    .delete-channels.active{
+    .delete-channels.active {
       color: $warning;
     }
   }

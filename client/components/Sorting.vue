@@ -36,7 +36,16 @@
     color: rgba($dark, .5);
     margin: 0 0 .5rem 0;
   }
-
+    .sorting {
+    padding: 0 1rem;
+    margin: 2rem auto;
+    @include bp(md) {
+      padding: 0 2rem;
+    }
+    @include bp(xlg) {
+      padding: 0 4rem;
+    }
+  }
   .sorting .modes {
     display: inline;
     padding: 0;
