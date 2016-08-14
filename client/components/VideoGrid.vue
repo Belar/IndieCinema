@@ -50,17 +50,15 @@ export default {
       var hiddenChannels = this.sharedState.hiddenChannels;
       var sortCondition = this.sharedState.sortCondition;
       var sortOrder = this.sharedState.sortOrder;
-      var filteredMovies = [];
 
       function sortBy(condition, order) {
-        var prop = condition.split('.');
-        var propCount = prop.length;
+        var props = condition.split('.');
 
         return function(a, b) {
-          for (var i = 0; i < propCount; i++) {
-            a = a[prop[i]];
-            b = b[prop[i]];
-          }
+          props.forEach(function(prop) {
+            a = a[prop];
+            b = b[prop];
+          });
           if (a < b) {
             return -1 * order;
           } else if (a > b) {
@@ -71,13 +69,13 @@ export default {
         };
       };
 
-      for (var i = 0; i < movies.length; i++) {
-        if (hiddenChannels.indexOf(movies[i].indieCinema.channel) === -1) {
-          filteredMovies.push(movies[i]);
+      function filterOutHidden(movie) {
+        if (hiddenChannels.indexOf(movie.indieCinema.channel) === -1) {
+          return true;
         }
-      }
+      };
 
-      return filteredMovies.sort(sortBy(sortCondition, sortOrder));
+      return movies.filter(filterOutHidden).sort(sortBy(sortCondition, sortOrder));
     }
   },
   methods: {
