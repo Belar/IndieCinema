@@ -136,7 +136,7 @@ export default {
       store.removeQueryChannel(channel);
 
       if (!this.sharedState.queryChannels.length > 0) {
-        return this.$set('movieList', []);
+        store.setMovies([]);
       }
       localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
       this.getList();
