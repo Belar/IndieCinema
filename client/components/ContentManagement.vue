@@ -139,7 +139,18 @@ export default {
         store.setMovies([]);
       }
       localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
-      this.getList();
+
+      // After channel is removed, filter out movies that belong to that channel - no query
+      var movies = this.sharedState.movieList;
+      var queryChannels = this.sharedState.queryChannels;
+
+      function filterByExistingChannel(movie) {
+        if (queryChannels.indexOf(movie.indieCinema.channel) !== -1) {
+          return true;
+        }
+      }
+      var cleanMovies = movies.filter(filterByExistingChannel);
+      store.setMovies(cleanMovies);
     },
     hideChannel(channel) {
       store.toggleHideChannel(channel);
