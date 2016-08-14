@@ -10,7 +10,7 @@
     <div class="query-channels">
       <h5>Current channels:</h5>
       <ul>
-        <li class="channel label " v-for="channel in queryChannels">
+        <li class="channel label " v-for="channel in sharedState.queryChannels">
           <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
           <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i>
           <span class="channel-name">{{ channel }}</span>
@@ -28,7 +28,6 @@
 import store from '../store';
 
 const localStorage = window.localStorage;
-var defaultChannels = ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']; // Default, curated channels - indie film, music videos, documentary etc.
 
 // Accepts array of objects and removes duplicates
 function removeDuplicates(array, prop) {
@@ -50,7 +49,6 @@ function removeDuplicates(array, prop) {
 export default {
   data: function() {
     return {
-      queryChannels: defaultChannels, // Assign default channels
       newChannel: '', // Placeholder for new channel
       deleteChannels: false, // Option to delete channel
       sharedState: store.state // Global store
@@ -71,7 +69,7 @@ export default {
       }
 
       // Check if channel already exists in the array of channels
-      if (this.queryChannels.indexOf(addChannel) !== -1) {
+      if (this.sharedState.queryChannels.indexOf(addChannel) !== -1) {
         return store.setMessage('This channel is already present');
       }
 
@@ -91,8 +89,8 @@ export default {
         // Turn off loading
         store.setLoading(false);
         // Add channel to the array with channels
-        this.queryChannels.push(addChannel);
-        localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
+        store.addQueryChannel(addChannel);
+        localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
       }, function(error) {
         // Turn off loading
         store.setLoading(false);
@@ -103,7 +101,7 @@ export default {
     },
     getList() {
       // Check if there are channel to get videos
-      if (!this.queryChannels.length > 0) {
+      if (!this.sharedState.queryChannels.length > 0) {
         return store.setMessage('There are no channels to show videos from');
       }
 
@@ -112,7 +110,7 @@ export default {
       var movies = this.sharedState.movieList;
       var fetchPage = this.sharedState.currentPage;
       this.$http({
-        url: '/api/get-videos?channels=' + this.queryChannels + '&page=' + fetchPage,
+        url: '/api/get-videos?channels=' + this.sharedState.queryChannels + '&page=' + fetchPage,
         method: 'GET'
       }).then(function(response) {
         movies = movies.concat(response.data);
@@ -135,13 +133,12 @@ export default {
       this.$set('deleteChannels', false);
     },
     removeChannel(channel) {
-      var channelPosition = this.queryChannels.indexOf(channel);
-      this.queryChannels.splice(channelPosition, 1);
+      store.removeQueryChannel(channel);
 
-      if (!this.queryChannels.length > 0) {
+      if (!this.sharedState.queryChannels.length > 0) {
         return this.$set('movieList', []);
       }
-      localStorage.setItem('myChannels', JSON.stringify(this.queryChannels));
+      localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
       this.getList();
     },
     hideChannel(channel) {
@@ -153,7 +150,8 @@ export default {
     // Get list of channels
     var customChannels = localStorage.getItem('myChannels');
     if (customChannels) {
-      this.$set('queryChannels', JSON.parse(customChannels));
+      customChannels = JSON.parse(customChannels);
+      store.setQueryChannels(customChannels);
     }
     // Get list of hidden channels
     var hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));
