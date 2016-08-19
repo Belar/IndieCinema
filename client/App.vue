@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="main-wrapper">
     <on-screen-message></on-screen-message>
+    <channel-groups></channel-groups>
     <h1>IndieCinema</h1>
 
     <content-management></content-management>
@@ -22,6 +23,7 @@ import ContentManagement from './components/ContentManagement'; // Loading indic
 import Sorting from './components/Sorting'; // Loading indicator component
 import Loading from './components/Loading'; // Loading indicator component
 import ScrollToTop from './components/ScrollToTop'; // Loading indicator component
+import ChannelGroups from './components/ChannelGroups'; // Loading indicator component
 
 export default {
   components: {
@@ -30,7 +32,8 @@ export default {
     Sorting,
     ContentManagement,
     Loading,
-    ScrollToTop
+    ScrollToTop,
+    ChannelGroups
   }
 };
 </script>
