@@ -69,7 +69,7 @@ server.register([Inert, queryVimeo, {
 
   server.route({
     method: 'GET',
-    path: '/{filename*}',
+    path: '/assets/{filename*}',
     config: {
       auth: false,
       cache: {
@@ -79,7 +79,7 @@ server.register([Inert, queryVimeo, {
     },
     handler: {
       directory: {
-        path: __dirname + '/public',
+        path: __dirname + '/public/assets',
         listing: false,
         index: false
       }
@@ -88,7 +88,7 @@ server.register([Inert, queryVimeo, {
 
   server.route({
     method: 'GET',
-    path: '/',
+    path: '/{path*}',
     handler: function (request, reply) {
       reply.file('./public/index.html');
     }

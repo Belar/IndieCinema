@@ -1,7 +1,7 @@
 <template>
   <div class="loading-bar" v-show="sharedState.loadingIndicator" transition="expand">
     <span class="loading-txt">Loading...</span>
-    <img class="loading-indicator" src="/images/dashinfinity.gif" alt="">
+    <img class="loading-indicator" src="/assets/images/dashinfinity.gif" alt="">
   </div>
 </template>
 

@@ -5,7 +5,7 @@
   <meta charset=utf-8>
   <meta http-equiv=X-UA-Compatible content="IE=edge">
   <meta name=viewport content="width=device-width,initial-scale=1">
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <title>IndieCinema</title>
 
 
@@ -17,10 +17,12 @@
 
 <body>
   <div id="body-content-wrapper">
-    <app></app>
+    <div id="app">
+      <router-view></router-view>
+    </div>
   </div>
   <% if (htmlWebpackPlugin.options.analytics) { %>
-    <script type="text/javascript" src="/js/analytics.js"></script>
+    <script type="text/javascript" src="/assets/js/analytics.js"></script>
     <% } %>
 </body>
 

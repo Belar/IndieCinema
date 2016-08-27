@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="main-wrapper">
+  <div class="main-wrapper">
     <on-screen-message></on-screen-message>
     <channel-groups></channel-groups>
     <h1>IndieCinema</h1>
