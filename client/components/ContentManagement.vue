@@ -99,33 +99,6 @@ export default {
       // Clear input
       this.newChannel = '';
     },
-    getList() {
-      // Check if there are channel to get videos
-      if (!this.sharedState.queryChannels.length > 0) {
-        return store.setMessage('There are no channels to show videos from');
-      }
-
-      // Show loading indicator
-      store.setLoading(true);
-      var movies = this.sharedState.movieList;
-      var fetchPage = this.sharedState.currentPage;
-      this.$http({
-        url: '/api/get-videos?channels=' + this.sharedState.queryChannels + '&page=' + fetchPage,
-        method: 'GET'
-      }).then(function(response) {
-        movies = movies.concat(response.data);
-        // Clear duplicates
-        var uniqueMovies = removeDuplicates(movies, 'uri');
-        // Turn off loading
-        store.setLoading(false);
-        // Update list of videos
-        store.setMovies(uniqueMovies);
-      }, function(error) {
-        // Turn off loading
-        store.setLoading(false);
-        return store.setMessage(error.data.message);
-      });
-    },
     allowRemoval() {
       if (this.deleteChannels === false) {
         return this.$set('deleteChannels', true);
@@ -174,7 +147,7 @@ export default {
     }
   },
   ready: function() {
-    this.getList();
+    store.getMovies();
 
     window.addEventListener('scroll', () => {
       var scrollHeight = document.body.scrollHeight;
@@ -184,7 +157,7 @@ export default {
       if (scrollTop >= scrollHeight - windowHeight - offset && this.sharedState.loadingIndicator === false) {
         var nextPage = this.sharedState.currentPage + 1;
         store.setCurrentPage(nextPage);
-        return this.getList();
+        return store.getMovies();
       }
     });
   }
