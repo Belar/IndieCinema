@@ -1,3 +1,22 @@
+import Vue from 'vue';
+
+// Accepts array of objects and removes duplicates
+function removeDuplicates(array, prop) {
+  var uniqueArray = [];
+  var uniqueObject = {};
+  var arrayLength = array.length;
+
+  // Generate objects identified by prop as key
+  for (var i = 0; i < arrayLength; i++) {
+    uniqueObject[array[i][prop]] = array[i];
+  }
+  // Insert objects into array
+  for (i = 0 in uniqueObject) {
+    uniqueArray.push(uniqueObject[i]);
+  }
+  return uniqueArray;
+}
+
 var store = {
   state: {
     channelGroups: [{
@@ -30,6 +49,33 @@ var store = {
   },
   setMovies: function (movies) {
     this.state.movieList = movies;
+  },
+  getMovies: function () {
+    // Check if there are channel to get videos
+    if (!this.state.queryChannels.length > 0) {
+      return store.setMessage('There are no channels to show videos from');
+    }
+
+    // Show loading indicator
+    store.setLoading(true);
+    var movies = this.state.movieList;
+    var fetchPage = this.state.currentPage;
+    Vue.http({
+      url: '/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage,
+      method: 'GET'
+    }).then(function (response) {
+      movies = movies.concat(response.data);
+      // Clear duplicates
+      var uniqueMovies = removeDuplicates(movies, 'uri');
+      // Turn off loading
+      store.setLoading(false);
+      // Update list of videos
+      store.setMovies(uniqueMovies);
+    }, function (error) {
+      // Turn off loading
+      store.setLoading(false);
+      return store.setMessage(error.data.message);
+    });
   },
   toggleHideChannel: function (channel) {
     // Toggle channel from invisible channels
