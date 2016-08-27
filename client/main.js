@@ -9,7 +9,11 @@ Vue.use(VueResource);
 
 // Views
 import CustomGroupView from './CustomGroupView';
+import GroupView from './GroupView';
 import NotFoundView from './NotFoundView';
+
+//Store
+import store from './store';
 
 var App = Vue.extend();
 
@@ -24,10 +28,17 @@ var router = new VueRouter({
 //   }
 // });
 
+router.beforeEach(function () {
+  store.setCurrentPage(1);
+  store.setMovies([]);
+});
+
 router.map({
   '/': {
-    name: 'home',
     component: CustomGroupView
+  },
+  '/group/:groupName': {
+    component: GroupView
   },
   '*': {
     component: NotFoundView
