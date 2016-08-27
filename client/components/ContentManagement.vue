@@ -148,18 +148,6 @@ export default {
   },
   ready: function() {
     store.getMovies();
-
-    window.addEventListener('scroll', () => {
-      var scrollHeight = document.body.scrollHeight;
-      var scrollTop = document.body.scrollTop;
-      var windowHeight = window.innerHeight;
-      var offset = 250;
-      if (scrollTop >= scrollHeight - windowHeight - offset && this.sharedState.loadingIndicator === false) {
-        var nextPage = this.sharedState.currentPage + 1;
-        store.setCurrentPage(nextPage);
-        return store.getMovies();
-      }
-    });
   }
 };
 </script>
