@@ -136,6 +136,9 @@ export default {
     if (customChannels) {
       customChannels = JSON.parse(customChannels);
       store.setQueryChannels(customChannels);
+    } else {
+      var exampleChannels = ['staffpicks', 'everythinganimated', '5vimeobest']; // Just a taste of channels, less overwhalming than a group
+      store.setQueryChannels(exampleChannels);
     }
     // Get list of hidden channels
     var hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));

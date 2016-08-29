@@ -35,7 +35,7 @@ var store = {
     loadingIndicator: false,
     screenMessage: '',
     movieList: [],
-    queryChannels: ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048'], // Default, curated channels - indie film, music videos, documentary etc.
+    queryChannels: [], // Default, curated channels - indie film, music videos, documentary etc.
     hiddenChannels: [], // Channels videos to hide
     sortCondition: 'indieCinema.order', // Defines how movies are ordered
     sortOrder: 1, // Asc or desc
