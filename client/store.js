@@ -77,6 +77,9 @@ var store = {
       return store.setMessage(error.data.message);
     });
   },
+  setHiddenChannels: function (channels) {
+    this.state.hiddenChannels = channels;
+  },
   toggleHideChannel: function (channel) {
     // Toggle channel from invisible channels
     var channelPosition = this.state.hiddenChannels.indexOf(channel);

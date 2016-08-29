@@ -31,6 +31,7 @@ var router = new VueRouter({
 router.beforeEach(function () {
   store.setCurrentPage(1);
   store.setMovies([]);
+  store.setHiddenChannels([]);
 });
 
 router.map({

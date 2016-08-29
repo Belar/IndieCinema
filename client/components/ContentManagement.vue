@@ -140,10 +140,7 @@ export default {
     // Get list of hidden channels
     var hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));
     if (hiddenChannels) {
-      var hiddenChannelsLength = hiddenChannels.length;
-      for (var i = 0; i < hiddenChannelsLength; i++) {
-        store.toggleHideChannel(hiddenChannels[i]);
-      }
+      store.setHiddenChannels(hiddenChannels);
     }
   },
   ready: function() {
