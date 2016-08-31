@@ -7,8 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: ['webpack-hot-middleware/client', './client/main.js'],
   output: {
-    path: path.resolve(__dirname, '../public/'),
-    publicPath: '/',
+    path: path.resolve(__dirname, '../public/assets/js/'),
+    publicPath: '/assets/js/',
     filename: 'build.js'
   },
   resolve: {
