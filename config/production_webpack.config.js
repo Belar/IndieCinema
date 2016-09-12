@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const projectRoot = path.resolve(__dirname, '../')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: ['./client/main.js'],
@@ -53,7 +54,8 @@ module.exports = {
   },
   vue: {
     loaders: {
-      'scss': 'vue-style!css!sass'
+      css: ExtractTextPlugin.extract(['css']),
+      scss: ExtractTextPlugin.extract(['css', 'sass'])
     }
   },
   eslint: {
@@ -69,7 +71,8 @@ module.exports = {
       template: path.resolve(__dirname, '../public/index_dev.ejs'),
       analytics: true,
       inject: true
-    })
+    }),
+    new ExtractTextPlugin('style.css')
   ],
   devtool: '#eval-source-map'
 }
