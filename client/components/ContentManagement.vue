@@ -3,22 +3,30 @@
     <div class="add-new-channel">
       <label>Add channel</label>
       <input autofocus autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
-      <i class="icon ion-plus-circled" @click="addChannel()"></i>
+      <svg class="icon icon-plus" @click="addChannel()">
+        <use xlink:href="/assets/images/symbols_defs.svg#icon-plus"></use>
+      </svg>
     </div>
   </div>
   <div class="action-bar clearfix">
     <div class="query-channels">
       <h5>Current channels:</h5>
       <ul>
-        <li class="channel label " v-for="channel in sharedState.queryChannels">
-          <i class="channel-visibility icon ion-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop></i>
-          <i class="close icon ion-close" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop></i>
+        <li class="channel label" v-for="channel in sharedState.queryChannels">
+          <svg class="channel-visibility icon icon-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop>
+            <use xlink:href="/assets/images/symbols_defs.svg#icon-eye"></use>
+          </svg>
+          <svg class="close icon icon-cross" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop>
+            <use xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
+          </svg>
           <span class="channel-name">{{ channel }}</span>
         </li>
       </ul>
     </div>
     <div class="options">
-      <i class="delete-channels icon ion-trash-b" :class="{'active' : deleteChannels}" @click="allowRemoval()"></i>
+      <svg class="delete-channels icon icon-bin" :class="{'active' : deleteChannels}" @click="allowRemoval()">
+        <use xlink:href="/assets/images/symbols_defs.svg#icon-bin"></use>
+      </svg>
     </div>
   </div>
 </template>
@@ -196,11 +204,14 @@ export default {
       width: 500px;
     }
   }
-  i {
-    font-size: 48px;
+  .icon {
+    height: 2rem;
+    width: 2rem;
+    margin-top: 10px;
     color: rgba($primary, .25);
     transition: color .2s ease-in;
     &:hover {
+      cursor: pointer;
       color: rgba($primary, 1);
     }
   }
@@ -246,9 +257,9 @@ export default {
     }
   }
   .icon {
-    height: 15px;
-    width: 15px;
-    margin: 1px 5px 0 0;
+    height: .75rem;
+    width: .75rem;
+    margin: 3px 5px 0 0;
     float: left;
     cursor: pointer;
     color: rgba($dark, .25);
@@ -276,14 +287,16 @@ export default {
   text-align: right;
   width: 15%;
   float: right;
+  @include bp(md) {
+    padding: 0;
+  }
   @include bp(xlg) {
+    padding: 0;
     margin: 4rem 0 0 0;
   }
   .icon {
     cursor: pointer;
-    // margin: 0rem .25rem;
     display: inline-block;
-    font-size: 24px;
     color: rgba($dark, .25);
     transition: color .2s ease-in;
     &:hover,

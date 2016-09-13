@@ -3,7 +3,9 @@
     <div class="modal-wrapper">
       <div class="modal-container" v-if="movie" @click.stop>
         <div class="modal-header">
-          <i class="modal-close icon ion-close" @click="closeMovie()" @click.stop></i>
+          <svg class="modal-close icon icon-cross" @click="closeMovie()" @click.stop>
+            <use pointer-events="visible" xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
+          </svg>
         </div>
         <div class="flex-video widescreen" v-if="movie.embed">
           {{{ movie.embed.html }}}
@@ -123,7 +125,7 @@ export default {
 
 .modal-close {
   font-size: 1.3rem;
-  margin: 1px 5px 0 0;
+  margin: 3px 5px 0 0;
   cursor: pointer;
   color: rgba($dark, .25);
   transition: color .2s ease-in;

@@ -1,7 +1,9 @@
 <template>
   <div class="loading-bar" v-show="sharedState.loadingIndicator" transition="expand">
     <span class="loading-txt">Loading...</span>
-    <img class="loading-indicator" src="/assets/images/dashinfinity.gif" alt="">
+    <svg class="loading-indicator icon icon-spinner">
+      <use xlink:href="/assets/images/symbols_defs.svg#icon-spinner"></use>
+    </svg>
   </div>
 </template>
 
@@ -29,8 +31,12 @@ export default {
 }
 
 .loading-indicator {
+  color: $primary;
   height: 36px;
   display: inline-block;
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 .loading-txt {
@@ -52,5 +58,14 @@ export default {
 .expand-enter,
 .expand-leave {
   height: 0px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="scroll-top" v-show="scrollAvailable" transition="fade" @click="toTheTop()" @click.stop>
-    <i class="ion ion-chevron-up"></i>
+    <svg class="icon icon-chevron-c-up">
+      <use xlink:href="/assets/images/symbols_defs.svg#icon-chevron-c-up"></use>
+    </svg>
   </div>
 </template>
 
@@ -51,7 +53,9 @@ export default {
     bottom: 1rem;
     right: 2rem;
   }
-  i {
+  .icon {
+    height: 1.5rem;
+    width: 1.5rem;
     background: $light;
     color: $dark;
     padding: .5rem;

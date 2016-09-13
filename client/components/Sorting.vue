@@ -2,8 +2,16 @@
   <div class="sorting">
     <h5>Order by:</h5>
     <ul class="modes">
-      <li :class="{'active' : this.sharedState.sortCondition === 'release_time'}" @click="changeOrder('release_time')"><i class="ion ion-calendar"></i>Release time</li>
-      <li :class="{'active' : this.sharedState.sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')"><i class="ion ion-ribbon-b"></i> Discovery time</li>
+      <li :class="{'active' : this.sharedState.sortCondition === 'release_time'}" @click="changeOrder('release_time')">
+        <svg class="icon icon-calendar">
+          <use xlink:href="/assets/images/symbols_defs.svg#icon-calendar"></use>
+        </svg>
+        Release time</li>
+      <li :class="{'active' : this.sharedState.sortCondition === 'indieCinema.order'}" @click="changeOrder('indieCinema.order')">
+        <svg class="icon icon-box">
+          <use xlink:href="/assets/images/symbols_defs.svg#icon-box"></use>
+        </svg>
+        Discovery time</li>
     </ul>
   </div>
 </template>
@@ -63,8 +71,10 @@ h5 {
   li.active {
     color: $primary;
   }
-  i {
-    margin: 1px 5px 0 0;
+  .icon {
+    height: .75rem;
+    width: .75rem;
+    margin: 3px 5px 0 0;
   }
 }
 </style>

@@ -25,3 +25,15 @@ $warning: #e53935;
   display: table;
   clear: both;
 }
+
+.icon {
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  use {
+    pointer-events: none;
+  }
+}
