@@ -8,7 +8,18 @@ const queryVimeo = require('./server/plugins/queryVimeo'); // plugin for Viemo p
 
 const server = new Hapi.Server();
 server.connection({
-  port: 3000
+  port: 3000,
+  routes: {
+    security: {
+      hsts: {
+        maxAge: 15768000,
+        includeSubDomains: true,
+        preload: true
+      },
+      xframe: true,
+      xss: true
+    }
+  }
 });
 
 var logConfig = {
@@ -98,7 +109,6 @@ server.register([Inert, queryVimeo, {
   server.route(require('./server/routes'));
 
 });
-
 
 server.start((err) => {
 
