@@ -15,12 +15,12 @@
 <script>
 'use strict';
 
-import VideoGrid from './components/VideoGrid';
-import OnScreenMessage from './components/OnScreenMessage';
-import Sorting from './components/Sorting'; // Loading indicator component
-import Loading from './components/Loading'; // Loading indicator component
-import ScrollToTop from './components/ScrollToTop'; // Loading indicator component
-import ChannelGroups from './components/ChannelGroups'; // Loading indicator component
+import VideoGrid from './components/VideoGrid'; // Grid presenting videos
+import OnScreenMessage from './components/OnScreenMessage'; // Message use for information - confirmations, errors
+import Sorting from './components/Sorting';
+import Loading from './components/Loading'; // Loading indicator
+import ScrollToTop from './components/ScrollToTop';
+import ChannelGroups from './components/ChannelGroups'; // Menu for channel groups
 
 import store from './store';
 
@@ -35,11 +35,12 @@ export default {
   },
   data: function() {
     return {
-      sharedState: store.state // Global store
+      sharedState: store.state
     };
   },
   route: {
     data: function() {
+      // Based on active group, assigns current channels and orders a fetch
       function findChannelGroup(group) {
         return group.name === currentGroup;
       }

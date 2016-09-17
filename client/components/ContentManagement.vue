@@ -33,6 +33,7 @@
 
 <script>
 'use strict';
+
 import store from '../store';
 
 const localStorage = window.localStorage;
@@ -47,7 +48,7 @@ function removeDuplicates(array, prop) {
   for (var i = 0; i < arrayLength; i++) {
     uniqueObject[array[i][prop]] = array[i];
   }
-  // Insert objects into array
+  // Insert objects into array, overwrite
   for (i = 0 in uniqueObject) {
     uniqueArray.push(uniqueObject[i]);
   }
@@ -72,6 +73,7 @@ export default {
         return store.setMessage('Channel name can not be empty');
       }
 
+      // Check if channel name contains special characters
       if (/^[a-zA-Z\u00C0-\u017F]+,\s[a-zA-Z\u00C0-\u017F]+$/.test(addChannel)) {
         return store.setMessage('Channel name can not contain accented characters');
       }
@@ -88,7 +90,7 @@ export default {
         url: '/api/get-videos-single?channel=' + addChannel,
         method: 'GET'
       }).then(function(response) {
-        // Add videos to array
+        // Add videos to movies array
         movies = movies.concat(response.data);
         // Clear duplicates
         var uniqueMovies = removeDuplicates(movies, 'uri');
@@ -108,6 +110,7 @@ export default {
       this.newChannel = '';
     },
     allowRemoval() {
+      // Toggles channels removal
       if (this.deleteChannels === false) {
         return this.$set('deleteChannels', true);
       }
@@ -121,7 +124,7 @@ export default {
       }
       localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
 
-      // After channel is removed, filter out movies that belong to that channel - no query
+      // After channel is removed, filter out (remove) movies that belong to that channel - no query
       var movies = this.sharedState.movieList;
       var queryChannels = this.sharedState.queryChannels;
 

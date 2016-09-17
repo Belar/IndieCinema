@@ -7,6 +7,8 @@
 </template>
 
 <script>
+'use strict';
+
 import store from '../store';
 
 export default {
@@ -17,6 +19,7 @@ export default {
   },
   watch: {
     'sharedState.screenMessage': function() {
+      // Removes message after X ms
       if (this.sharedState.screenMessage) {
         setTimeout(function() {
           store.setMessage('');

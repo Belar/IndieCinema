@@ -12,6 +12,8 @@
 </template>
 
 <script>
+'use strict';
+
 import store from '../store';
 
 export default {
@@ -52,7 +54,7 @@ export default {
     &:hover {
       color: $primary;
     }
-    &.active{
+    &.active {
       color: $primary;
     }
   }

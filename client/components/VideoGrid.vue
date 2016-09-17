@@ -31,7 +31,7 @@
 
 import Modal from './Modal'; // Modal component
 import store from '../store';
-import 'lazysizes';
+import 'lazysizes'; // Image loading lib
 
 export default {
   components: {
@@ -46,6 +46,7 @@ export default {
   },
   computed: {
     movieListEdited: function() {
+      // Computed property, generates list of movies based on hidden channels, sorting conditions, order etc.
       var movies = this.sharedState.movieList;
       var hiddenChannels = this.sharedState.hiddenChannels;
       var sortCondition = this.sharedState.sortCondition;
@@ -80,12 +81,13 @@ export default {
   },
   methods: {
     showMovie(video) {
-      // Show modal and pass movie's URI for data query
+      // Show modal and pass movie's data - no query, data comes from movies array (store)
       this.videoModal = video;
       this.showModal = true;
     }
   },
   ready: function() {
+    // Infine scrolling, orders new batch of movies via store
     window.addEventListener('scroll', () => {
       var scrollHeight = document.body.scrollHeight;
       var scrollTop = document.body.scrollTop;
