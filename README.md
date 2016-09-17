@@ -1,20 +1,22 @@
 # IndieCinema
 
-IndieCinema is a web application that builds better view for Vimeo videos from given channels.
+IndieCinema is a web application that builds a grid of Vimeo videos based on given channels.
 
 Check it out online: [IndieCinema](https://indiecinema.belardesign.com/)
 
 Features:
 
-- predefined grid with videos from popular channels dedicated to independent film
-- pop-up with embed and information about video
-- custom channels
-- channel management (hide, delete, refresh)
+- predefined and custom channels (groups)
+- grid view
+- pop-up (modal) with embed and information about video
+- channel management
+- infinite scrolling (+ scrollToTop)
+- sorting
 
 ## Technology
 
-Front-end: [VueJS](https://vuejs.org)<br>
-API: [HapiJS](https://hapijs.com/)<br>
+Front-end: [VueJS](https://vuejs.org)
+API: [HapiJS](https://hapijs.com/)
 Setup: [Hapi Vue](https://github.com/Belar/hapi-vue-simple)
 
 ### Run Dev
