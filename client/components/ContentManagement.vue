@@ -1,32 +1,34 @@
 <template>
-  <div class="add-new-channel-wrapper">
-    <div class="add-new-channel">
-      <label>Add channel</label>
-      <input autofocus autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
-      <svg class="icon icon-plus" @click="addChannel()">
-        <use xlink:href="/assets/images/symbols_defs.svg#icon-plus"></use>
-      </svg>
+  <div>
+    <div class="add-new-channel-wrapper">
+      <div class="add-new-channel">
+        <label>Add channel</label>
+        <input autofocus autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
+        <svg class="icon icon-plus" @click="addChannel()">
+          <use xlink:href="/assets/images/symbols_defs.svg#icon-plus"></use>
+        </svg>
+      </div>
     </div>
-  </div>
-  <div class="action-bar clearfix">
-    <div class="query-channels">
-      <h5>Current channels:</h5>
-      <ul>
-        <li class="channel label" v-for="channel in sharedState.queryChannels">
-          <svg class="channel-visibility icon icon-eye" :class="{'inactive' : this.sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop>
-            <use xlink:href="/assets/images/symbols_defs.svg#icon-eye"></use>
-          </svg>
-          <svg class="close icon icon-cross" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop>
-            <use xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
-          </svg>
-          <span class="channel-name">{{ channel }}</span>
-        </li>
-      </ul>
-    </div>
-    <div class="options">
-      <svg class="delete-channels icon icon-bin" :class="{'active' : deleteChannels}" @click="allowRemoval()">
-        <use xlink:href="/assets/images/symbols_defs.svg#icon-bin"></use>
-      </svg>
+    <div class="action-bar clearfix">
+      <div class="query-channels">
+        <h5>Current channels:</h5>
+        <ul>
+          <li class="channel label" v-for="channel in sharedState.queryChannels">
+            <svg class="channel-visibility icon icon-eye" :class="{'inactive' : sharedState.hiddenChannels.indexOf(channel) !== -1}" v-show="!deleteChannels" @click="hideChannel(channel)" @click.stop>
+              <use xlink:href="/assets/images/symbols_defs.svg#icon-eye"></use>
+            </svg>
+            <svg class="close icon icon-cross" v-show="deleteChannels" @click="removeChannel(channel)" @click.stop>
+              <use xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
+            </svg>
+            <span class="channel-name">{{ channel }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="options">
+        <svg class="delete-channels icon icon-bin" :class="{'active' : deleteChannels}" @click="allowRemoval()">
+          <use xlink:href="/assets/images/symbols_defs.svg#icon-bin"></use>
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -112,9 +114,10 @@ export default {
     allowRemoval() {
       // Toggles channels removal
       if (this.deleteChannels === false) {
-        return this.$set('deleteChannels', true);
+        this.deleteChannels = true;
+        return;
       }
-      this.$set('deleteChannels', false);
+      this.deleteChannels = false;
     },
     removeChannel(channel) {
       store.removeQueryChannel(channel);
@@ -157,13 +160,13 @@ export default {
       store.setHiddenChannels(hiddenChannels);
     }
   },
-  ready: function() {
+  mounted: function() {
     store.getMovies();
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .add-new-channel-wrapper {
   text-align: center;

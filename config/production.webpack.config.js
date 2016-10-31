@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const projectRoot = path.resolve(__dirname, '../')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -8,28 +7,20 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   entry: ['./client/main.js'],
   output: {
-    path: path.resolve(__dirname, '../public/assets/build/'),
-    publicPath: '/assets/build/',
-    filename: 'build.js'
+    path: path.resolve(__dirname, '../public/'),
+    publicPath: '/',
+    filename: 'build/build.js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue']
+    extensions: ['', '.js', '.vue'],
+    alias: {
+      'vue': 'vue/dist/vue'
+    }
   },
   resolveLoader: {
     root: path.join(__dirname, 'node_modules'),
   },
   module: {
-    preLoaders: [{
-      test: /\.vue$/,
-      loader: 'eslint',
-      include: projectRoot,
-      exclude: /node_modules/
-    }, {
-      test: /\.js$/,
-      loader: 'eslint',
-      include: projectRoot,
-      exclude: /node_modules/
-    }],
     loaders: [{
       test: /\.vue$/,
       loader: 'vue'
@@ -55,11 +46,8 @@ module.exports = {
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract(['css']),
-      scss: ExtractTextPlugin.extract(['css', 'sass'])
+      sass: ExtractTextPlugin.extract(['css', 'sass'])
     }
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
   },
   plugins: [
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
@@ -68,17 +56,16 @@ module.exports = {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../public/index.html'),
-      template: path.resolve(__dirname, '../public/index_dev.ejs'),
-      analytics: true,
-      inject: true
+      template: path.resolve(__dirname, '../build/index_dev.ejs'),
+      inject: true,
+      analytics: true
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('build/style.css')
   ],
-  devtool: '#eval-source-map'
+  devtool: '#source-map'
 }
 
-module.exports.devtool = '#source-map'
-  // http://vuejs.github.io/vue-loader/workflow/production.html
+// http://vuejs.github.io/vue-loader/workflow/production.html
 module.exports.plugins = (module.exports.plugins || []).concat([
   new webpack.DefinePlugin({
     'process.env': {

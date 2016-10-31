@@ -2,7 +2,6 @@
 node_modules/
 npm-debug.log
 
-client/vimeoData.js
 public/assets/images
 public/assets/js/analytics.js
 config/secret.js

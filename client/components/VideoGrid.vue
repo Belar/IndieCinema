@@ -1,29 +1,31 @@
 <template>
-  <div class="video-index">
-    <div class="video-grid">
-      <ul>
-        <li class="single-movie" v-for="movie in movieListEdited">
-          <div class="preview-wrapper" @click="showMovie(movie)">
-            <img class="lazyload" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" alt="">
-          </div>
-          <div class="excerpt">
-            <h4>{{ movie.name }}</h4>
-            <div class="description">
-              {{ movie.description }}
+  <div>
+    <div class="video-index">
+      <div class="video-grid">
+        <ul>
+          <li class="single-movie" v-for="movie in movieListEdited" :key="movie.uri">
+            <div class="preview-wrapper" @click="showMovie(movie)">
+              <img :class="'lazyload'" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" alt="">
             </div>
-          </div>
-        </li>
-        <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
-        <li class="single-movie"></li>
-        <li class="single-movie"></li>
-        <li class="single-movie"></li>
-        <li class="single-movie"></li>
-        <li class="single-movie"></li>
-        <li class="single-movie"></li>
-      </ul>
+            <div class="excerpt">
+              <h4>{{ movie.name }}</h4>
+              <div class="description">
+                {{ movie.description }}
+              </div>
+            </div>
+          </li>
+          <!-- Hacky way to make elements of last row (when not full) behave when using justify: space-between -->
+          <li class="single-movie"></li>
+          <li class="single-movie"></li>
+          <li class="single-movie"></li>
+          <li class="single-movie"></li>
+          <li class="single-movie"></li>
+          <li class="single-movie"></li>
+        </ul>
+      </div>
     </div>
+    <modal :show="showModal" :video="videoModal" @closeModal="showModal = false"></modal>
   </div>
-  <modal :show.sync="showModal" :video.sync="videoModal"></modal>
 </template>
 
 <script>
@@ -86,7 +88,7 @@ export default {
       this.showModal = true;
     }
   },
-  ready: function() {
+  mounted: function() {
     // Infine scrolling, orders new batch of movies via store
     window.addEventListener('scroll', () => {
       var scrollHeight = document.body.scrollHeight;
@@ -103,7 +105,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 h1 {
   font-family: 'Old Standard TT', serif;

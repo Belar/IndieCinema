@@ -1,27 +1,27 @@
 <template>
-  <div class="modal-mask" v-show="show" @click="closeMovie()" transition="modal">
-    <div class="modal-wrapper">
-      <div class="modal-container" v-if="movie" @click.stop>
-        <div class="modal-header">
-          <svg class="modal-close icon icon-cross" @click="closeMovie()" @click.stop>
-            <use pointer-events="visible" xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
-          </svg>
-        </div>
-        <div class="flex-video widescreen" v-if="movie.embed">
-          {{{ movie.embed.html }}}
-        </div>
-        <div class="movie-info">
-          <h2 class="title">{{ movie.name }}</h2>
-          <div class="by" v-if="movie.user">by
-            <span class="author"><a v-bind:href="movie.user.link" target="_blank" rel="noreferrer">{{ movie.user.name }}</a></span>
+  <transition name="modal">
+    <div class="modal-mask" v-show="show" @click="closeMovie()">
+      <div class="modal-wrapper">
+        <div class="modal-container" v-if="movie" @click.stop>
+          <div class="modal-header">
+            <svg class="modal-close icon icon-cross" @click="closeMovie()" @click.stop>
+              <use pointer-events="visible" xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
+            </svg>
           </div>
-          <div class="description">
-            {{ movie.description }}
+          <div class="flex-video widescreen" v-if="movie.embed" v-html="movie.embed.html"></div>
+          <div class="movie-info">
+            <h2 class="title">{{ movie.name }}</h2>
+            <div class="by" v-if="movie.user">by
+              <span class="author"><a v-bind:href="movie.user.link" target="_blank" rel="noreferrer">{{ movie.user.name }}</a></span>
+            </div>
+            <div class="description">
+              {{ movie.description }}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -31,35 +31,30 @@ export default {
   props: {
     show: {
       type: Boolean,
-      required: true,
-      twoWay: true
+      required: true
     },
     video: {
       type: Object,
       required: true
     }
   },
-
-  data: function() {
-    return {
-      movie: {}
-    };
+  computed: {
+    movie: function() {
+      return this.video;
+    }
   },
-
   methods: {
     closeMovie() {
       // Clear movie info
       this.movie = {};
       // Hide modal
-      this.show = false;
+      this.$emit('closeModal');
     }
   },
-
   watch: {
     'show': function() {
       var appWrapper = document.getElementById('body-content-wrapper');
       if (this.show === true) {
-        this.$set('movie', this.video);
         // Add class to body limiting its scrolling with overflow
         appWrapper.classList.add('modal-open');
       } else {
@@ -69,7 +64,7 @@ export default {
     }
   },
 
-  ready: function() {
+  mounted: function() {
     // Closes modal on escape
     document.addEventListener('keydown', (event) => {
       // Check if modal is open and key is esc
@@ -81,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .modal-mask {
   position: fixed;
@@ -192,13 +187,12 @@ export default {
  * these styles.
  */
 
-.modal-enter,
-.modal-leave {
+.modal-enter-active,
+.modal-leave-active {
   opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave .modal-container {
+.modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }

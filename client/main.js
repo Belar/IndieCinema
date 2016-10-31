@@ -15,35 +15,30 @@ import NotFoundView from './NotFoundView';
 //Store
 import store from './store';
 
-var App = Vue.extend();
+const routes = [{
+  path: '/',
+  component: CustomGroupView
+}, {
+  path: '/group/:groupName',
+  component: GroupView
+}, {
+  path: '*',
+  component: NotFoundView
+}];
 
-var router = new VueRouter({
-  history: true
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes,
+  linkActiveClass: 'active'
 });
 
-// new Vue({
-//   el: 'body',
-//   components: {
-//     App
-//   }
-// });
-
-router.beforeEach(function () {
+router.beforeEach((to, from, next) => {
   store.setCurrentPage(1);
   store.setMovies([]);
   store.setHiddenChannels([]);
+  next();
 });
 
-router.map({
-  '/': {
-    component: CustomGroupView
-  },
-  '/group/:groupName': {
-    component: GroupView
-  },
-  '*': {
-    component: NotFoundView
-  }
-});
-
-router.start(App, '#app');
+const App = new Vue({
+  router
+}).$mount('#app');

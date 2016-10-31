@@ -1,9 +1,11 @@
 <template>
-  <div class="message-bar" v-show="sharedState.screenMessage" transition="expand">
-    <div class="message-body">
-      {{sharedState.screenMessage}}
+  <transition name="expand">
+    <div class="message-bar" v-show="sharedState.screenMessage">
+      <div class="message-body">
+        {{sharedState.screenMessage}}
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .message-bar {
   position: absolute;
@@ -44,19 +46,14 @@ export default {
   font-weight: 600;
 }
 
-.expand-transition {
+.expand-enter-active,
+.expand-leave-active {
   transition: all .3s ease;
   height: 50px;
 }
 
-
-/* .expand-enter defines the starting state for entering */
-
-
-/* .expand-leave defines the ending state for leaving */
-
 .expand-enter,
-.expand-leave {
+.expand-leave-active {
   height: 0px;
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
-  <div class="scroll-top" v-show="scrollAvailable" transition="fade" @click="toTheTop()" @click.stop>
-    <svg class="icon icon-chevron-c-up">
-      <use xlink:href="/assets/images/symbols_defs.svg#icon-chevron-c-up"></use>
-    </svg>
-  </div>
+  <transition name="fade">
+    <div class="scroll-top" v-show="scrollAvailable" @click="toTheTop()" @click.stop>
+      <svg class="icon icon-chevron-c-up">
+        <use xlink:href="/assets/images/symbols_defs.svg#icon-chevron-c-up"></use>
+      </svg>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -29,18 +31,19 @@ export default {
       scrollTop(125);
     }
   },
-  ready: function() {
+  mounted: function() {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 0) {
-        return this.$set('scrollAvailable', true);
+        this.scrollAvailable = true;
+        return;
       }
-      return this.$set('scrollAvailable', false);
+      this.scrollAvailable = false;
     });
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .scroll-top {
   position: fixed;
@@ -65,19 +68,13 @@ export default {
   }
 }
 
-.fade-transition {
+.fade-enter-active,
+.fade-leave-active {
   transition: all .3s ease;
   opacity: .5;
 }
 
-
-/* .expand-enter defines the starting state for entering */
-
-
-/* .expand-leave defines the ending state for leaving */
-
-.fade-enter,
-.fade-leave {
+.fade-leave-active {
   opacity: 0;
 }
 </style>

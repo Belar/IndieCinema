@@ -1,12 +1,12 @@
 <template>
   <div class="channel-groups">
     <ul>
-      <li class="group" v-for="group in sharedState.channelGroups">
-        <a class="group-name" v-link="{ path: '/group/'+group.name, activeClass: 'active' }">{{ group.name }}</a>
-      </li>
-      <li class="group">
-        <a class="group-name" v-link="{ path: '/', activeClass: 'active', exact: true }">Your channels</a>
-      </li>
+      <router-link tag="li" :to="{ path: '/group/'+group.name}" v-for="group in sharedState.channelGroups" class="group">
+        <a class="group-name">{{ group.name }}</a>
+      </router-link>
+      <router-link tag="li" to="/" class="group" exact>
+        <a class="group-name">Your channels</a>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .channel-groups {
   border-bottom: 1px solid rgba($dark, .05);

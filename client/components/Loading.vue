@@ -1,10 +1,12 @@
 <template>
-  <div class="loading-bar" v-show="sharedState.loadingIndicator" transition="expand">
-    <span class="loading-txt">Loading...</span>
-    <svg class="loading-indicator icon icon-spinner">
-      <use xlink:href="/assets/images/symbols_defs.svg#icon-spinner"></use>
-    </svg>
-  </div>
+  <transition name="expand">
+    <div class="loading-bar" v-show="sharedState.loadingIndicator">
+      <span class="loading-txt">Loading...</span>
+      <svg class="loading-indicator icon icon-spinner">
+        <use xlink:href="/assets/images/symbols_defs.svg#icon-spinner"></use>
+      </svg>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -21,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .loading-bar {
   position: fixed;
@@ -49,17 +51,13 @@ export default {
   margin: 0 .5rem 0 0;
 }
 
-.expand-transition {
+.expand-enter-active,
+.expand-leave-active {
   transition: all .3s ease;
   height: 50px;
 }
 
-
-/* .expand-enter defines the starting state for entering
-.expand-leave defines the ending state for leaving */
-
-.expand-enter,
-.expand-leave {
+.expand-leave-active {
   height: 0px;
 }
 

@@ -38,8 +38,17 @@ export default {
       sharedState: store.state
     };
   },
-  route: {
-    data: function() {
+  created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.getData();
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'getData'
+  },
+  methods: {
+    getData: function() {
       // Based on active group, assigns current channels and orders a fetch
       function findChannelGroup(group) {
         return group.name === currentGroup;
@@ -55,7 +64,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 body {
   background: $light;

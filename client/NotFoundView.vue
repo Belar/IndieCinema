@@ -4,7 +4,8 @@
     <h1>IndieCinema</h1>
     <div class="not-found">
       <h2 class="info">Page you are looking for doesn't exist.</h2>
-      Let's get you <a v-link="'/'">home.</a>
+      Let's get you
+      <router-link to="/"><a>home/</a></router-link>
     </div>
   </div>
 </template>
@@ -21,7 +22,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="sass">
 @import "./utils/sass/styling";
 .not-found {
   max-width: 960px;
