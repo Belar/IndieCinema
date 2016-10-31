@@ -15,9 +15,9 @@ Features:
 
 ## Technology
 
-Front-end: [VueJS](https://vuejs.org)
-API: [HapiJS](https://hapijs.com/)
-Setup: [Hapi Vue](https://github.com/Belar/hapi-vue-simple)
+Front-end: [VueJS](https://vuejs.org)  
+API: [HapiJS](https://hapijs.com/)  
+Setup: [Hapi Vue](https://github.com/Belar/hapi-vue)  
 
 ### Run Dev
 
