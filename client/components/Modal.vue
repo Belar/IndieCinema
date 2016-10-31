@@ -177,21 +177,15 @@ export default {
   }
 }
 
+.modal-enter {
+  opacity: 0;
+}
 
-/*
- * the following styles are auto-applied to elements with
- * v-transition="modal" when their visiblity is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter-active,
 .modal-leave-active {
   opacity: 0;
 }
 
+.modal-enter .modal-container,
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);

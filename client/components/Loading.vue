@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import "./utils/sass/styling";
 .loading-bar {
   position: fixed;
@@ -33,6 +33,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 50px;
 }
 
 .loading-indicator {
@@ -54,11 +55,15 @@ export default {
 .expand-enter-active,
 .expand-leave-active {
   transition: all .3s ease;
-  height: 50px;
 }
 
+.expand-enter,
 .expand-leave-active {
-  height: 0px;
+  height: 0;
+}
+
+.expand-leave {
+  height: 50px;
 }
 
 @keyframes spin {

@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import "./utils/sass/styling";
 .message-bar {
   position: absolute;
@@ -44,16 +44,20 @@ export default {
   background: rgba($dark, .5);
   color: $light;
   font-weight: 600;
+  height: 50px;
 }
 
 .expand-enter-active,
 .expand-leave-active {
   transition: all .3s ease;
-  height: 50px;
 }
 
 .expand-enter,
 .expand-leave-active {
-  height: 0px;
+  height: 0;
+}
+
+.expand-leave {
+  height: 50px;
 }
 </style>
