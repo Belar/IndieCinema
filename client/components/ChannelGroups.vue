@@ -43,6 +43,12 @@ export default {
   li {
     display: inline;
     margin-right: 1rem;
+    &:hover a {
+      color: $primary;
+    }
+    &.active a {
+      color: $primary;
+    }
   }
   a {
     color: rgba($dark, .5);
@@ -51,12 +57,6 @@ export default {
     transition: color .15s ease-in;
     cursor: pointer;
     text-decoration: none;
-    &:hover {
-      color: $primary;
-    }
-    &.active {
-      color: $primary;
-    }
   }
 }
 </style>
