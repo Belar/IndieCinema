@@ -5,5 +5,6 @@ npm-debug.log
 public/assets/images
 public/assets/js/analytics.js
 config/secret.js
+test/unit/coverage/
 .debug_log
 .error_log
