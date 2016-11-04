@@ -88,10 +88,7 @@ export default {
       var movies = this.sharedState.movieList; // Get list of already showed movies
       store.setLoading(true);
 
-      this.$http({
-        url: '/api/get-videos-single?channel=' + addChannel,
-        method: 'GET'
-      }).then(function(response) {
+      this.$http.get('/api/get-videos-single?channel=' + addChannel).then((response) => {
         // Add videos to movies array
         movies = movies.concat(response.data);
         // Clear duplicates
@@ -103,7 +100,7 @@ export default {
         // Add channel to the array with channels
         store.addQueryChannel(addChannel);
         localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
-      }, function(error) {
+      }, (error) => {
         // Turn off loading
         store.setLoading(false);
         return store.setMessage(error.data.message);

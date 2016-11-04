@@ -60,10 +60,7 @@ var store = {
     store.setLoading(true);
     var movies = this.state.movieList;
     var fetchPage = this.state.currentPage;
-    Vue.http({
-      url: '/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage,
-      method: 'GET'
-    }).then(function (response) {
+    Vue.http.get('/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage).then((response) => {
       movies = movies.concat(response.data);
       // Clear duplicates
       var uniqueMovies = removeDuplicates(movies, 'uri');
@@ -71,7 +68,7 @@ var store = {
       store.setLoading(false);
       // Update list of videos
       store.setMovies(uniqueMovies);
-    }, function (error) {
+    }, (error) => {
       // Turn off loading
       store.setLoading(false);
       return store.setMessage(error.data.message);
