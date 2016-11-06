@@ -46,7 +46,7 @@ export default {
 }
 
 .loading-txt {
-  color: rgba($dark, .25);
+  color: rgba($dark, .7);
   display: inline-block;
   vertical-align: top;
   margin: 0 .5rem 0 0;

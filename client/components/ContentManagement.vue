@@ -243,7 +243,7 @@ export default {
   h5 {
     font-size: .95rem;
     margin: 0 0 .5rem 0;
-    color: rgba($dark, .5);
+    color: rgba($dark, .7);
   }
   ul {
     margin: 0;

@@ -51,7 +51,7 @@ export default {
     }
   }
   a {
-    color: rgba($dark, .5);
+    color: rgba($dark, .7);
     font-size: .9rem;
     font-weight: 600;
     transition: color .15s ease-in;

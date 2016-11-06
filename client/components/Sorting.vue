@@ -43,7 +43,7 @@ export default {
 @import "./utils/sass/styling";
 h5 {
   font-size: .95rem;
-  color: rgba($dark, .5);
+  color: rgba($dark, .7);
   margin: 0 0 .5rem 0;
 }
 
@@ -67,7 +67,7 @@ h5 {
     margin: auto 1rem auto 0;
     transition: color .2s ease-in;
     cursor: pointer;
-    color: rgba($dark, .5);
+    color: rgba($dark, .7);
   }
   li:hover,
   li.active {
