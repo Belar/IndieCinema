@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <on-screen-message></on-screen-message>
     <channel-groups></channel-groups>
-    <img class="logo" src="/assets/images/logo.svg" alt="">
+    <img class="logo" src="/assets/images/logo.svg" alt="IndieCinema logo">
 
     <content-management></content-management>
 

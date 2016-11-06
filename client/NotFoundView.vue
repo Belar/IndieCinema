@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrapper">
     <channel-groups></channel-groups>
-    <img class="logo" src="/assets/images/logo.svg" alt="">
+    <img class="logo" src="/assets/images/logo.svg" alt="IndieCinema logo">
 
     <div class="not-found">
       <h2 class="info">Page you are looking for doesn't exist.</h2>

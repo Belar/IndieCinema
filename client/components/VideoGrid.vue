@@ -5,7 +5,7 @@
         <ul>
           <li class="single-movie" v-for="movie in movieListEdited" :key="movie.uri">
             <div class="preview-wrapper" @click="showMovie(movie)">
-              <img :class="'lazyload'" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" alt="">
+              <img :class="'lazyload'" v-bind:src="movie.pictures.sizes[0].link" v-bind:data-src="movie.pictures.sizes[2].link" :alt="'Preview of ' + movie.name + ' video'">
             </div>
             <div class="excerpt">
               <h4>{{ movie.name }}</h4>
