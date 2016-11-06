@@ -43,8 +43,8 @@ $warning: #e53935;
   margin: auto;
   min-width: 250px;
   max-width: 75%;
+  margin: 2rem auto;
   @include bp(md) {
-    margin: 2rem auto;
     max-width: 100%;
   }
   @include bp(lg) {
