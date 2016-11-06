@@ -107,21 +107,6 @@ export default {
 
 <style lang="sass">
 @import "./utils/sass/styling";
-h1 {
-  font-family: 'Old Standard TT', serif;
-  font-weight: bold;
-  text-align: center;
-  font-size: 2rem;
-  @include bp(md) {
-    margin: 2rem 0 0 0;
-    font-size: 2.5rem;
-  }
-  @include bp(lg) {
-    margin: 4rem 0 0 0;
-    font-size: 3rem;
-  }
-}
-
 .video-grid {
   clear: both;
   padding: 0 1rem;

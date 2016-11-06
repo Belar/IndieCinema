@@ -37,3 +37,18 @@ $warning: #e53935;
     pointer-events: none;
   }
 }
+
+.logo {
+  display: block;
+  margin: auto;
+  min-width: 250px;
+  max-width: 75%;
+  @include bp(md) {
+    margin: 2rem auto;
+    max-width: 100%;
+  }
+  @include bp(lg) {
+    min-width: 300px;
+    margin: 4rem auto;
+  }
+}
