@@ -31,6 +31,9 @@ var store = {
     }, {
       'name': 'creative',
       'channels': ['designcollector', '1nspirational', 'thegoodstuff', '5vimeobest', 'nothingshortof']
+    }, {
+      'name': 'planet',
+      'channels': ['eoadaily', 'hdtime', 'landandwater', 'planethd']
     }],
     loadingIndicator: false,
     screenMessage: '',
