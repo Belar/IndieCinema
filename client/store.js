@@ -21,7 +21,7 @@ var store = {
   state: {
     channelGroups: [{
       'name': 'mix',
-      'channels': ['staffpicks', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']
+      'channels': ['staffpicks', '893369', 'shortoftheweek', '31259', 'everythinganimated', 'documentaryfilm', '8048']
     }, {
       'name': 'film',
       'channels': ['shortoftheweek', '31259', 'filmmakers', 'thefilmmakers', 'bfc']
