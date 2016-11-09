@@ -3,7 +3,7 @@
     <div class="add-new-channel-wrapper">
       <div class="add-new-channel">
         <label for="addChannel">Add channel</label>
-        <input id="addChannel" autofocus autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
+        <input id="addChannel" autocomplete="off" placeholder="e.g. eoadaily" v-model="newChannel" @keyup.enter="addChannel()">
         <svg class="icon icon-plus" @click="addChannel()">
           <use xlink:href="/assets/images/symbols_defs.svg#icon-plus"></use>
         </svg>
