@@ -92,7 +92,7 @@ export default {
     // Infine scrolling, orders new batch of movies via store
     window.addEventListener('scroll', () => {
       var scrollHeight = document.body.scrollHeight;
-      var scrollTop = document.body.scrollTop;
+      var scrollTop = document.body.scrollTop || window.pageYOffset;
       var windowHeight = window.innerHeight;
       var offset = 250;
       if (scrollTop >= scrollHeight - windowHeight - offset && this.sharedState.loadingIndicator === false) {
