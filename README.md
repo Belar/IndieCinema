@@ -19,6 +19,8 @@ Front-end: [VueJS](https://vuejs.org)
 API: [HapiJS](https://hapijs.com/)  
 Setup: [Hapi Vue](https://github.com/Belar/hapi-vue)  
 
+Favicon setup: [RealFaviconGenerator](https://realfavicongenerator.net)
+
 ### Run Dev
 
 ```bash
