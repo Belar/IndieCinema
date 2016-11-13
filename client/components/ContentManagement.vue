@@ -37,25 +37,9 @@
 'use strict';
 
 import store from '../store';
+import helpers from '../helpers';
 
 const localStorage = window.localStorage;
-
-// Accepts array of objects and removes duplicates
-function removeDuplicates(array, prop) {
-  var uniqueArray = [];
-  var uniqueObject = {};
-  var arrayLength = array.length;
-
-  // Generate objects identified by prop as key
-  for (var i = 0; i < arrayLength; i++) {
-    uniqueObject[array[i][prop]] = array[i];
-  }
-  // Insert objects into array, overwrite
-  for (i = 0 in uniqueObject) {
-    uniqueArray.push(uniqueObject[i]);
-  }
-  return uniqueArray;
-}
 
 export default {
   data: function() {
@@ -92,7 +76,7 @@ export default {
         // Add videos to movies array
         movies = movies.concat(response.data);
         // Clear duplicates
-        var uniqueMovies = removeDuplicates(movies, 'uri');
+        var uniqueMovies = helpers.removeDuplicates(movies, 'uri');
         // Update list of videos
         store.setMovies(uniqueMovies);
         // Turn off loading

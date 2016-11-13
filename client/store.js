@@ -1,21 +1,5 @@
 import Vue from 'vue';
-
-// Accepts array of objects and removes duplicates
-function removeDuplicates(array, prop) {
-  var uniqueArray = [];
-  var uniqueObject = {};
-  var arrayLength = array.length;
-
-  // Generate objects identified by prop as key
-  for (var i = 0; i < arrayLength; i++) {
-    uniqueObject[array[i][prop]] = array[i];
-  }
-  // Insert objects into array
-  for (i = 0 in uniqueObject) {
-    uniqueArray.push(uniqueObject[i]);
-  }
-  return uniqueArray;
-}
+import helpers from './helpers';
 
 var store = {
   state: {
@@ -66,7 +50,7 @@ var store = {
     Vue.http.get('/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage).then((response) => {
       movies = movies.concat(response.data);
       // Clear duplicates
-      var uniqueMovies = removeDuplicates(movies, 'uri');
+      var uniqueMovies = helpers.removeDuplicates(movies, 'uri');
       // Turn off loading
       store.setLoading(false);
       // Update list of videos
