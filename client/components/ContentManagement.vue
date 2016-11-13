@@ -52,7 +52,7 @@ export default {
   methods: {
     addChannel() {
       // Remove whitespace on ends
-      var addChannel = this.newChannel.trim();
+      let addChannel = this.newChannel.trim();
 
       // Check if there is a valid(ish) value
       if (!addChannel) {
@@ -69,14 +69,14 @@ export default {
         return store.setMessage('This channel is already present');
       }
 
-      var movies = this.sharedState.movieList; // Get list of already showed movies
+      let movies = this.sharedState.movieList; // Get list of already showed movies
       store.setLoading(true);
 
       this.$http.get('/api/get-videos-single?channel=' + addChannel).then((response) => {
         // Add videos to movies array
         movies = movies.concat(response.data);
         // Clear duplicates
-        var uniqueMovies = helpers.removeDuplicates(movies, 'uri');
+        let uniqueMovies = helpers.removeDuplicates(movies, 'uri');
         // Update list of videos
         store.setMovies(uniqueMovies);
         // Turn off loading
@@ -109,15 +109,15 @@ export default {
       localStorage.setItem('myChannels', JSON.stringify(this.sharedState.queryChannels));
 
       // After channel is removed, filter out (remove) movies that belong to that channel - no query
-      var movies = this.sharedState.movieList;
-      var queryChannels = this.sharedState.queryChannels;
+      let movies = this.sharedState.movieList;
+      let queryChannels = this.sharedState.queryChannels;
 
       function filterByExistingChannel(movie) {
         if (queryChannels.indexOf(movie.indieCinema.channel) !== -1) {
           return true;
         }
       }
-      var cleanMovies = movies.filter(filterByExistingChannel);
+      let cleanMovies = movies.filter(filterByExistingChannel);
       store.setMovies(cleanMovies);
     },
     hideChannel(channel) {
@@ -127,16 +127,16 @@ export default {
   },
   created: function() {
     // Get list of channels
-    var customChannels = localStorage.getItem('myChannels');
+    let customChannels = localStorage.getItem('myChannels');
     if (customChannels) {
       customChannels = JSON.parse(customChannels);
       store.setQueryChannels(customChannels);
     } else {
-      var exampleChannels = ['staffpicks', 'everythinganimated', '5vimeobest']; // Just a taste of channels, less overwhalming than a group
+      let exampleChannels = ['staffpicks', 'everythinganimated', '5vimeobest']; // Just a taste of channels, less overwhalming than a group
       store.setQueryChannels(exampleChannels);
     }
     // Get list of hidden channels
-    var hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));
+    let hiddenChannels = JSON.parse(localStorage.getItem('hiddenChannels'));
     if (hiddenChannels) {
       store.setHiddenChannels(hiddenChannels);
     }

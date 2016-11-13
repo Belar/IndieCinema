@@ -53,7 +53,7 @@ export default {
   },
   watch: {
     'show': function() {
-      var appWrapper = document.getElementById('body-content-wrapper');
+      let appWrapper = document.getElementById('body-content-wrapper');
       if (this.show === true) {
         // Add class to body limiting its scrolling with overflow
         appWrapper.classList.add('modal-open');

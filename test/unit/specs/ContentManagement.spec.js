@@ -12,7 +12,7 @@ const vm = new Vue(ContentManagement);
 describe('ConentManagement.vue component', function () {
   it('should set correct default data', function () {
     expect(typeof ContentManagement.data).to.be.equal('function');
-    var defaultData = ContentManagement.data();
+    let defaultData = ContentManagement.data();
     expect(defaultData.deleteChannels).to.be.false;
   });
 

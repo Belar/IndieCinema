@@ -49,13 +49,13 @@ export default {
   computed: {
     movieListEdited: function() {
       // Computed property, generates list of movies based on hidden channels, sorting conditions, order etc.
-      var movies = this.sharedState.movieList;
-      var hiddenChannels = this.sharedState.hiddenChannels;
-      var sortCondition = this.sharedState.sortCondition;
-      var sortOrder = this.sharedState.sortOrder;
+      let movies = this.sharedState.movieList;
+      let hiddenChannels = this.sharedState.hiddenChannels;
+      let sortCondition = this.sharedState.sortCondition;
+      let sortOrder = this.sharedState.sortOrder;
 
       function sortBy(condition, order) {
-        var props = condition.split('.');
+        let props = condition.split('.');
 
         return function(a, b) {
           props.forEach(function(prop) {
@@ -91,12 +91,12 @@ export default {
   mounted: function() {
     // Infine scrolling, orders new batch of movies via store
     window.addEventListener('scroll', () => {
-      var scrollHeight = document.body.scrollHeight;
-      var scrollTop = document.body.scrollTop || window.pageYOffset;
-      var windowHeight = window.innerHeight;
-      var offset = 250;
+      let scrollHeight = document.body.scrollHeight;
+      let scrollTop = document.body.scrollTop || window.pageYOffset;
+      let windowHeight = window.innerHeight;
+      let offset = 250;
       if (scrollTop >= scrollHeight - windowHeight - offset && this.sharedState.loadingIndicator === false) {
-        var nextPage = this.sharedState.currentPage + 1;
+        let nextPage = this.sharedState.currentPage + 1;
         store.setCurrentPage(nextPage);
         return store.getMovies();
       }

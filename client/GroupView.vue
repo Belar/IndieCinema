@@ -54,8 +54,8 @@ export default {
         return group.name === currentGroup;
       }
 
-      var currentGroup = this.$route.params.groupName;
-      var queryChannels = this.sharedState.channelGroups.find(findChannelGroup).channels;
+      let currentGroup = this.$route.params.groupName;
+      let queryChannels = this.sharedState.channelGroups.find(findChannelGroup).channels;
 
       store.setQueryChannels(queryChannels);
       store.getMovies();

@@ -20,8 +20,8 @@ export default {
   methods: {
     toTheTop() {
       function scrollTop(duration) {
-        var step = -document.body.scrollHeight / duration;
-        var scrolling = setInterval(function() {
+        let step = -document.body.scrollHeight / duration;
+        let scrolling = setInterval(function() {
           if (window.scrollY !== 0) {
             return window.scrollBy(0, step);
           }

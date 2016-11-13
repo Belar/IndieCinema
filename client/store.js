@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import helpers from './helpers';
 
-var store = {
+const store = {
   state: {
     channelGroups: [{
       'name': 'mix',
@@ -45,12 +45,12 @@ var store = {
 
     // Show loading indicator
     store.setLoading(true);
-    var movies = this.state.movieList;
-    var fetchPage = this.state.currentPage;
+    let movies = this.state.movieList;
+    let fetchPage = this.state.currentPage;
     Vue.http.get('/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage).then((response) => {
       movies = movies.concat(response.data);
       // Clear duplicates
-      var uniqueMovies = helpers.removeDuplicates(movies, 'uri');
+      let uniqueMovies = helpers.removeDuplicates(movies, 'uri');
       // Turn off loading
       store.setLoading(false);
       // Update list of videos
@@ -66,7 +66,7 @@ var store = {
   },
   toggleHideChannel: function (channel) {
     // Toggle channel from invisible channels
-    var channelPosition = this.state.hiddenChannels.indexOf(channel);
+    let channelPosition = this.state.hiddenChannels.indexOf(channel);
     if (channelPosition !== -1) {
       return this.state.hiddenChannels.splice(channelPosition, 1);
     }
@@ -79,7 +79,7 @@ var store = {
     this.state.queryChannels.push(channel);
   },
   removeQueryChannel: function (channel) {
-    var channelPosition = this.state.queryChannels.indexOf(channel);
+    let channelPosition = this.state.queryChannels.indexOf(channel);
     if (channelPosition !== -1) {
       return this.state.queryChannels.splice(channelPosition, 1);
     }
