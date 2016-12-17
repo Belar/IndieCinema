@@ -24,7 +24,7 @@
         </ul>
       </div>
     </div>
-    <modal :show="showModal" :video="videoModal" @closeModal="showModal = false"></modal>
+    <modal :show="showModal" :video="videoModal" @closeModal="hideMovie()"></modal>
   </div>
 </template>
 
@@ -86,6 +86,11 @@ export default {
       // Show modal and pass movie's data - no query, data comes from movies array (store)
       this.videoModal = video;
       this.showModal = true;
+    },
+    hideMovie() {
+      // Show modal and pass movie's data - no query, data comes from movies array (store)
+      this.videoModal = {};
+      this.showModal = false;
     }
   },
   mounted: function() {

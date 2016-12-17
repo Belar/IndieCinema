@@ -2,20 +2,20 @@
   <transition name="modal">
     <div class="modal-mask" v-show="show" @click="closeMovie()">
       <div class="modal-wrapper">
-        <div class="modal-container" v-if="movie" @click.stop>
+        <div class="modal-container" v-if="video" @click.stop>
           <div class="modal-header">
             <svg class="modal-close icon icon-cross" @click="closeMovie()" @click.stop>
               <use pointer-events="visible" xlink:href="/assets/images/symbols_defs.svg#icon-cross"></use>
             </svg>
           </div>
-          <div class="flex-video widescreen" v-if="movie.embed" v-html="movie.embed.html"></div>
+          <div class="flex-video widescreen" v-if="video.embed" v-html="video.embed.html"></div>
           <div class="movie-info">
-            <h2 class="title">{{ movie.name }}</h2>
-            <div class="by" v-if="movie.user">by
-              <span class="author"><a v-bind:href="movie.user.link" target="_blank" rel="noreferrer">{{ movie.user.name }}</a></span>
+            <h2 class="title">{{ video.name }}</h2>
+            <div class="by" v-if="video.user">by
+              <span class="author"><a v-bind:href="video.user.link" target="_blank" rel="noreferrer">{{ video.user.name }}</a></span>
             </div>
             <div class="description">
-              {{ movie.description }}
+              {{ video.description }}
             </div>
           </div>
         </div>
@@ -38,15 +38,8 @@ export default {
       required: true
     }
   },
-  computed: {
-    movie: function() {
-      return this.video;
-    }
-  },
   methods: {
     closeMovie() {
-      // Clear movie info
-      this.movie = {};
       // Hide modal
       this.$emit('closeModal');
     }

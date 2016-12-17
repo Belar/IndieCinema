@@ -24,10 +24,6 @@ describe('Modal.vue component', function () {
     done();
   });
 
-  it('should contain movie computed property with video prop data', function () {
-    expect(vm.movie).to.be.equal(propsData.video);
-  });
-
   before(function () {
     sinon.spy(vm, '$emit');
   });
