@@ -35,6 +35,7 @@
 
 <script>
 'use strict';
+import axios from 'axios';
 
 import store from '../store';
 import helpers from '../helpers';
@@ -72,7 +73,7 @@ export default {
       let movies = this.sharedState.movieList; // Get list of already showed movies
       store.setLoading(true);
 
-      this.$http.get('/api/get-videos-single?channel=' + addChannel).then((response) => {
+      axios.get('/api/get-videos-single?channel=' + addChannel).then((response) => {
         // Add videos to movies array
         movies = movies.concat(response.data);
         // Clear duplicates

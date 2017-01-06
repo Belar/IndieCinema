@@ -1,8 +1,6 @@
 import Vue from 'vue';
+import axios from 'axios';
 import ContentManagement from 'client/components/ContentManagement';
-
-import VueResource from 'vue-resource';
-Vue.use(VueResource);
 
 import store from 'client/store';
 import videoData from '../utils/videoData.js';
@@ -26,7 +24,7 @@ describe('ConentManagement.vue component', function () {
   let promiseCall;
 
   beforeEach(function () {
-    promiseCall = sinon.stub(Vue, 'http').returnsPromise();
+    promiseCall = sinon.stub(axios, 'get').returnsPromise();
     vm.newChannel = '';
     vm.sharedState.queryChannels = ['remove', 'hide'];
 
@@ -41,7 +39,7 @@ describe('ConentManagement.vue component', function () {
     sinon.spy(store, 'setMessage');
   });
   afterEach(function () {
-    Vue.http.restore();
+    axios.get.restore();
     window.localStorage.clear();
 
     // Reset spies

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import axios from 'axios';
 import store from 'client/store';
 
 import videoData from '../utils/videoData.js';
@@ -66,7 +66,7 @@ describe('store methods', function () {
   store.state.queryChannels = storeData.queryChannels;
 
   beforeEach(function () {
-    promiseCall = sinon.stub(Vue, 'http').returnsPromise();
+    promiseCall = sinon.stub(axios, 'get').returnsPromise();
 
     // Set spies
     sinon.spy(store, 'setMovies');
@@ -74,7 +74,7 @@ describe('store methods', function () {
     sinon.spy(store, 'setMessage');
   });
   afterEach(function () {
-    Vue.http.restore();
+    axios.get.restore();
     window.localStorage.clear();
 
     // Reset spies

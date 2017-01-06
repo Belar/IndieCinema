@@ -1,5 +1,5 @@
-import Vue from 'vue';
 import helpers from './helpers';
+import axios from 'axios';
 
 const store = {
   state: {
@@ -47,7 +47,7 @@ const store = {
     store.setLoading(true);
     let movies = this.state.movieList;
     let fetchPage = this.state.currentPage;
-    Vue.http.get('/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage).then((response) => {
+    axios.get('/api/get-videos?channels=' + this.state.queryChannels + '&page=' + fetchPage).then((response) => {
       movies = movies.concat(response.data);
       // Clear duplicates
       let uniqueMovies = helpers.removeDuplicates(movies, 'uri');

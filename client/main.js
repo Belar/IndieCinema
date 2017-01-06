@@ -1,11 +1,10 @@
 /* eslint-disable */
 
 import Vue from 'vue';
-import VueResource from 'vue-resource'; // Web requests, Vue plugin
 import VueRouter from 'vue-router'; // Routing , Vue plugin
+require('es6-promise').polyfill();
 
 Vue.use(VueRouter, 'localhost:3000'); //
-Vue.use(VueResource);
 
 // Views
 import CustomGroupView from './CustomGroupView';
