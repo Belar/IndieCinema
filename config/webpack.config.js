@@ -16,7 +16,7 @@ module.exports = {
     alias: {
       'client': path.resolve(__dirname, '../client'),
       'components': path.resolve(__dirname, '../clients/components'),
-      'vue': 'vue/dist/vue'
+      'vue$': 'vue/dist/vue.common.js'
     }
   },
   resolveLoader: {
@@ -33,7 +33,7 @@ module.exports = {
       loader: 'eslint',
       include: projectRoot,
       exclude: /node_modules/
-      }],
+    }],
     loaders: [{
       test: /\.vue$/,
       loader: 'vue'
