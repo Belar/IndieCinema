@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: ['./client/main.js'],
@@ -60,7 +61,10 @@ module.exports = {
       inject: true,
       analytics: true
     }),
-    new ExtractTextPlugin('build/style.css')
+    new ExtractTextPlugin('build/style.css'),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    }),
   ],
   devtool: '#source-map'
 }
