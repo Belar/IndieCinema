@@ -1,9 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: ['./client/main.js'],
@@ -13,42 +12,39 @@ module.exports = {
     filename: 'build/build.js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue'],
+    modules: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue'],
     alias: {
+      'client': path.resolve(__dirname, '../client'),
+      'components': path.resolve(__dirname, '../clients/components'),
       'vue$': 'vue/dist/vue.common.js'
     }
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
-  },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.vue$/,
-      loader: 'vue'
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          'css': ExtractTextPlugin.extract(['css-loader']),
+          'sass': ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
+        }
+      }
     }, {
       test: /\.js$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       exclude: /node_modules/
     }, {
-      test: /\.json$/,
-      loader: 'json'
-    }, {
       test: /\.html$/,
-      loader: 'vue-html'
+      loader: 'vue-html-loader'
     }, {
       test: /\.(png|jpg|gif|svg)$/,
-      loader: 'url',
+      loader: 'url-loader',
       query: {
         limit: 10000,
         name: '[name].[ext]?[hash]'
       }
     }]
-  },
-  vue: {
-    loaders: {
-      css: ExtractTextPlugin.extract(['css']),
-      sass: ExtractTextPlugin.extract(['css', 'sass'])
-    }
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -57,23 +53,19 @@ module.exports = {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../public/index.html'),
       template: path.resolve(__dirname, '../build/index_dev.ejs'),
-      inject: true,
-      analytics: true
+      inject: true
     }),
-    new ExtractTextPlugin('build/style.css'),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false
-    }),
+    new ExtractTextPlugin('build/style.css')
   ],
-  devtool: '#source-map'
+  devtool: 'source-map'
 }
