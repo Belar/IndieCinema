@@ -47,6 +47,7 @@ export default {
 @import "./utils/sass/styling";
 .scroll-top {
   position: fixed;
+  z-index: 900;
   bottom: 1rem;
   right: 1rem;
   opacity: .5;

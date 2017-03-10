@@ -46,17 +46,16 @@ export default {
   },
   watch: {
     'show': function() {
-      let appWrapper = document.getElementById('body-content-wrapper');
+      let appBody = document.querySelector('body');
       if (this.show === true) {
         // Add class to body limiting its scrolling with overflow
-        appWrapper.classList.add('modal-open');
+        appBody.classList.add('modal-open');
       } else {
         // Remove class from body to return scrolling availability
-        appWrapper.classList.remove('modal-open');
+        appBody.classList.remove('modal-open');
       }
     }
   },
-
   mounted: function() {
     // Closes modal on escape
     document.addEventListener('keydown', (event) => {
@@ -73,6 +72,7 @@ export default {
 @import "./utils/sass/styling";
 .modal-mask {
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -86,7 +86,7 @@ export default {
 }
 
 .modal-wrapper {
-  z-index: 1010;
+  z-index: 1001;
   margin: auto;
   left: 0;
   right: 0;
