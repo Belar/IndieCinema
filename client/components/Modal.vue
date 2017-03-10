@@ -46,17 +46,16 @@ export default {
   },
   watch: {
     'show': function() {
-      let appWrapper = document.getElementById('body-content-wrapper');
+      let appBody = document.querySelector('body');
       if (this.show === true) {
         // Add class to body limiting its scrolling with overflow
-        appWrapper.classList.add('modal-open');
+        appBody.classList.add('modal-open');
       } else {
         // Remove class from body to return scrolling availability
-        appWrapper.classList.remove('modal-open');
+        appBody.classList.remove('modal-open');
       }
     }
   },
-
   mounted: function() {
     // Closes modal on escape
     document.addEventListener('keydown', (event) => {
