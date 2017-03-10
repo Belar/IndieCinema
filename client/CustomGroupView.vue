@@ -44,9 +44,4 @@ body {
   background: $light;
   font-family: 'Open Sans', Helvetica, sans-serif;
 }
-
-.modal-open {
-  position: absolute;
-  overflow-y: hidden;
-}
 </style>
