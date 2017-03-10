@@ -33,13 +33,12 @@
       margin: 4rem auto;
 }
 }
+.modal-open {
+  overflow: hidden;
+}
 body {
   background: #FAFAFA;
   font-family: 'Open Sans', Helvetica, sans-serif;
-}
-.modal-open {
-  position: absolute;
-  overflow-y: hidden;
 }
 
 .clearfix:after {
@@ -75,6 +74,9 @@ body {
       min-width: 300px;
       margin: 4rem auto;
 }
+}
+.modal-open {
+  overflow: hidden;
 }
 .video-grid {
   clear: both;
@@ -164,8 +166,12 @@ body {
       margin: 4rem auto;
 }
 }
+.modal-open {
+  overflow: hidden;
+}
 .modal-mask {
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -178,7 +184,7 @@ body {
   overflow-y: auto;
 }
 .modal-wrapper {
-  z-index: 1010;
+  z-index: 1001;
   margin: auto;
   left: 0;
   right: 0;
@@ -300,6 +306,9 @@ body {
       margin: 4rem auto;
 }
 }
+.modal-open[data-v-dd32710a] {
+  overflow: hidden;
+}
 .message-bar[data-v-dd32710a] {
   position: absolute;
   display: flex;
@@ -357,6 +366,9 @@ body {
       min-width: 300px;
       margin: 4rem auto;
 }
+}
+.modal-open {
+  overflow: hidden;
 }
 .add-new-channel-wrapper {
   text-align: center;
@@ -552,6 +564,9 @@ body {
       margin: 4rem auto;
 }
 }
+.modal-open {
+  overflow: hidden;
+}
 h5 {
   font-size: .95rem;
   color: rgba(33, 33, 33, 0.7);
@@ -626,6 +641,9 @@ h5 {
       min-width: 300px;
       margin: 4rem auto;
 }
+}
+.modal-open[data-v-da93f54a] {
+  overflow: hidden;
 }
 .loading-bar[data-v-da93f54a] {
   position: fixed;
@@ -705,8 +723,12 @@ h5 {
       margin: 4rem auto;
 }
 }
+.modal-open {
+  overflow: hidden;
+}
 .scroll-top {
   position: fixed;
+  z-index: 900;
   bottom: 1rem;
   right: 1rem;
   opacity: .5;
@@ -771,6 +793,9 @@ h5 {
       min-width: 300px;
       margin: 4rem auto;
 }
+}
+.modal-open {
+  overflow: hidden;
 }
 .channel-groups {
   border-bottom: 1px solid rgba(33, 33, 33, 0.05);
@@ -843,13 +868,12 @@ h5 {
       margin: 4rem auto;
 }
 }
+.modal-open {
+  overflow: hidden;
+}
 body {
   background: #FAFAFA;
   font-family: 'Open Sans', Helvetica, sans-serif;
-}
-.modal-open {
-  position: absolute;
-  overflow-y: hidden;
 }
 
 .clearfix:after {
@@ -885,6 +909,9 @@ body {
       min-width: 300px;
       margin: 4rem auto;
 }
+}
+.modal-open {
+  overflow: hidden;
 }
 .not-found {
   max-width: 960px;
