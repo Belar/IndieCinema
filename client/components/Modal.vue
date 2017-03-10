@@ -72,6 +72,7 @@ export default {
 @import "./utils/sass/styling";
 .modal-mask {
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -85,7 +86,7 @@ export default {
 }
 
 .modal-wrapper {
-  z-index: 1010;
+  z-index: 1001;
   margin: auto;
   left: 0;
   right: 0;
