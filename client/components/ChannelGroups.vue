@@ -1,7 +1,7 @@
 <template>
   <div class="channel-groups">
     <ul>
-      <router-link tag="li" :to="{ path: '/group/'+group.name}" v-for="group in sharedState.channelGroups" class="group">
+      <router-link tag="li" :to="{ path: '/group/'+group.name}" v-for="group in sharedState.channelGroups" :key="group.name" class="group">
         <a class="group-name">{{ group.name }}</a>
       </router-link>
       <router-link tag="li" to="/" class="group" exact>
