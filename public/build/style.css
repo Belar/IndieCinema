@@ -659,7 +659,7 @@ h5 {
   color: #2196F3;
   height: 36px;
   display: inline-block;
-  animation-name: spin;
+  animation-name: spin-data-v-da93f54a;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
@@ -680,7 +680,7 @@ h5 {
 .expand-leave[data-v-da93f54a] {
   height: 50px;
 }
-@keyframes spin {
+@keyframes spin-data-v-da93f54a {
 0% {
     transform: rotate(0deg);
 }
