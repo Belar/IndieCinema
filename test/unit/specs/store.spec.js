@@ -8,9 +8,9 @@ describe('store state', function () {
   it('state should be an object', function () {
     expect(typeof store.state).to.be.equal('object');
   });
-  it('channelGroups should be an array, not empty', function () {
+  it('channelGroups should be an array', function () {
     expect(store.state.channelGroups).to.be.an('array');
-    expect(store.state.channelGroups).to.be.not.empty;
+    expect(store.state.channelGroups).to.have.any.keys;
   });
   it('loadingIndicator should be set to false', function () {
     expect(store.state.loadingIndicator).to.be.a('boolean');
@@ -30,15 +30,15 @@ describe('store state', function () {
   });
   it('sortCondition should be an array', function () {
     expect(store.state.sortCondition).to.be.a('string');
-    expect(store.state.sortCondition).to.be.not.empty;
+    expect(store.state.sortCondition).to.be.oneOf(['indieCinema.release_time', 'indieCinema.order']);
   });
-  it('sortOrder should be a number and not empty', function () {
+  it('sortOrder should be a number', function () {
     expect(store.state.sortOrder).to.be.a('number');
-    expect(store.state.sortOrder).to.be.not.empty;
+    expect(store.state.sortOrder).to.be.oneOf([1, -1]);
   });
-  it('currentPage should be a number and not empty', function () {
+  it('currentPage should be a number', function () {
     expect(store.state.currentPage).to.be.a('number');
-    expect(store.state.currentPage).to.be.not.empty;
+    expect(store.state.currentPage).to.be.equal(1);
   });
 });
 
