@@ -63,7 +63,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../public/index.html'),
       template: path.resolve(__dirname, '../build/index_dev.ejs'),
-      inject: true
+      inject: true,
+      analytics: true
     }),
     new ExtractTextPlugin('build/style.css')
   ],
