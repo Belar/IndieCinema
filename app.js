@@ -4,6 +4,7 @@ const Hapi = require('hapi');
 const Inert = require('inert'); // File reply
 const Good = require('good'); // Logging
 const h2o2 = require('h2o2'); // Proxy
+const path = require('path');
 
 const queryVimeo = require('./server/plugins/queryVimeo'); // plugin for Viemo proxy
 
@@ -76,7 +77,6 @@ server.register([Inert, h2o2, queryVimeo, {
   register: Good,
   options: logConfig
 }], function (err) {
-
   if (err) {
     throw err;
   }
@@ -96,7 +96,7 @@ server.register([Inert, h2o2, queryVimeo, {
     },
     handler: {
       directory: {
-        path: __dirname + '/public/assets/',
+        path: path.join(__dirname, '/public/assets/'),
         listing: false,
         index: false
       }
@@ -115,7 +115,7 @@ server.register([Inert, h2o2, queryVimeo, {
     },
     handler: {
       directory: {
-        path: __dirname + '/public/build/',
+        path: path.join(__dirname, '/public/build/'),
         listing: false,
         index: false
       }
