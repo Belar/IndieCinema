@@ -48,18 +48,16 @@ var logConfig = {
   }
 };
 
-// Register webpack HMR, only for non-production environments
-if (process.env.NODE_ENV !== 'production') {
-
+// Register webpack HMR, fallback to development environment
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   const WebpackConfig = require('./config/webpack.config.js'); // Webpack config
-  const HapiWebpackDevMiddleware = require('hapi-webpack-dev-middleware');
-  const HapiWebpackHotMiddleware = require('hapi-webpack-hot-middleware');
+  const HapiWebpackMiddleware = require('./server/plugins/HapiWebpackMiddleware');
 
-  server.register([{
-    register: HapiWebpackDevMiddleware,
+  server.register({
+    register: HapiWebpackMiddleware,
     options: {
       config: WebpackConfig,
-      options: {
+      devOptions: {
         noInfo: true,
         publicPath: WebpackConfig.output.publicPath,
         stats: {
@@ -67,14 +65,11 @@ if (process.env.NODE_ENV !== 'production') {
         }
       }
     }
-  }, {
-    register: HapiWebpackHotMiddleware
-  }], function (err) {
+  }, function (err) {
     if (err) {
       throw err;
     }
   });
-
 }
 
 server.register([Inert, h2o2, queryVimeo, {
@@ -146,13 +141,13 @@ server.register([Inert, h2o2, queryVimeo, {
       }
     });
   }
-
 });
 
 server.start((err) => {
-
   if (err) {
     throw err;
   }
   console.log('Server running at:', server.info.uri);
 });
+
+module.exports = server;

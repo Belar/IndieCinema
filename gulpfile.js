@@ -18,9 +18,9 @@ gulp.task('nodemon', function (cb) {
 
       // Ensure only one call
       if (!called) {
+        called = true;
         return cb();
       }
-      called = true;
     })
     .on('restart', function onRestart() {
       // Reload connected browsers after a slight delay
@@ -39,7 +39,7 @@ gulp.task('browser-sync', ['nodemon'], function () {
   browserSync.init({
 
     // Watch the following files, inject changes or refresh
-    files: ['build/*.html','build/*.ejs','public/assets/js/**/*.*', 'public/assets/css/**/*.*', 'public/assets/images/**/*.*'],
+    files: ['public/assets/js/**/*.*', 'public/assets/css/**/*.*', 'public/assets/images/**/*.*'],
 
     // Proxy our Hapi app
     proxy: 'http://localhost:3000',
