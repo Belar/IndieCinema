@@ -1,8 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: ['./client/main.js'],
@@ -63,10 +63,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../public/index.html'),
       template: path.resolve(__dirname, '../build/index_dev.ejs'),
-      inject: true,
-      analytics: true
+      inject: true
     }),
     new ExtractTextPlugin('build/style.css')
   ],
   devtool: 'source-map'
-}
+};
