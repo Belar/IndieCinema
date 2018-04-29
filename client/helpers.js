@@ -10,7 +10,7 @@ module.exports = {
       uniqueObject[array[i][prop]] = array[i];
     }
     // Insert objects into array
-    for (i = 0 in uniqueObject) {
+    for (i in uniqueObject) {
       uniqueArray.push(uniqueObject[i]);
     }
     return uniqueArray;
